@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MessageContent>
+  <Segment Description="Message Header" InstancePath="MSH[1]" Name="MSH">
+    <Field Categrization="" Data="|" DataElement="Field Separator" Location="MSH.1"/>
+    <Field Categrization="" Data="^~\&amp;" DataElement="Encoding Characters" Location="MSH.2"/>
+    <Field DataElement="Sending Application" Location="MSH.3">
+      <Component Categrization="" Data="Test EHR Application" DataElement="Namespace ID" Location="MSH.3.1"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="MSH.3.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.3.3"/>
+    </Field>
+    <Field DataElement="Sending Facility" Location="MSH.4">
+      <Component Categrization="" Data="X68" DataElement="Namespace ID" Location="MSH.4.1"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="MSH.4.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.4.3"/>
+    </Field>
+    <Field DataElement="Receiving Application" Location="MSH.5">
+      <Component Categrization="" Data="" DataElement="Namespace ID" Location="MSH.5.1"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="MSH.5.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.5.3"/>
+    </Field>
+    <Field DataElement="Receiving Facility" Location="MSH.6">
+      <Component Categrization="" Data="NIST Test Iz Reg" DataElement="Namespace ID" Location="MSH.6.1"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="MSH.6.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.6.3"/>
+    </Field>
+    <Field DataElement="Date/Time Of Message" Location="MSH.7">
+      <Component Categrization="" Data="20120701082240-0500" DataElement="Time" Location="MSH.7.1"/>
+    </Field>
+    <Field DataElement="Message Type" Location="MSH.9">
+      <Component Categrization="" Data="VXU" DataElement="Message Code" Location="MSH.9.1"/>
+      <Component Categrization="" Data="V04" DataElement="Trigger Event" Location="MSH.9.2"/>
+      <Component Categrization="" Data="VXU_V04" DataElement="Message Structure" Location="MSH.9.3"/>
+    </Field>
+    <Field Categrization="" Data="NIST-IZ-001.00" DataElement="Message Control ID" Location="MSH.10"/>
+    <Field DataElement="Processing ID" Location="MSH.11">
+      <Component Categrization="" Data="P" DataElement="Processing ID" Location="MSH.11.1"/>
+    </Field>
+    <Field DataElement="Version ID" Location="MSH.12">
+      <Component Categrization="" Data="2.5.1" DataElement="Version ID" Location="MSH.12.1"/>
+    </Field>
+    <Field Categrization="" Data="ER" DataElement="Accept Acknowledgment Type" Location="MSH.15"/>
+    <Field Categrization="" Data="AL" DataElement="Application Acknowledgment Type" Location="MSH.16"/>
+    <Field DataElement="Message Profile Identifier" Location="MSH.21">
+      <Component Categrization="" Data="Z22" DataElement="Entity Identifier" Location="MSH.21.1"/>
+      <Component Categrization="" Data="CDCPHINVS" DataElement="Namespace ID" Location="MSH.21.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="MSH.21.3"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.21.4"/>
+    </Field>
+    <Field DataElement="Sending Responsible Organization" Location="MSH.22">
+      <Component Categrization="" Data="" DataElement="Organization Name" Location="MSH.22.1"/>
+      <Component DataElement="Assigning Authority" Location="MSH.22.6">
+        <SubComponent Categrization="" Data="" DataElement="Namespace ID" Location="MSH.22.6.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="MSH.22.6.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.22.6.3"/>
+      </Component>
+      <Component Categrization="" Data="" DataElement="Identifier Type Code" Location="MSH.22.7"/>
+      <Component Categrization="" Data="" DataElement="Organization Identifier" Location="MSH.22.10"/>
+    </Field>
+    <Field DataElement="Receiving Responsible Organization" Location="MSH.23">
+      <Component Categrization="" Data="" DataElement="Organization Name" Location="MSH.23.1"/>
+      <Component DataElement="Assigning Authority" Location="MSH.23.6">
+        <SubComponent Categrization="" Data="" DataElement="Namespace ID" Location="MSH.23.6.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="MSH.23.6.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="MSH.23.6.3"/>
+      </Component>
+      <Component Categrization="" Data="" DataElement="Identifier Type Code" Location="MSH.23.7"/>
+      <Component Categrization="" Data="" DataElement="Organization Identifier" Location="MSH.23.10"/>
+    </Field>
+  </Segment>
+  <Segment Description="Patient Identification" InstancePath="PID[1]" Name="PID">
+    <Field Categrization="" Data="1" DataElement="Set ID - PID" Location="PID.1"/>
+    <Field DataElement="Patient Identifier List" Location="PID.3">
+      <Component Categrization="" Data="D26376273" DataElement="ID Number" Location="PID.3.1"/>
+      <Component DataElement="Assigning Authority" Location="PID.3.4">
+        <SubComponent Categrization="" Data="NIST MPI" DataElement="Namespace ID" Location="PID.3.4.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="PID.3.4.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="PID.3.4.3"/>
+      </Component>
+      <Component Categrization="" Data="MR" DataElement="Identifier Type Code" Location="PID.3.5"/>
+    </Field>
+    <Field DataElement="Patient Name" Location="PID.5">
+      <Component DataElement="Family Name" Location="PID.5.1">
+        <SubComponent Categrization="" Data="Snow" DataElement="Surname" Location="PID.5.1.1"/>
+      </Component>
+      <Component Categrization="" Data="Madelynn" DataElement="Given Name" Location="PID.5.2"/>
+      <Component Categrization="" Data="Ainsley" DataElement="Second and Further Given Names or Initials Thereof" Location="PID.5.3"/>
+      <Component Categrization="" Data="L" DataElement="Name Type Code" Location="PID.5.7"/>
+    </Field>
+    <Field DataElement="Mother's Maiden Name" Location="PID.6">
+      <Component DataElement="Family Name" Location="PID.6.1">
+        <SubComponent Categrization="" Data="Lam" DataElement="Surname" Location="PID.6.1.1"/>
+      </Component>
+      <Component Categrization="" Data="M" DataElement="Name Type Code" Location="PID.6.7"/>
+    </Field>
+    <Field DataElement="Date/Time of Birth" Location="PID.7">
+      <Component Categrization="" Data="20070706" DataElement="Time" Location="PID.7.1"/>
+    </Field>
+    <Field Categrization="" Data="F" DataElement="Administrative Sex" Location="PID.8"/>
+    <Field DataElement="Race" Location="PID.10">
+      <Component Categrization="" Data="2076-8" DataElement="Identifier" Location="PID.10.1"/>
+      <Component Categrization="" Data="Native Hawaiian or Other Pacific Islander" DataElement="Text" Location="PID.10.2"/>
+      <Component Categrization="" Data="CDCREC" DataElement="Name of Coding System" Location="PID.10.3"/>
+    </Field>
+    <Field DataElement="Patient Address" Location="PID.11">
+      <Component DataElement="Street Address" Location="PID.11.1">
+        <SubComponent Categrization="" Data="32 Prescott Street Ave" DataElement="Street or Mailing Address" Location="PID.11.1.1"/>
+      </Component>
+      <Component Categrization="" Data="" DataElement="Other Designation" Location="PID.11.2"/>
+      <Component Categrization="" Data="Warwick" DataElement="City" Location="PID.11.3"/>
+      <Component Categrization="" Data="MA" DataElement="State or Province" Location="PID.11.4"/>
+      <Component Categrization="" Data="02452" DataElement="Zip or Postal Code" Location="PID.11.5"/>
+      <Component Categrization="" Data="USA" DataElement="Country" Location="PID.11.6"/>
+      <Component Categrization="" Data="L" DataElement="Address Type" Location="PID.11.7"/>
+    </Field>
+    <Field DataElement="Phone Number - Home" Location="PID.13">
+      <Component Categrization="" Data="PRN" DataElement="Telecommunication Use Code" Location="PID.13.2"/>
+      <Component Categrization="" Data="PH" DataElement="Telecommunication Equipment Type" Location="PID.13.3"/>
+      <Component Categrization="" Data="" DataElement="Email Address" Location="PID.13.4"/>
+      <Component Categrization="" Data="657" DataElement="Area/City Code" Location="PID.13.6"/>
+      <Component Categrization="" Data="5558563" DataElement="Local Number" Location="PID.13.7"/>
+    </Field>
+    <Field DataElement="Ethnic Group" Location="PID.22">
+      <Component Categrization="" Data="2186-5" DataElement="Identifier" Location="PID.22.1"/>
+      <Component Categrization="" Data="non Hispanic or Latino" DataElement="Text" Location="PID.22.2"/>
+      <Component Categrization="" Data="CDCREC" DataElement="Name of Coding System" Location="PID.22.3"/>
+    </Field>
+    <Field Categrization="" Data="" DataElement="Multiple Birth Indicator" Location="PID.24"/>
+    <Field Categrization="" Data="" DataElement="Birth Order" Location="PID.25"/>
+    <Field DataElement="Patient Death Date and Time" Location="PID.29">
+      <Component Categrization="" Data="" DataElement="Time" Location="PID.29.1"/>
+    </Field>
+    <Field Categrization="" Data="" DataElement="Patient Death Indicator" Location="PID.30"/>
+  </Segment>
+  <Segment Description="Patient Additional Demographic" InstancePath="PD1[1]" Name="PD1">
+    <Field DataElement="Publicity Code" Location="PD1.11">
+      <Component Categrization="" Data="02" DataElement="Identifier" Location="PD1.11.1"/>
+      <Component Categrization="" Data="Reminder/Recall - any method" DataElement="Text" Location="PD1.11.2"/>
+      <Component Categrization="" Data="HL70215" DataElement="Name of Coding System" Location="PD1.11.3"/>
+    </Field>
+    <Field Categrization="" Data="" DataElement="Protection Indicator" Location="PD1.12"/>
+    <Field Categrization="" Data="" DataElement="Protection Indicator Effective Date" Location="PD1.13"/>
+    <Field Categrization="" Data="A" DataElement="Immunization Registry Status" Location="PD1.16"/>
+    <Field Categrization="" Data="20120701" DataElement="Immunization Registry Status Effective Date" Location="PD1.17"/>
+    <Field Categrization="" Data="20120701" DataElement="Publicity Code Effective Date" Location="PD1.18"/>
+  </Segment>
+  <Segment Description="Next of Kin / Associated Parties" InstancePath="NK1[1]" Name="NK1">
+    <Field Categrization="" Data="1" DataElement="Set ID - NK1" Location="NK1.1"/>
+    <Field DataElement="Name" Location="NK1.2">
+      <Component DataElement="Family Name" Location="NK1.2.1">
+        <SubComponent Categrization="" Data="Lam" DataElement="Surname" Location="NK1.2.1.1"/>
+      </Component>
+      <Component Categrization="" Data="Morgan" DataElement="Given Name" Location="NK1.2.2"/>
+      <Component Categrization="" Data="" DataElement="Second and Further Given Names or Initials Thereof" Location="NK1.2.3"/>
+      <Component Categrization="" Data="L" DataElement="Name Type Code" Location="NK1.2.7"/>
+    </Field>
+    <Field DataElement="Relationship" Location="NK1.3">
+      <Component Categrization="" Data="MTH" DataElement="Identifier" Location="NK1.3.1"/>
+      <Component Categrization="" Data="Mother" DataElement="Text" Location="NK1.3.2"/>
+      <Component Categrization="" Data="HL70063" DataElement="Name of Coding System" Location="NK1.3.3"/>
+    </Field>
+    <Field DataElement="Address" Location="NK1.4">
+      <Component DataElement="Street Address" Location="NK1.4.1">
+        <SubComponent Categrization="" Data="32 Prescott Street Ave" DataElement="Street or Mailing Address" Location="NK1.4.1.1"/>
+      </Component>
+      <Component Categrization="" Data="" DataElement="Other Designation" Location="NK1.4.2"/>
+      <Component Categrization="" Data="Warwick" DataElement="City" Location="NK1.4.3"/>
+      <Component Categrization="" Data="MA" DataElement="State or Province" Location="NK1.4.4"/>
+      <Component Categrization="" Data="02452" DataElement="Zip or Postal Code" Location="NK1.4.5"/>
+      <Component Categrization="" Data="USA" DataElement="Country" Location="NK1.4.6"/>
+      <Component Categrization="" Data="L" DataElement="Address Type" Location="NK1.4.7"/>
+    </Field>
+    <Field DataElement="Phone Number" Location="NK1.5">
+      <Component Categrization="" Data="PRN" DataElement="Telecommunication Use Code" Location="NK1.5.2"/>
+      <Component Categrization="" Data="PH" DataElement="Telecommunication Equipment Type" Location="NK1.5.3"/>
+      <Component Categrization="" Data="" DataElement="Email Address" Location="NK1.5.4"/>
+      <Component Categrization="" Data="657" DataElement="Area/City Code" Location="NK1.5.6"/>
+      <Component Categrization="" Data="5558563" DataElement="Local Number" Location="NK1.5.7"/>
+    </Field>
+  </Segment>
+  <Segment Description="Common Order" InstancePath="ORDER[1].ORC[1]" Name="ORC">
+    <Field Categrization="" Data="RE" DataElement="Order Control" Location="ORC.1"/>
+    <Field DataElement="Placer Order Number" Location="ORC.2">
+      <Component Categrization="" Data="" DataElement="Entity Identifier" Location="ORC.2.1"/>
+      <Component Categrization="" Data="" DataElement="Namespace ID" Location="ORC.2.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="ORC.2.3"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="ORC.2.4"/>
+    </Field>
+    <Field DataElement="Filler Order Number" Location="ORC.3">
+      <Component Categrization="" Data="IZ-783274" DataElement="Entity Identifier" Location="ORC.3.1"/>
+      <Component Categrization="" Data="NDA" DataElement="Namespace ID" Location="ORC.3.2"/>
+      <Component Categrization="" Data="" DataElement="Universal ID" Location="ORC.3.3"/>
+      <Component Categrization="" Data="" DataElement="Universal ID Type" Location="ORC.3.4"/>
+    </Field>
+    <Field DataElement="Entered By" Location="ORC.10">
+      <Component Categrization="" Data="I-23432" DataElement="ID Number" Location="ORC.10.1"/>
+      <Component DataElement="Family Name" Location="ORC.10.2">
+        <SubComponent Categrization="" Data="Burden" DataElement="Surname" Location="ORC.10.2.1"/>
+      </Component>
+      <Component Categrization="" Data="Donna" DataElement="Given Name" Location="ORC.10.3"/>
+      <Component Categrization="" Data="A" DataElement="Second and Further Given Names or Initials Thereof" Location="ORC.10.4"/>
+      <Component DataElement="Assigning Authority" Location="ORC.10.9">
+        <SubComponent Categrization="" Data="NIST-AA-1" DataElement="Namespace ID" Location="ORC.10.9.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="ORC.10.9.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="ORC.10.9.3"/>
+      </Component>
+      <Component Categrization="" Data="" DataElement="Name Type Code" Location="ORC.10.10"/>
+      <Component Categrization="" Data="PRN" DataElement="Identifier Type Code" Location="ORC.10.13"/>
+    </Field>
+    <Field DataElement="Ordering Provider" Location="ORC.12">
+      <Component Categrization="" Data="57422" DataElement="ID Number" Location="ORC.12.1"/>
+      <Component DataElement="Family Name" Location="ORC.12.2">
+        <SubComponent Categrization="" Data="RADON" DataElement="Surname" Location="ORC.12.2.1"/>
+      </Component>
+      <Component Categrization="" Data="NICHOLAS" DataElement="Given Name" Location="ORC.12.3"/>
+      <Component Categrization="" Data="" DataElement="Second and Further Given Names or Initials Thereof" Location="ORC.12.4"/>
+      <Component DataElement="Assigning Authority" Location="ORC.12.9">
+        <SubComponent Categrization="" Data="NIST-AA-1" DataElement="Namespace ID" Location="ORC.12.9.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="ORC.12.9.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="ORC.12.9.3"/>
+      </Component>
+      <Component Categrization="" Data="L" DataElement="Name Type Code" Location="ORC.12.10"/>
+      <Component Categrization="" Data="MD" DataElement="Identifier Type Code" Location="ORC.12.13"/>
+    </Field>
+    <Field DataElement="Entering Organization" Location="ORC.17">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="ORC.17.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="ORC.17.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="ORC.17.3"/>
+    </Field>
+  </Segment>
+  <Segment Description="Pharmacy/Treatment Administration" InstancePath="ORDER[1].RXA[1]" Name="RXA">
+    <Field Categrization="" Data="0" DataElement="Give Sub-ID Counter" Location="RXA.1"/>
+    <Field Categrization="" Data="1" DataElement="Administration Sub-ID Counter" Location="RXA.2"/>
+    <Field DataElement="Date/Time Start of Administration" Location="RXA.3">
+      <Component Categrization="" Data="20120814" DataElement="Time" Location="RXA.3.1"/>
+    </Field>
+    <Field DataElement="Administered Code" Location="RXA.5">
+      <Component Categrization="" Data="33332-0010-01" DataElement="Identifier" Location="RXA.5.1"/>
+      <Component Categrization="" Data="Influenza, seasonal, injectable, preservative free" DataElement="Text" Location="RXA.5.2"/>
+      <Component Categrization="" Data="NDC" DataElement="Name of Coding System" Location="RXA.5.3"/>
+    </Field>
+    <Field Categrization="" Data="0.5" DataElement="Administered Amount" Location="RXA.6"/>
+    <Field DataElement="Administered Units" Location="RXA.7">
+      <Component Categrization="" Data="mL" DataElement="Identifier" Location="RXA.7.1"/>
+      <Component Categrization="" Data="MilliLiter [SI Volume Units]" DataElement="Text" Location="RXA.7.2"/>
+      <Component Categrization="" Data="UCUM" DataElement="Name of Coding System" Location="RXA.7.3"/>
+    </Field>
+    <Field DataElement="Administration Notes" Location="RXA.9">
+      <Component Categrization="" Data="00" DataElement="Identifier" Location="RXA.9.1"/>
+      <Component Categrization="" Data="New immunization record" DataElement="Text" Location="RXA.9.2"/>
+      <Component Categrization="" Data="NIP001" DataElement="Name of Coding System" Location="RXA.9.3"/>
+    </Field>
+    <Field DataElement="Administering Provider" Location="RXA.10">
+      <Component Categrization="" Data="7832-1" DataElement="ID Number" Location="RXA.10.1"/>
+      <Component DataElement="Family Name" Location="RXA.10.2">
+        <SubComponent Categrization="" Data="Lemon" DataElement="Surname" Location="RXA.10.2.1"/>
+      </Component>
+      <Component Categrization="" Data="Mike" DataElement="Given Name" Location="RXA.10.3"/>
+      <Component Categrization="" Data="A" DataElement="Second and Further Given Names or Initials Thereof" Location="RXA.10.4"/>
+      <Component DataElement="Assigning Authority" Location="RXA.10.9">
+        <SubComponent Categrization="" Data="NIST-AA-1" DataElement="Namespace ID" Location="RXA.10.9.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="RXA.10.9.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="RXA.10.9.3"/>
+      </Component>
+      <Component Categrization="" Data="" DataElement="Name Type Code" Location="RXA.10.10"/>
+      <Component Categrization="" Data="PRN" DataElement="Identifier Type Code" Location="RXA.10.13"/>
+    </Field>
+    <Field DataElement="Administered-at Location" Location="RXA.11">
+      <Component DataElement="Facility" Location="RXA.11.4">
+        <SubComponent Categrization="" Data="X68" DataElement="Namespace ID" Location="RXA.11.4.1"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID" Location="RXA.11.4.2"/>
+        <SubComponent Categrization="" Data="" DataElement="Universal ID Type" Location="RXA.11.4.3"/>
+      </Component>
+    </Field>
+    <Field Categrization="" Data="Z0860BB" DataElement="Substance Lot Number" Location="RXA.15"/>
+    <Field DataElement="Substance Expiration Date" Location="RXA.16">
+      <Component Categrization="" Data="20121104" DataElement="Time" Location="RXA.16.1"/>
+    </Field>
+    <Field DataElement="Substance Manufacturer Name" Location="RXA.17">
+      <Component Categrization="" Data="CSL" DataElement="Identifier" Location="RXA.17.1"/>
+      <Component Categrization="" Data="CSL Behring" DataElement="Text" Location="RXA.17.2"/>
+      <Component Categrization="" Data="MVX" DataElement="Name of Coding System" Location="RXA.17.3"/>
+    </Field>
+    <Field DataElement="Substance/Treatment Refusal Reason" Location="RXA.18">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="RXA.18.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="RXA.18.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="RXA.18.3"/>
+    </Field>
+    <Field Categrization="" Data="CP" DataElement="Completion Status" Location="RXA.20"/>
+    <Field Categrization="" Data="A" DataElement="Action Code - RXA" Location="RXA.21"/>
+  </Segment>
+  <Segment Description="Pharmacy/Treatment Route" InstancePath="ORDER[1].RXR[1]" Name="RXR">
+    <Field DataElement="Route" Location="RXR.1">
+      <Component Categrization="" Data="C28161" DataElement="Identifier" Location="RXR.1.1"/>
+      <Component Categrization="" Data="Intramuscular" DataElement="Text" Location="RXR.1.2"/>
+      <Component Categrization="" Data="NCIT" DataElement="Name of Coding System" Location="RXR.1.3"/>
+    </Field>
+    <Field DataElement="Administration Site" Location="RXR.2">
+      <Component Categrization="" Data="LD" DataElement="Identifier" Location="RXR.2.1"/>
+      <Component Categrization="" Data="Left Arm" DataElement="Text" Location="RXR.2.2"/>
+      <Component Categrization="" Data="HL70163" DataElement="Name of Coding System" Location="RXR.2.3"/>
+    </Field>
+  </Segment>
+  <Segment Description="Observation/Result" InstancePath="ORDER[1].OBSERVATION[1].OBX[1]" Name="OBX">
+    <Field Categrization="" Data="1" DataElement="Set ID - OBX" Location="OBX.1"/>
+    <Field Categrization="" Data="CE" DataElement="Value Type" Location="OBX.2"/>
+    <Field DataElement="Observation Identifier" Location="OBX.3">
+      <Component Categrization="" Data="64994-7" DataElement="Identifier" Location="OBX.3.1"/>
+      <Component Categrization="" Data="Vaccine funding program eligibility category" DataElement="Text" Location="OBX.3.2"/>
+      <Component Categrization="" Data="LN" DataElement="Name of Coding System" Location="OBX.3.3"/>
+    </Field>
+    <Field Categrization="" Data="1" DataElement="Observation Sub-ID" Location="OBX.4"/>
+    <Field DataElement="Observation Value" Location="OBX.5">
+      <Component Categrization="" Data="V05" DataElement="Identifier" Location="OBX.5.1"/>
+      <Component Categrization="" Data="VFC eligible - Federally Qualified Health Center Patient (under-insured)" DataElement="Text" Location="OBX.5.2"/>
+      <Component Categrization="" Data="HL70064" DataElement="Name of Coding System" Location="OBX.5.3"/>
+    </Field>
+    <Field DataElement="Units" Location="OBX.6">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.6.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.6.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.6.3"/>
+    </Field>
+    <Field Categrization="" Data="F" DataElement="Observation Result Status" Location="OBX.11"/>
+    <Field DataElement="Date/Time of the Observation" Location="OBX.14">
+      <Component Categrization="" Data="20120701" DataElement="Time" Location="OBX.14.1"/>
+    </Field>
+    <Field DataElement="Observation Method" Location="OBX.17">
+      <Component Categrization="" Data="VXC40" DataElement="Identifier" Location="OBX.17.1"/>
+      <Component Categrization="" Data="Eligibility captured at the immunization level" DataElement="Text" Location="OBX.17.2"/>
+      <Component Categrization="" Data="CDCPHINVS" DataElement="Name of Coding System" Location="OBX.17.3"/>
+    </Field>
+  </Segment>
+  <Segment Description="Observation/Result" InstancePath="ORDER[1].OBSERVATION[2].OBX[1]" Name="OBX">
+    <Field Categrization="" Data="2" DataElement="Set ID - OBX" Location="OBX.1"/>
+    <Field Categrization="" Data="CE" DataElement="Value Type" Location="OBX.2"/>
+    <Field DataElement="Observation Identifier" Location="OBX.3">
+      <Component Categrization="" Data="30956-7" DataElement="Identifier" Location="OBX.3.1"/>
+      <Component Categrization="" Data="vaccine type" DataElement="Text" Location="OBX.3.2"/>
+      <Component Categrization="" Data="LN" DataElement="Name of Coding System" Location="OBX.3.3"/>
+    </Field>
+    <Field Categrization="" Data="2" DataElement="Observation Sub-ID" Location="OBX.4"/>
+    <Field DataElement="Observation Value" Location="OBX.5">
+      <Component Categrization="" Data="88" DataElement="Identifier" Location="OBX.5.1"/>
+      <Component Categrization="" Data="Influenza, unspecified formulation" DataElement="Text" Location="OBX.5.2"/>
+      <Component Categrization="" Data="CVX" DataElement="Name of Coding System" Location="OBX.5.3"/>
+    </Field>
+    <Field DataElement="Units" Location="OBX.6">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.6.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.6.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.6.3"/>
+    </Field>
+    <Field Categrization="" Data="F" DataElement="Observation Result Status" Location="OBX.11"/>
+    <Field DataElement="Date/Time of the Observation" Location="OBX.14">
+      <Component Categrization="" Data="" DataElement="Time" Location="OBX.14.1"/>
+    </Field>
+    <Field DataElement="Observation Method" Location="OBX.17">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.17.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.17.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.17.3"/>
+    </Field>
+  </Segment>
+  <Segment Description="Observation/Result" InstancePath="ORDER[1].OBSERVATION[3].OBX[1]" Name="OBX">
+    <Field Categrization="" Data="3" DataElement="Set ID - OBX" Location="OBX.1"/>
+    <Field Categrization="" Data="TS" DataElement="Value Type" Location="OBX.2"/>
+    <Field DataElement="Observation Identifier" Location="OBX.3">
+      <Component Categrization="" Data="29768-9" DataElement="Identifier" Location="OBX.3.1"/>
+      <Component Categrization="" Data="Date vaccine information statement published" DataElement="Text" Location="OBX.3.2"/>
+      <Component Categrization="" Data="LN" DataElement="Name of Coding System" Location="OBX.3.3"/>
+    </Field>
+    <Field Categrization="" Data="2" DataElement="Observation Sub-ID" Location="OBX.4"/>
+    <Field DataElement="Observation Value" Location="OBX.5">
+      <Component Categrization="" Data="20120702" DataElement="Identifier" Location="OBX.5.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.5.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.5.3"/>
+    </Field>
+    <Field DataElement="Units" Location="OBX.6">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.6.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.6.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.6.3"/>
+    </Field>
+    <Field Categrization="" Data="F" DataElement="Observation Result Status" Location="OBX.11"/>
+    <Field DataElement="Date/Time of the Observation" Location="OBX.14">
+      <Component Categrization="" Data="" DataElement="Time" Location="OBX.14.1"/>
+    </Field>
+    <Field DataElement="Observation Method" Location="OBX.17">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.17.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.17.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.17.3"/>
+    </Field>
+  </Segment>
+  <Segment Description="Observation/Result" InstancePath="ORDER[1].OBSERVATION[4].OBX[1]" Name="OBX">
+    <Field Categrization="" Data="4" DataElement="Set ID - OBX" Location="OBX.1"/>
+    <Field Categrization="" Data="TS" DataElement="Value Type" Location="OBX.2"/>
+    <Field DataElement="Observation Identifier" Location="OBX.3">
+      <Component Categrization="" Data="29769-7" DataElement="Identifier" Location="OBX.3.1"/>
+      <Component Categrization="" Data="Date vaccine information statement presented" DataElement="Text" Location="OBX.3.2"/>
+      <Component Categrization="" Data="LN" DataElement="Name of Coding System" Location="OBX.3.3"/>
+    </Field>
+    <Field Categrization="" Data="2" DataElement="Observation Sub-ID" Location="OBX.4"/>
+    <Field DataElement="Observation Value" Location="OBX.5">
+      <Component Categrization="" Data="20120814" DataElement="Identifier" Location="OBX.5.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.5.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.5.3"/>
+    </Field>
+    <Field DataElement="Units" Location="OBX.6">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.6.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.6.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.6.3"/>
+    </Field>
+    <Field Categrization="" Data="F" DataElement="Observation Result Status" Location="OBX.11"/>
+    <Field DataElement="Date/Time of the Observation" Location="OBX.14">
+      <Component Categrization="" Data="" DataElement="Time" Location="OBX.14.1"/>
+    </Field>
+    <Field DataElement="Observation Method" Location="OBX.17">
+      <Component Categrization="" Data="" DataElement="Identifier" Location="OBX.17.1"/>
+      <Component Categrization="" Data="" DataElement="Text" Location="OBX.17.2"/>
+      <Component Categrization="" Data="" DataElement="Name of Coding System" Location="OBX.17.3"/>
+    </Field>
+  </Segment>
+</MessageContent>
+

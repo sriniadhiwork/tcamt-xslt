@@ -1,0 +1,45 @@
+
+PVD PC -  Provider
+
+
+First  Name  - PVD 5.2
+Middle Name  - PVD 5.3
+Last   Name  - PVD 5.1
+Clinic Name  - PVD 7.1
+Address Line1- PVD 8.1
+City         - PVD 8.2
+State        - PVD 8.3
+Zip Code     - PVD 8.4
+Phone        - PVD 9.1
+DEA Number   - PVD 2.1.1
+NPI Number   - PVD 2.2.1
+
+
+PCD P2  - Pharmacy
+Pharmacy Name - PVD 7.1
+Address Line1 - PVD 8.1
+City          - PVD 8.2
+State         - PVD 8.3
+Zip Code      - PVD 8.4
+Phone         - PVD 9.1
+NCPDP Number  - PVD 2.1.1
+NPI Number    - PVD 2.2.1
+
+PTT - Patient 
+First  Name   - PTT 3.2
+Middle Name   - PTT 3.3
+Last   Name   - PTT 3.1
+Address Line1 - PVD 6.1
+City          - PVD 6.2
+State         - PVD 6.3
+Zip Code      - PVD 6.4
+Phone         - PVD 7.1
+Gender        - PVD 4.1
+DOB           - PVD 2.1
+
+DRU  -    Medication
+Medication name - DRU.1.2
+Directions      - DRU.3.2
+Quanitity       - DRU.2.2
+Refills         - DRU.6.2 
+Substitution Allowed -  DRU.7.1

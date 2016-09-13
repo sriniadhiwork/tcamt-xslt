@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Folder FolderName="XML Files" ExtStr="xml;cml;math;rdf;smil;svg;wml">
+		<Folder FolderName="iz">
+			<File FilePath="xml\iz\TC1-IZ-AD-1_Admin_Child.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\iz\TC1-IZ-QR-1.1_Query_Q11_Z44.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\iz\TC2-IZ-AD-10-ACK.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\iz\TC2-IZ-AD-2_Admin_Adult.xml" HomeFolder="Yes"/>
+		</Folder>
+		<Folder FolderName="ss">
+			<File FilePath="xml\ss\ed-tc2-ts3.xml" HomeFolder="Yes"/>
+		</Folder>
+		<Folder FolderName="lri">
+			<File FilePath="xml\lri\Message.xml" HomeFolder="Yes"/>
+			<ExtMountFolder FolderName="xml\lri\EHR"/>
+		</Folder>
+		<Folder FolderName="common">
+			<File FilePath="xml\common\MessageContents.xml" HomeFolder="Yes"/>
+		</Folder>
+		<Folder FolderName="e-rx">
+			<File FilePath="xml\e-rx\CANRX.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\e-rx\CHGRX.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\e-rx\NEWRX.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\e-rx\REFREQ.xml" HomeFolder="Yes"/>
+			<File FilePath="xml\e-rx\RXHREQ.xml" HomeFolder="Yes"/>
+		</Folder>
+		<Folder FolderName="meta">
+			<Folder FolderName="profile">
+				<File FilePath="xml\meta\profile\VXU-Z22_Profile.xml" HomeFolder="Yes"/>
+			</Folder>
+			<Folder FolderName="constraints">
+				<File FilePath="xml\meta\constraints\ACK-Z23_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\QBP-Z34_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\QBP-Z44_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\RSP-Z31_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\RSP-Z32_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\RSP-Z33_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\RSP-Z42_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\T22_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\T42_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\T44_Constraints.xml" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\constraints\VXU-Z22_Constraints.xml" HomeFolder="Yes"/>
+			</Folder>
+			<Folder FolderName="schema">
+				<File FilePath="xml\meta\schema\Commons.xsd" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\schema\ConformanceContext.xsd" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\schema\Expressions.xsd" HomeFolder="Yes"/>
+				<File FilePath="xml\meta\schema\Profile.xsd" HomeFolder="Yes"/>
+			</Folder>
+		</Folder>
+		<Folder FolderName="jd"/>
+		<Folder FolderName="jdoc">
+			<ExtMountFolder FolderName="juror document\LRI\XML\lri-xml-messages_new"/>
+		</Folder>
+	</Folder>
+	<Folder FolderName="XSL Files" ExtStr="xsl;xslt">
+		<Folder FolderName="modules">
+			<File FilePath="xsl\common\modules\_common_messagecontent_with_imports.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_common_tdspec_with_imports.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_common_teststory_with_imports.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_css_messagecontent.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_css_tds.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_css_teststory.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_expand_imports_in_xsl.xslt" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_generate_all_xsls_without_imports.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_hl7tables.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_hl7tables_min.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_hl7tables_min2.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_main-html.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_ng-tab-html.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_plain-html.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_profile_merger.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_util.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\common\modules\_xmsgcheck.xsl" HomeFolder="Yes"/>
+		</Folder>
+		<Folder FolderName="e-Rx">
+			<Folder FolderName="modules">
+				<File FilePath="xsl\e-Rx\modules\_e-Rx_tdspec.xsl" HomeFolder="Yes"/>
+				<File FilePath="xsl\e-Rx\modules\_e-Rx_tdspec_stdxml.xsl" HomeFolder="Yes"/>
+			</Folder>
+			<File FilePath="xsl\e-Rx\e-Rx_tdspec.xsl" HomeFolder="Yes"/>
+			<File FilePath="xsl\e-Rx\e-Rx_tdspec_stdxml.xsl" HomeFolder="Yes"/>
+			<File FilePath="juror document\e-Prescribing\XSL\eRxJurorDoc.xsl" HomeFolder="Yes"/>
+		</Folder>
+		<Folder FolderName="jdoc">
+			<Folder FolderName="lri">
+				<File FilePath="juror document\LRI\XSL\jurorDoc_LRIv2.xsl" HomeFolder="Yes"/>
+			</Folder>
+		</Folder>
+		<Folder FolderName="lri">
+			<Folder FolderName="modules">
+				<File FilePath="xsl\lri\modules\_alltemplates_jurorDoc_LRIv2.xsl" HomeFolder="Yes"/>
+				<File FilePath="xsl\lri\modules\_build_jurorDoc_LRIv2.xsl" HomeFolder="Yes"/>
+				<File FilePath="xsl\lri\modules\_css_jurorDoc_LRIv2.xsl" HomeFolder="Yes"/>
+				<File FilePath="xsl\lri\modules\_util_jurorDoc_LRIv2.xsl" HomeFolder="Yes"/>
+			</Folder>
+			<File FilePath="xsl\lri\jurorDoc_LRIv2.xsl" HomeFolder="Yes"/>
+		</Folder>
+		<File FilePath="xsl\common\caller7toxml.xsl" HomeFolder="Yes"/>
+		<File FilePath="xsl\common\common_messagecontent.xsl" HomeFolder="Yes"/>
+		<File FilePath="xsl\common\common_tdspec.xsl" HomeFolder="Yes"/>
+		<File FilePath="xsl\common\common_teststory.xsl" HomeFolder="Yes"/>
+		<File FilePath="xsl\common\er7toxml.xsl" HomeFolder="Yes"/>
+		<File FilePath="xsl\common\xmsgcheck.xsl" HomeFolder="Yes"/>
+		<File FilePath="xsl\common\xsltest.xsl" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="XQuery Files" ExtStr="xq;xql;xquery"/>
+	<Folder FolderName="HTML Files" ExtStr="html;htm;xhtml;asp"/>
+	<Folder FolderName="DTD/Schemas" ExtStr="dtd;dcd;xdr;biz;xsd"/>
+	<Folder FolderName="Entities" ExtStr="ent"/>
+</Project>

@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?><html>
+   <head>
+      <style type="text/css">
+            @media screen{
+                .jurorContainer fieldset{
+                    font-size:100%;
+                }
+                .jurorContainer fieldset table tbody tr th{
+                    font-size:90%
+                }
+                .jurorContainer fieldset table tbody tr td{
+                    font-size:90%;
+                }
+            }
+            @media print{
+                .jurorContainer fieldset{
+                    font-size:small;
+                }
+                .jurorContainer fieldset table th{
+                    font-size:x-small;
+                }
+                .jurorContainer fieldset table td{
+                    font-size:xx-small
+                }
+                * [type = text]{
+                    width:98%;
+                    height:15px;
+                    margin:2px;
+                    padding:0px;
+                    background:1px #ccc;
+                }
+            
+                .jurorContainer * [type = checkbox]{
+                    width:10px;
+                    height:10px;
+                    margin:2px;
+                    padding:0px;
+                    background:1px #ccc;
+                }
+            }
+            
+            
+            .jurorContainer * [type = text]{
+                width:95%;
+            }
+            
+            .jurorContainer fieldset{
+                page-break-inside:avoid;
+            }
+            .jurorContainer fieldset table{
+                width:98%;
+                border:1px groove;
+                margin:0 auto;
+                page-break-inside:avoid;
+            }
+            .jurorContainer fieldset table tr{
+                border:1px groove;
+            }
+            .jurorContainer fieldset table th{
+                border:1px groove;
+            }
+            .jurorContainer fieldset table td{
+                border:1px groove;
+                empty-cells:show;
+            }
+            .jurorContainer fieldset table[id = inspectionStatus] thead tr th:last-child{
+                width:2%;
+                color:black;
+            }
+            .jurorContainer fieldset table[id = inspectionStatus] thead tr th:nth-last-child(2){
+                width:2%;
+                color:black;
+            }
+            .jurorContainer fieldset table[id = inspectionStatus] thead tr th:nth-last-child(3){
+                width:45%;
+            }
+            .jurorContainer fieldset table thead{
+                border:1px groove;
+                background:#446BEC;
+                text-align:center;
+                color:white;
+            }
+            .jurorContainer fieldset table thead tr td{
+                text-align:left;
+                color:black;
+                background:white;
+            }
+            .jurorContainer fieldset table tbody tr th{
+                text-align:left;
+                background:#C6DEFF;
+            }
+            .jurorContainer fieldset table tbody tr td{
+                text-align:left
+            }
+            .jurorContainer fieldset table tbody tr td [type = text]{
+                text-align:left;
+                margin-left:1%
+            }
+            .jurorContainer fieldset table caption{
+                font-weight:bold;
+                color:#0840F8;
+            }
+            .jurorContainer fieldset legend{
+                font-weight:bold;
+            }
+            .jurorContainer fieldset pre{
+                font-family:Times New Roman;
+            }
+            .jurorContainer fieldset p{
+            text-align:left;
+            }
+            .jurorContainer fieldset{
+                width:98%;
+                border:1px solid #446BEC;
+            }
+            .jurorContainer .embSpace{
+                padding-left:25px;
+            }
+            .jurorContainer .noData{
+                background:#B8B8B8;
+            }
+            .jurorContainer .boldItalic{
+                font-style:italic;
+                font-weight:bold;
+            }
+            .jurorContainer .bold{
+                font-weight:bold;
+            }
+            .jurorContainer .normal{
+                font-weight:normal;
+            }
+            
+             }
+        </style>
+      <script type="text/javascript">
+            
+            
+            function comment(){
+            
+            $("textarea").on("keyup",function (){
+            var h=$(this);
+            h.height(20).height(h[0].scrollHeight);
+            });
+            
+            } 
+      
+            if(typeof jQuery =='undefined') {
+            var headTag = document.getElementsByTagName("head")[0];
+            var jqTag = document.createElement('script');
+            jqTag.type = 'text/javascript';
+            jqTag.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js';
+            jqTag.onload = comment;
+            
+            headTag.appendChild(jqTag);
+            }
+            else {  
+            $(document).ready(function (){
+            
+            comment();
+            
+            
+            });
+            
+            }
+        </script>
+   </head>
+   <body>
+      <div class="jurorContainer">
+         <fieldset>
+            <table id="headerTable">
+               <thead>
+                  <tr>
+                     <th colspan="2">HL7 v2.5 ORU^R01^ORU_R01 Message: Incorporation of
+                        Laboratory Results
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th>Test Case ID</th>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <th>Juror ID</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Juror Name</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>HIT System Tested</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Inspection Date/Time</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Inspection Settlement (Pass/Fail)</th>
+                     <td>
+                        <table id="inspectionStatus">
+                           <thead>
+                              <tr>
+                                 <th>Pass</th>
+                                 <th>Fail</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td>
+                                    <input type="checkbox" value=""></input>
+                                 </td>
+                                 <td>
+                                    <input type="checkbox" value=""></input>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Reason Failed</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Juror Comments</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <p>This Test Case-specific Juror Document provides a checklist for the
+               Tester to use during testing for assessing the Health IT Module's
+               ability to display and incorporate required data elements from the
+               information received in the LRI message. Additional data from the
+               message or from the Health IT Module are permitted to be displayed and
+               incorporated by the Module. Grayed-out fields in the Juror Document
+               indicate where no data for that data element were included in the LRI
+               message for the given Test Case. 
+            </p>
+            <p>The format of the Display Verification
+               section of this Juror Document is for ease-of-use by the Tester and does
+               not indicate how the Health IT Module display must be designed. 
+            </p>
+         </fieldset>
+         <h2>Display Verification</h2>
+         <fieldset>
+            <legend>Legend for Display Requirement</legend>
+            <p>Data in 
+               <b>bold</b> text: HIT Module must display exact version of stored
+               data
+            </p>
+            <p>Data in 
+               <b>
+                  <i>bold italics</i>
+               </b> text: HIT Module must display exact
+               version of data received in the LRI message
+            </p>
+            <p>Data in regular text: HIT Module may display equivalent version of stored
+               data
+            </p>
+         </fieldset>
+         <br></br>
+         <fieldset id="Patient.1.Table">
+            <table id="patientInformationDisplay">
+               <thead>
+                  <tr>
+                     <th colspan="5">Patient Information - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th>Patient Identifier</th>
+                     <th>Patient Name</th>
+                     <th>DOB</th>
+                     <th>Sex</th>
+                     <th>Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td class="boldItalic">PATID1234</td>
+                     <td class="boldItalic">William A Jones </td>
+                     <td class="normal">06/15/1961</td>
+                     <td class="normal">M</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="5">When a given patient has more than one Patient ID
+                        Number, the HIT module may display the ID Number that is most
+                        appropriate for the context (e.g., inpatient ID Number versus
+                        ambulatory ID Number.) 
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <table id="labResultsDisplay">
+               <thead>
+                  <tr>
+                     <th colspan="10">Lab Results - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th width="15%">Test Performed:</th>
+                     <td colspan="10" width="75%" style="font-weight:bold">Complete Blood Count</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Test Report Date:</th>
+                     <td colspan="10" width="75%" style="font-weight:normal;">09/25/2015 20:15:55</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Result Report Status</th>
+                     <td colspan="10" width="75%" style="font-weight:normal;">A</td>
+                  </tr>
+                  <tr>
+                     <th colspan="10">Result Report Status</th>
+                  </tr>
+                  <tr>
+                     <td colspan="10">&nbsp;</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Result Observation Name</th>
+                     <th width="5%">Result Value</th>
+                     <th width="5%">UOM</th>
+                     <th width="7%">Reference Range</th>
+                     <th width="7%">Abnormal Flag</th>
+                     <th width="6%">Status</th>
+                     <th width="10%">Date/Time of Observation</th>
+                     <th width="10%">End Date/Time of Observation</th>
+                     <th width="10%">Date/Time of Analysis</th>
+                     <th width="20%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td class="bold">Erythrocytes [#/volume] in Blood</td>
+                     <td class="boldItalic">4.41</td>
+                     <td class="boldItalic">million per microliter</td>
+                     <td class="bold">4.3 to 6.2</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Hemoglobin [Mass/volume] in Blood</td>
+                     <td class="boldItalic">12.5</td>
+                     <td class="boldItalic">grams per milliliter</td>
+                     <td class="bold">13 to 18</td>
+                     <td class="normal">L</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Hematocrit [Volume Fraction] of Blood</td>
+                     <td class="boldItalic">41</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">40 to 52</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Leukocytes [#/volume] in Blood</td>
+                     <td class="boldItalic">105600</td>
+                     <td class="boldItalic">cells per microliter</td>
+                     <td class="bold">4300 to 10800</td>
+                     <td class="normal">HH</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Platelets [#/volume] in Blood</td>
+                     <td class="boldItalic">210000</td>
+                     <td class="boldItalic">cells per microliter</td>
+                     <td class="bold">150000 to 350000</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Erythrocyte mean corpuscular volume [Entitic volume]</td>
+                     <td class="boldItalic">91</td>
+                     <td class="boldItalic">femtoliter</td>
+                     <td class="bold">80 to 95</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Erythrocyte mean corpuscular hemoglobin [Entitic mass]</td>
+                     <td class="boldItalic">29</td>
+                     <td class="boldItalic">picograms per cell</td>
+                     <td class="bold">27 to 31</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Erythrocyte mean corpuscular hemoglobin concentration [Mass/volume]</td>
+                     <td class="boldItalic">32.4</td>
+                     <td class="boldItalic">grams per deciliter</td>
+                     <td class="bold">32 to 36</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Erythrocyte distribution width [Ratio]</td>
+                     <td class="boldItalic">10.5</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">10.2 to 14.5</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Basophils [#/volume] in Blood</td>
+                     <td class="boldItalic">0.1</td>
+                     <td class="boldItalic">thousand per microliter</td>
+                     <td class="bold">0 to 0.3</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Basophils/100 leukocytes in Blood</td>
+                     <td class="boldItalic">0.1</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">0 to 2</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Monocytes [#/volume] in Blood</td>
+                     <td class="boldItalic">3</td>
+                     <td class="boldItalic">thousand per microliter</td>
+                     <td class="bold">0.0 to 13.0</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Monocytes/100 leukocytes in Blood</td>
+                     <td class="boldItalic">3</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">0 to 10</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Eosinophils [#/volume] in Blood</td>
+                     <td class="boldItalic">2.1</td>
+                     <td class="boldItalic">thousand per microliter</td>
+                     <td class="bold">0.0 to 0.45</td>
+                     <td class="normal">HH</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Eosinophils/100 leukocytes in Blood</td>
+                     <td class="boldItalic">2</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">0 to 6</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Lymphocytes [#/volume] in Blood</td>
+                     <td class="boldItalic">41.2</td>
+                     <td class="boldItalic">thousand per microliter</td>
+                     <td class="bold">1.0 to 4.8</td>
+                     <td class="normal">HH</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Lymphocytes/100 leukocytes in Blood</td>
+                     <td class="boldItalic">39</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">15.0 to 45.0</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Neutrophils [#/volume] in Blood</td>
+                     <td class="boldItalic">58</td>
+                     <td class="boldItalic">thousand per microliter</td>
+                     <td class="bold">1.5 to 7.0</td>
+                     <td class="normal">HH</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Neutrophils/100 leukocytes in Blood</td>
+                     <td class="boldItalic">55</td>
+                     <td class="boldItalic">percent</td>
+                     <td class="bold">50 to 73</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/25/2015 19:30:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Anisocytosis [Presence] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Hypochromia [Presence] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Macrocytes [Presence] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Microcytes [Presence] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Poikilocytosis [Presence] in Blood by Light microscopy</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Polychromasia [Presence] in Blood by Light microscopy</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Erythrocyte morphology finding [Identifier] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Leukocyte morphology finding [Identifier] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="bold">Platelet morphology finding [Identifier] in Blood</td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td class="normal">I</td>
+                     <td class="normal">09/25/2015 14:00:  </td>
+                     <td class="noData"></td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="10">For all numeric Result values that are less than 1,
+                        the displayed data must include a pre-decimal "0" and
+                        the decimal point (e.g., ".5" must be displayed as
+                        "0.5". The displayed data cannot change the level of
+                        precision of a numeric Result value (e.g., "6" cannot
+                        be displayed as "6.0").
+                     </td>
+                  </tr>
+                  <br></br>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <br></br>
+      </div>
+   </body>
+</html>

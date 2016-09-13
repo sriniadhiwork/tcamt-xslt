@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message version="010" release="006" HighestVersionSupported="" xmlns="http://www.ncpdp.org/schema/SCRIPT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ncpdp.org/schema/SCRIPT Script_10.6_XML\SCRIPT_XML_10_6.xsd">
+    
+    <Header>
+        <To Qualifier="P">RECIPIENT_ID</To>
+        <From Qualifier="D">SENDER_ID</From>
+        <MessageID>MU102</MessageID>
+        <SentTime>2015-7-15T14:05:00</SentTime>
+        <Security>
+            <Sender>
+                <SecondaryIdentification>PASSWORD</SecondaryIdentification>
+                <TertiaryIdentification>3RYIDENTIFIER</TertiaryIdentification>
+            </Sender>
+            <Receiver></Receiver>
+        </Security>
+        <PrescriberOrderNumber>ORDMU202</PrescriberOrderNumber>
+    </Header>
+    <Body>
+        <NewRx>
+            <Pharmacy>
+                <Identification>
+                    <NCPDPID>9911557</NCPDPID>
+                    <NPI>2020000008</NPI>
+                </Identification>
+                <StoreName>CA Pharmacy 10.6MU</StoreName>
+                <Address>
+                    <AddressLine1>65432 Cabernet Turn</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Sonoma</City>
+                    <State >CA</State >
+                    <ZipCode>95476</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(707) 555-7071</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Pharmacy>
+            <Prescriber>
+                <Identification>
+                    <NPI>1457623993</NPI>
+                    <DEANumber>AD1234567</DEANumber>
+                </Identification>
+                <ClinicName></ClinicName>
+                <Name>
+                    <LastName>Crawley</LastName>
+                    <FirstName>Robert</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Address>
+                    <AddressLine1>625 Downton Lane</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Sonoma</City>
+                    <State >CA</State >
+                    <ZipCode>95476</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(707) 55-3333</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Prescriber>
+            <Patient >
+                <Name>
+                    <LastName>Saguaro</LastName>
+                    <FirstName>Hector</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Gender>Male</Gender>
+                <DateOfBirth>
+                    <Date>09/19/1933</Date>
+                </DateOfBirth>
+                <Address>
+                    <AddressLine1>3621 Dogwood Lane</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Tucson</City>
+                    <State >AZ</State >
+                    <ZipCode>85701</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(520) 55-1215</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Patient >
+            <MedicationPrescribed>
+                <DrugDescription>Klor-Con 10 MEQ Extended Release Tablet</DrugDescription>
+                <DrugCoded>
+                    <ProductCode>00245004100</ProductCode>
+                    <ProductCodeQualifier>ND</ProductCodeQualifier>
+                    <Strength>10</Strength>
+                    <DrugDBCode>628958</DrugDBCode>
+                    <DrugDBCodeQualifier>SBD</DrugDBCodeQualifier>
+                    <FormSourceCode>AA</FormSourceCode>
+                    <FormCode>C42927</FormCode>
+                    <StrengthSourceCode>AB</StrengthSourceCode>
+                    <StrengthCode>C48512</StrengthCode>
+                </DrugCoded>
+                <Quantity>
+                    <Value>60</Value>
+                    <CodeListQualifier>38</CodeListQualifier>
+                    <UnitSourceCode>AC</UnitSourceCode>
+                    <PotencyUnitCode>C48542</PotencyUnitCode>
+                </Quantity>
+                <DaysSupply>30</DaysSupply>
+                <Directions>Take 1 tablet two times a day, after meal.</Directions>
+                <Refills>
+                    <Qualifier>R</Qualifier>
+                    <Value>3</Value>
+                </Refills>
+                <Substitutions>Not allowed</Substitutions>
+                <WrittenDate>
+                    <Date>2015-7-15</Date>
+                </WrittenDate>
+            </MedicationPrescribed>
+        </NewRx>
+    </Body>
+</Message>
+<!-- ************************************************ -->
+<!-- Scenario: MU2-02: New Prescription - Klor-Con 10 mEq Extended Release tablet | MU2 Test 02 | Ambulatory | Two PatientTwo -->
+<!-- ************************************************ -->

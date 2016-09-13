@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message version="010" release="006" HighestVersionSupported="" xmlns="http://www.ncpdp.org/schema/SCRIPT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ncpdp.org/schema/SCRIPT Script_10.6_XML\SCRIPT_XML_10_6.xsd">
+    
+    <Header>
+        <To Qualifier="P">RECIPIENT_ID</To>
+        <From Qualifier="D">SENDER_ID</From>
+        <MessageID>MU104</MessageID>
+        <SentTime>2015-09-29T10:20:10</SentTime>
+        <Security>
+            <Sender>
+                <SecondaryIdentification>PASSWORD</SecondaryIdentification>
+                <TertiaryIdentification>3RYIDENTIFIER</TertiaryIdentification>
+            </Sender>
+            <Receiver></Receiver>
+        </Security>
+        <PrescriberOrderNumber>ORDMU204</PrescriberOrderNumber>
+    </Header>
+    <Body>
+        <NewRx>
+            <Pharmacy>
+                <Identification>
+                    <NCPDPID>2323239</NCPDPID>
+                    <NPI>2040000004</NPI>
+                </Identification>
+                <StoreName>Mail Order Pharmacy 10.6MU</StoreName>
+                <Address>
+                    <AddressLine1>9292 Langley Rd</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Phoenix</City>
+                    <State >AZ</State >
+                    <ZipCode>85001</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(623) 555-2323</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Pharmacy>
+            <Prescriber>
+                <Identification>
+                    <NPI>1699052480</NPI>
+                    <DEANumber>GG1234567</DEANumber>
+                </Identification>
+                <ClinicName></ClinicName>
+                <Name>
+                    <LastName>Gregson</LastName>
+                    <FirstName>Michael</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Address>
+                    <AddressLine1>2020 Casino Blvd</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Las Vegas</City>
+                    <State >NV</State >
+                    <ZipCode>89101</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(702) 555-1312</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Prescriber>
+            <Patient >
+                <Name>
+                    <LastName>Yellowstone</LastName>
+                    <FirstName>Tim</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Gender>Male</Gender>
+                <DateOfBirth>
+                    <Date>06/05/1943</Date>
+                </DateOfBirth>
+                <Address>
+                    <AddressLine1>3111 Thorn Street</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Cheyenne</City>
+                    <State >WY</State >
+                    <ZipCode>82003</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(307) 555-1213	</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Patient >
+            <MedicationPrescribed>
+                <DrugDescription>Cardura 2 MG Oral Tablet</DrugDescription>
+                <DrugCoded>
+                    <ProductCode>00049276041</ProductCode>
+                    <ProductCodeQualifier>ND</ProductCodeQualifier>
+                    <Strength>2</Strength>
+                    <DrugDBCode>104368</DrugDBCode>
+                    <DrugDBCodeQualifier>SBD</DrugDBCodeQualifier>
+                    <FormSourceCode>AA</FormSourceCode>
+                    <FormCode>C42998</FormCode>
+                    <StrengthSourceCode>AB</StrengthSourceCode>
+                    <StrengthCode>C28253</StrengthCode>
+                </DrugCoded>
+                <Quantity>
+                    <Value>30</Value>
+                    <CodeListQualifier>38</CodeListQualifier>
+                    <UnitSourceCode>AC</UnitSourceCode>
+                    <PotencyUnitCode>C48542</PotencyUnitCode>
+                </Quantity>
+                <DaysSupply>30</DaysSupply>
+                <Directions>Take 1 tablet once a day</Directions>
+                <Refills>
+                    <Qualifier>R</Qualifier>
+                    <Value>2</Value>
+                </Refills>
+                <Substitutions>Not allowed</Substitutions>
+                <WrittenDate>
+                    <Date>2015-09-29</Date>
+                </WrittenDate>
+            </MedicationPrescribed>
+        </NewRx>
+    </Body>
+</Message>
+<!-- ************************************************ -->
+<!-- Scenario: MU2-04: New Prescription - Cardura 2 mg tablet | MU2 Test 04 | Ambulatory | Four PatientFour -->
+<!-- ************************************************ -->

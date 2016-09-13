@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessageContent>
+   <Segment Description="" Name="UNA">
+    <Field DataElement="" Location="UNA.0">  
+          <Component Categrization="" Data="UNA" DataElement="  ()" Location="UNA.0.1"/>
+    </Field>  
+    <Field DataElement="" Location="UNA.1">  
+          <Component Categrization="" Data="./" DataElement="  ()" Location="UNA.1.1"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="UIB">
+    <Field DataElement="" Location="UIB.0">  
+          <Component Categrization="" Data="UIB" DataElement="  ()" Location="UIB.0.1"/>
+    </Field>  
+    <Field DataElement="" Location="UIB.1">  
+          <Component Categrization="" Data="UNOA" DataElement="  ()" Location="UIB.1.1"/>
+          <Component Categrization="" Data="0" DataElement="  ()" Location="UIB.1.2"/>
+    </Field>  
+    <Field DataElement="" Location="UIB.2">  
+    </Field>  
+    <Field DataElement="Trans_Cntrl_Ref" Location="UIB.3">  
+          <Component Categrization="M" Data="77777777" DataElement=" Trans_Cntrl_Ref (/MessageID)" Location="UIB.3.1"/>
+          <Component Categrization="C" Data="C" DataElement=" Init_Ref_ID ()" Location="UIB.3.2"/>
+    </Field>  
+    <Field DataElement="" Location="UIB.4">  
+    </Field>  
+    <Field DataElement="" Location="UIB.5">  
+    </Field>  
+    <Field DataElement="Sender_ID_L1" Location="UIB.6">  
+          <Component Categrization="M" Data="SENDER_ID" DataElement=" Sender_ID_L1 (/Header/From)" Location="UIB.6.1"/>
+          <Component Categrization="C" Data="D" DataElement=" Sender_L1_ID_Code_Qual (/Header/From/Qualifier)" Location="UIB.6.2"/>
+    </Field>  
+    <Field DataElement="Recipient_ID_L1" Location="UIB.7">  
+          <Component Categrization="M" Data="RECIPIENT_ID" DataElement=" Recipient_ID_L1 (/Header/To)" Location="UIB.7.1"/>
+    </Field>  
+    <Field DataElement="Date_of_Init" Location="UIB.8">  
+          <Component Categrization="C" Data="20151012" DataElement=" Date_of_Init ()" Location="UIB.8.1"/>
+          <Component Categrization="C" Data="101022" DataElement=" Event_Time ()" Location="UIB.8.2"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="UIH">
+    <Field DataElement="" Location="UIH.0">  
+          <Component Categrization="" Data="UIH" DataElement="  ()" Location="UIH.0.1"/>
+    </Field>  
+    <Field DataElement="Message_Type" Location="UIH.1">  
+          <Component Categrization="M" Data="SCRIPT" DataElement=" Message_Type ()" Location="UIH.1.1"/>
+          <Component Categrization="M" Data="010" DataElement=" Message_Version_Number (Message[version])" Location="UIH.1.2"/>
+          <Component Categrization="M" Data="006" DataElement=" Message_Release_Number (Message[release])" Location="UIH.1.3"/>
+          <Component Categrization="C" Data="NEWRX" DataElement=" Message_Function ()" Location="UIH.1.4"/>
+    </Field>  
+    <Field DataElement="Message_Reference_Number" Location="UIH.2">  
+          <Component Categrization="C" Data="80572" DataElement=" Message_Reference_Number (Message/Header/RxReferenceNumber)" Location="UIH.2.1"/>
+    </Field>  
+    <Field DataElement="UIH_Init_Ctrl_Ref" Location="UIH.3">  
+          <Component Categrization="C/M" Data="ORDMU201" DataElement=" UIH_Init_Ctrl_Ref (/Header/RelatesToMessageID)" Location="UIH.3.1"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="PVD">
+    <Field DataElement="" Location="PVD.0">  
+          <Component Categrization="" Data="PVD" DataElement="  ()" Location="PVD.0.1"/>
+    </Field>  
+    <Field DataElement="Provider_Coded" Location="PVD.1">  
+          <Component Categrization="M" Data="PC" DataElement=" Provider_Coded (/Prescriber)" Location="PVD.1.1"/>
+    </Field>  
+    <Field DataElement="Ref_Nmbr" Location="PVD.2">  
+          <Component Categrization="M" Data="AP9010000" DataElement=" Ref_Nmbr (/Prescriber/Identification/NPI)" Location="PVD.2.1"/>
+          <Component Categrization="M" Data="DH" DataElement=" Ref_Qual ()" Location="PVD.2.2"/>
+          <Component Categrization="M" Data="1010000002" DataElement=" Ref_Nmbr (/Prescriber/Identification/NPI)" Location="PVD.2.1"/>
+          <Component Categrization="M" Data="HPI" DataElement=" Ref_Qual ()" Location="PVD.2.2"/>
+    </Field>  
+    <Field DataElement="" Location="PVD.3">  
+    </Field>  
+    <Field DataElement="Agency_Qual_Code" Location="PVD.4">  
+    </Field>  
+    <Field DataElement="Party_Name" Location="PVD.5">  
+          <Component Categrization="M" Data="MacClare" DataElement=" Party_Name (/[]/LastName)" Location="PVD.5.1"/>
+          <Component Categrization="" Data="Susan" DataElement=" First_Name (/[]/FirstName)" Location="PVD.5.2"/>
+    </Field>  
+    <Field DataElement="" Location="PVD.6">  
+    </Field>  
+    <Field DataElement="Party_Name_Tag" Location="PVD.7">  
+          <Component Categrization="C" Data="Clinic One" DataElement=" Party_Name_Tag (/Prescriber/ClinicName)" Location="PVD.7.1"/>
+    </Field>  
+    <Field DataElement="Street" Location="PVD.8">  
+          <Component Categrization="M" Data="10105 Trailblazer Ct" DataElement=" Street (/Address/AddressLine1)" Location="PVD.8.1"/>
+          <Component Categrization="M" Data="Portland" DataElement=" City (/Address/City)" Location="PVD.8.2"/>
+          <Component Categrization="M" Data="OR" DataElement=" Country Sub-entity (/Address/State)" Location="PVD.8.3"/>
+          <Component Categrization="M" Data="97215" DataElement=" Postcode (/Address/ZipCode)" Location="PVD.8.4"/>
+    </Field>  
+    <Field DataElement="Communication_Nmbr" Location="PVD.9">  
+          <Component Categrization="M" Data="50355-2233" DataElement=" Communication_Nmbr (/CommunicationNumbers/Communication/Number)" Location="PVD.9.1"/>
+          <Component Categrization="M" Data="TE" DataElement=" Code_List_Qual (/CommunicationNumbers/Communication/Qualifier)" Location="PVD.9.2"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="PVD">
+    <Field DataElement="" Location="PVD.0">  
+          <Component Categrization="" Data="PVD" DataElement="  ()" Location="PVD.0.1"/>
+    </Field>  
+    <Field DataElement="Provider_Coded" Location="PVD.1">  
+          <Component Categrization="M" Data="P2" DataElement=" Provider_Coded (/Pharmacy)" Location="PVD.1.1"/>
+    </Field>  
+    <Field DataElement="Ref_Nmbr" Location="PVD.2">  
+          <Component Categrization="M" Data="0999055" DataElement=" Ref_Nmbr (/Pharmacy/Identification/NCPDPID)" Location="PVD.2.1"/>
+          <Component Categrization="M" Data="D3" DataElement=" Ref_Qual ()" Location="PVD.2.2"/>
+          <Component Categrization="M" Data="2050000001" DataElement=" Ref_Nmbr (/Pharmacy/Identification/NCPDPID)" Location="PVD.2.1"/>
+          <Component Categrization="M" Data="HPI" DataElement=" Ref_Qual ()" Location="PVD.2.2"/>
+    </Field>  
+    <Field DataElement="" Location="PVD.3">  
+    </Field>  
+    <Field DataElement="Agency_Qual_Code" Location="PVD.4">  
+    </Field>  
+    <Field DataElement="Party_Name" Location="PVD.5">  
+    </Field>  
+    <Field DataElement="" Location="PVD.6">  
+    </Field>  
+    <Field DataElement="Party_Name_Tag" Location="PVD.7">  
+          <Component Categrization="M" Data="Mail Order Pharmacy 10.6MU NOCS" DataElement=" Party_Name_Tag (/Pharmacy/Storename)" Location="PVD.7.1"/>
+    </Field>  
+    <Field DataElement="Street" Location="PVD.8">  
+          <Component Categrization="C" Data="1629-90 Supply Ln" DataElement=" Street (/Address/AddressLine1)" Location="PVD.8.1"/>
+          <Component Categrization="C" Data="Saint Louis" DataElement=" City (/Address/City)" Location="PVD.8.2"/>
+          <Component Categrization="C" Data="MO" DataElement=" Country Sub-entity (/Address/State)" Location="PVD.8.3"/>
+          <Component Categrization="C" Data="63105" DataElement=" Postcode (/Address/ZipCode)" Location="PVD.8.4"/>
+    </Field>  
+    <Field DataElement="Communication_Nmbr" Location="PVD.9">  
+          <Component Categrization="M" Data="314555-3142" DataElement=" Communication_Nmbr (/CommunicationNumbers/Communication/Number)" Location="PVD.9.1"/>
+          <Component Categrization="M" Data="TE" DataElement=" Code_List_Qual (/CommunicationNumbers/Communication/Qualifier)" Location="PVD.9.2"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="PTT">
+    <Field DataElement="" Location="PTT.0">  
+          <Component Categrization="" Data="PTT" DataElement="  ()" Location="PTT.0.1"/>
+    </Field>  
+    <Field DataElement="Individual_Relationship_Coded" Location="PTT.1">  
+          <Component Categrization="C" Data="1" DataElement=" Individual_Relationship_Coded (/PatientRelationship)" Location="PTT.1.1"/>
+    </Field>  
+    <Field DataElement="Century_Date" Location="PTT.2">  
+          <Component Categrization="C" Data="19570321" DataElement=" Century_Date (DateOfBirth/Date)" Location="PTT.2.1"/>
+    </Field>  
+    <Field DataElement="Party_Name" Location="PTT.3">  
+          <Component Categrization="M" Data="Biscayne" DataElement=" Party_Name (/Name/LastName)" Location="PTT.3.1"/>
+          <Component Categrization="M" Data="Sophia" DataElement=" First_Name (/Name/FirstName)" Location="PTT.3.2"/>
+    </Field>  
+    <Field DataElement="Gender_Coded" Location="PTT.4">  
+          <Component Categrization="M" Data="F" DataElement=" Gender_Coded (/Gender)" Location="PTT.4.1"/>
+    </Field>  
+    <Field DataElement="Ref_Nmbr" Location="PTT.5">  
+          <Component Categrization="M" Data="6532865" DataElement=" Ref_Nmbr (/Identification/NCPDPID)" Location="PTT.5.1"/>
+          <Component Categrization="M" Data="94" DataElement=" Ref_Qual ()" Location="PTT.5.2"/>
+    </Field>  
+    <Field DataElement="Street" Location="PTT.6">  
+          <Component Categrization="C" Data="991 Monroe Avenue" DataElement=" Street (/Address/AddressLine1)" Location="PTT.6.1"/>
+          <Component Categrization="C" Data="Port Charlotte" DataElement=" City (/Address/City)" Location="PTT.6.2"/>
+          <Component Categrization="C" Data="FL" DataElement=" Country (/Address/Country)" Location="PTT.6.3"/>
+          <Component Categrization="C" Data="33952" DataElement=" Postcode (/Address/ZipCode)" Location="PTT.6.4"/>
+    </Field>  
+    <Field DataElement="Communication_Nmbr" Location="PTT.7">  
+          <Component Categrization="C" Data="9415551223" DataElement=" Communication_Nmbr (/CommunicationNumbers/Communication/Number)" Location="PTT.7.1"/>
+          <Component Categrization="C" Data="TE" DataElement=" Code_List_Qual (/CommunicationNumbers/Communication/Qualifier)" Location="PTT.7.2"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="DRU">
+    <Field DataElement="" Location="DRU.0">  
+          <Component Categrization="" Data="DRU" DataElement="  ()" Location="DRU.0.1"/>
+    </Field>  
+    <Field DataElement="Item_Desc_ID" Location="DRU.1">  
+          <Component Categrization="M" Data="P" DataElement=" Item_Desc_ID ()" Location="DRU.1.1"/>
+          <Component Categrization="M" Data="Procardia XL 30 mg Extended Release" DataElement=" Item_Desc (/DrugDescription)" Location="DRU.1.2"/>
+          <Component Categrization="M" Data="00069265041" DataElement=" Item_Nmbr (/DrugCoded/ProductCode)" Location="DRU.1.3"/>
+          <Component Categrization="C" Data="ND" DataElement=" Code_List_Resp_Agency (/DrugCoded/ProductCodeQualifier)" Location="DRU.1.4"/>
+          <Component Categrization="" Data="" DataElement="  ()" Location="DRU.1.5"/>
+          <Component Categrization="C" Data="30" DataElement=" Free_Text_010 (/DrugCoded/DrugDBCode)" Location="DRU.1.6"/>
+          <Component Categrization="C" Data="" DataElement=" Code_List_Qual2 ()" Location="DRU.1.7"/>
+          <Component Categrization="C" Data="207772 SBD" DataElement=" Ref_Nmbr (/DrugCoded/DrugDBCode)" Location="DRU.1.8"/>
+          <Component Categrization="C" Data="SBD" DataElement=" Ref_Qual (/DrugCoded/DrugDBCodeQualifier)" Location="DRU.1.9"/>
+          <Component Categrization="" Data=" Tablet" DataElement="  ()" Location="DRU.1.10"/>
+          <Component Categrization="" Data="" DataElement="  ()" Location="DRU.1.11"/>
+          <Component Categrization="" Data="" DataElement="  ()" Location="DRU.1.12"/>
+          <Component Categrization="C" Data="AA" DataElement=" Source_Code_List (/DrugCoded/FormSourceCode)" Location="DRU.1.13"/>
+          <Component Categrization="C" Data="C42927" DataElement=" Item_Form_Code (/DrugCoded/FormCode)" Location="DRU.1.14"/>
+          <Component Categrization="C" Data="AB" DataElement=" Source_Code_List2 (/DrugCoded/StrengthsourceCode)" Location="DRU.1.15"/>
+          <Component Categrization="C" Data="C28253" DataElement=" Item_Strength_Code (/DrugCoded/StrenghtCode)" Location="DRU.1.16"/>
+    </Field>  
+    <Field DataElement="" Location="DRU.2">  
+          <Component Categrization="" Data="" DataElement="  ()" Location="DRU.2.1"/>
+          <Component Categrization="C" Data="53" DataElement=" Drug_Quantity (/Quantity/Value)" Location="DRU.2.2"/>
+          <Component Categrization="C" Data="38" DataElement=" Drug_Code_List_Qual3 (/Quantity/CodeListQualifier)" Location="DRU.2.3"/>
+          <Component Categrization="C" Data="AC" DataElement=" Drug_Source_Code_List3 (/Quantity/UnitSourceCode)" Location="DRU.2.4"/>
+          <Component Categrization="C" Data="C48542" DataElement=" Drug_Potency_Unit_Code (/Quantity/PotencyUnitCode)" Location="DRU.2.5"/>
+    </Field>  
+    <Field DataElement="" Location="DRU.3">  
+          <Component Categrization="" Data="" DataElement="  ()" Location="DRU.3.1"/>
+          <Component Categrization="C" Data="Take 1 tablet a day by mouth for seven days, then take 2 tablets by mo" DataElement=" Dosage1 (/Directions)" Location="DRU.3.2"/>
+          <Component Categrization="C" Data="uth once a day." DataElement=" Dosage2 (/Directions)" Location="DRU.3.3"/>
+    </Field>  
+    <Field DataElement="DateTime_Prd_Qual" Location="DRU.4">  
+          <Component Categrization="C" Data="85" DataElement=" DateTime_Prd_Qual ()" Location="DRU.4.1"/>
+          <Component Categrization="C" Data="20151120" DataElement=" DateTime_Prd (/WrittenDate)" Location="DRU.4.2"/>
+          <Component Categrization="C" Data="102" DataElement=" DateTime_Prd_Format_Qual ()" Location="DRU.4.3"/>
+          <Component Categrization="C" Data="ZDS" DataElement=" DateTime_Prd_Qual ()" Location="DRU.4.1"/>
+          <Component Categrization="C" Data="30" DataElement=" DateTime_Prd (/WrittenDate)" Location="DRU.4.2"/>
+          <Component Categrization="C" Data="804" DataElement=" DateTime_Prd_Format_Qual ()" Location="DRU.4.3"/>
+    </Field>  
+    <Field DataElement="Product_Service_Sub_Coded" Location="DRU.5">  
+          <Component Categrization="C" Data="1" DataElement=" Product_Service_Sub_Coded (/Substitutions)" Location="DRU.5.1"/>
+    </Field>  
+    <Field DataElement="Quantity_Qual" Location="DRU.6">  
+          <Component Categrization="C" Data="R" DataElement=" Quantity_Qual (/Refills/Qualifier)" Location="DRU.6.1"/>
+          <Component Categrization="C" Data="0" DataElement=" Quantity (/Refills/value)" Location="DRU.6.2"/>
+    </Field>  
+    <Field DataElement="" Location="DRU.7">  
+          <Component Categrization="" Data="1" DataElement="  ()" Location="DRU.7.1"/>
+          <Component Categrization="" Data="I201" DataElement="  ()" Location="DRU.7.2"/>
+          <Component Categrization="" Data="ABF" DataElement="  ()" Location="DRU.7.3"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="SIG">
+    <Field DataElement="" Location="SIG.0">  
+          <Component Categrization="" Data="SIG" DataElement="  ()" Location="SIG.0.1"/>
+    </Field>  
+    <Field DataElement="REPEATING SIG 7898 Sig Sequence Position Number" Location="SIG.1">  
+          <Component Categrization="M" Data="1" DataElement=" REPEATING SIG 7898 Sig Sequence Position Number ()" Location="SIG.1.1"/>
+          <Component Categrization="C" Data="THEN" DataElement=" REPEATING SIG 7899 Multiple SIG Modifier ()" Location="SIG.1.2"/>
+    </Field>  
+    <Field DataElement="CODE SYSTEM COMPOSITE 7900 SNOMED Version" Location="SIG.2">  
+          <Component Categrization="C" Data="20130731" DataElement=" CODE SYSTEM COMPOSITE 7900 SNOMED Version ()" Location="SIG.2.1"/>
+          <Component Categrization="C" Data="14.01d" DataElement=" CODE SYSTEM COMPOSITE 7901 FMT Version ()" Location="SIG.2.2"/>
+    </Field>  
+    <Field DataElement="FREE TEXT 7902 Sig Free Text String Indicator" Location="SIG.3">  
+          <Component Categrization="M" Data="2" DataElement=" FREE TEXT 7902 Sig Free Text String Indicator ()" Location="SIG.3.1"/>
+          <Component Categrization="M" Data="Take 1 tablet a day by mouth for seven days, then take 2 tablets by mouth once a day." DataElement=" FREE TEXT 7989 Sig Free Text ()" Location="SIG.3.2"/>
+    </Field>  
+    <Field DataElement="DOSE 7903 Dose Composite Indicator" Location="SIG.4">  
+          <Component Categrization="M" Data="1" DataElement=" DOSE 7903 Dose Composite Indicator ()" Location="SIG.4.1"/>
+          <Component Categrization="C" Data="take" DataElement=" DOSE 7904 Dose Delivery Method Text ()" Location="SIG.4.2"/>
+          <Component Categrization="C" Data="1" DataElement=" DOSE 7905 Dose Delivery Method Code Qualifier ()" Location="SIG.4.3"/>
+          <Component Categrization="C" Data="419652001" DataElement=" DOSE 7906 Dose Delivery Method Code ()" Location="SIG.4.4"/>
+          <Component Categrization="C" Data="" DataElement=" DOSE 7907 Dose Delivery Method Modifier Text ()" Location="SIG.4.5"/>
+          <Component Categrization="C" Data="" DataElement=" DOSE 7908 Dose Delivery Method Modifier Code Qualifier ()" Location="SIG.4.6"/>
+          <Component Categrization="C" Data="" DataElement=" DOSE 7909 Dose Delivery Method Modifier Code ()" Location="SIG.4.7"/>
+          <Component Categrization="C" Data="1" DataElement=" DOSE 7910 Dose Quantity ()" Location="SIG.4.8"/>
+          <Component Categrization="C" Data="tablet" DataElement=" DOSE 7911 Dose Form Text ()" Location="SIG.4.9"/>
+          <Component Categrization="C" Data="2" DataElement=" DOSE 7912 Dose Form Code Qualifier ()" Location="SIG.4.10"/>
+          <Component Categrization="C" Data="C42998" DataElement=" DOSE 7913 Dose Form Code ()" Location="SIG.4.11"/>
+    </Field>  
+    <Field DataElement="DOSE CALCULATION 7915 Dosing Basis Numeric Value" Location="SIG.5">  
+    </Field>  
+    <Field DataElement="VEHICLE 7926 Vehicle Name" Location="SIG.6">  
+    </Field>  
+    <Field DataElement="ROUTE OF ADMINISTRATION  7934 Route of Administration Text" Location="SIG.7">  
+          <Component Categrization="C" Data="by mouth" DataElement=" ROUTE OF ADMINISTRATION  7934 Route of Administration Text ()" Location="SIG.7.1"/>
+          <Component Categrization="C" Data="1" DataElement=" ROUTE OF ADMINISTRATION  7935 Route of Administration Code Qualifier ()" Location="SIG.7.2"/>
+          <Component Categrization="C" Data="26643006" DataElement=" ROUTE OF ADMINISTRATION  7936 Route of Administration Code ()" Location="SIG.7.3"/>
+    </Field>  
+    <Field DataElement="SITE OF ADMINISTRATION   7938 Site of Administration Text" Location="SIG.8">  
+    </Field>  
+    <Field DataElement="TIMING   7942 Administration Timing Text" Location="SIG.9">  
+          <Component Categrization="C" Data="" DataElement=" TIMING   7942 Administration Timing Text ()" Location="SIG.9.1"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7943 Administration Timing Code Qualifier ()" Location="SIG.9.2"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7944 Administration Timing Code ()" Location="SIG.9.3"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7945 Multiple Administration Timing Modifier ()" Location="SIG.9.4"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7946 Rate of Administration ()" Location="SIG.9.5"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7947 Rate Unit of Measure Text ()" Location="SIG.9.6"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7948 Rate Unit of Measure Code Qualifier ()" Location="SIG.9.7"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7949 Rate Unit of Measure Code ()" Location="SIG.9.8"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7950 Time Period Basis Text ()" Location="SIG.9.9"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7951 Time Period Basis Code Qualifier ()" Location="SIG.9.10"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7952 Time Period Basis Code ()" Location="SIG.9.11"/>
+          <Component Categrization="C" Data="1" DataElement=" TIMING   7953 Frequency Numeric Value ()" Location="SIG.9.12"/>
+          <Component Categrization="C" Data="day" DataElement=" TIMING   7942 Administration Timing Text ()" Location="SIG.9.13"/>
+          <Component Categrization="C" Data="1" DataElement=" TIMING   7955 Frequency Units Code Qualifier ()" Location="SIG.9.14"/>
+          <Component Categrization="C" Data="258703001" DataElement=" TIMING   7956 Frequency Units Code ()" Location="SIG.9.15"/>
+    </Field>  
+    <Field DataElement="DURATION 7963 Duration Numeric Value" Location="SIG.10">  
+          <Component Categrization="C" Data="7" DataElement=" DURATION 7963 Duration Numeric Value ()" Location="SIG.10.1"/>
+          <Component Categrization="C" Data="day" DataElement=" DURATION 7964 Duration Text ()" Location="SIG.10.2"/>
+          <Component Categrization="C" Data="1" DataElement=" DURATION 7965 Duration Text Code Qualifier ()" Location="SIG.10.3"/>
+          <Component Categrization="C" Data="258703001" DataElement=" DURATION 7966 Duration Text Code ()" Location="SIG.10.4"/>
+    </Field>  
+    <Field DataElement="MAXIMUM DOSE RESTRICTION 7967 Maximum Dose Restriction Numeric Value" Location="SIG.11">  
+    </Field>  
+    <Field DataElement="INDICATION 7976 Indication Precursor Text" Location="SIG.12">  
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="SIG">
+    <Field DataElement="" Location="SIG.0">  
+          <Component Categrization="" Data="SIG" DataElement="  ()" Location="SIG.0.1"/>
+    </Field>  
+    <Field DataElement="REPEATING SIG 7898 Sig Sequence Position Number" Location="SIG.1">  
+          <Component Categrization="M" Data="2" DataElement=" REPEATING SIG 7898 Sig Sequence Position Number ()" Location="SIG.1.1"/>
+    </Field>  
+    <Field DataElement="CODE SYSTEM COMPOSITE 7900 SNOMED Version" Location="SIG.2">  
+          <Component Categrization="C" Data="20130731" DataElement=" CODE SYSTEM COMPOSITE 7900 SNOMED Version ()" Location="SIG.2.1"/>
+          <Component Categrization="C" Data="14.01d" DataElement=" CODE SYSTEM COMPOSITE 7901 FMT Version ()" Location="SIG.2.2"/>
+    </Field>  
+    <Field DataElement="FREE TEXT 7902 Sig Free Text String Indicator" Location="SIG.3">  
+          <Component Categrization="M" Data="2" DataElement=" FREE TEXT 7902 Sig Free Text String Indicator ()" Location="SIG.3.1"/>
+          <Component Categrization="M" Data="Take 1 tablet a day by mouth for seven days, then take 2 tablets by mouth once a day." DataElement=" FREE TEXT 7989 Sig Free Text ()" Location="SIG.3.2"/>
+    </Field>  
+    <Field DataElement="DOSE 7903 Dose Composite Indicator" Location="SIG.4">  
+          <Component Categrization="M" Data="1" DataElement=" DOSE 7903 Dose Composite Indicator ()" Location="SIG.4.1"/>
+          <Component Categrization="C" Data="take" DataElement=" DOSE 7904 Dose Delivery Method Text ()" Location="SIG.4.2"/>
+          <Component Categrization="C" Data="1" DataElement=" DOSE 7905 Dose Delivery Method Code Qualifier ()" Location="SIG.4.3"/>
+          <Component Categrization="C" Data="419652001" DataElement=" DOSE 7906 Dose Delivery Method Code ()" Location="SIG.4.4"/>
+          <Component Categrization="C" Data="" DataElement=" DOSE 7907 Dose Delivery Method Modifier Text ()" Location="SIG.4.5"/>
+          <Component Categrization="C" Data="" DataElement=" DOSE 7908 Dose Delivery Method Modifier Code Qualifier ()" Location="SIG.4.6"/>
+          <Component Categrization="C" Data="" DataElement=" DOSE 7909 Dose Delivery Method Modifier Code ()" Location="SIG.4.7"/>
+          <Component Categrization="C" Data="2" DataElement=" DOSE 7910 Dose Quantity ()" Location="SIG.4.8"/>
+          <Component Categrization="C" Data="tablet" DataElement=" DOSE 7911 Dose Form Text ()" Location="SIG.4.9"/>
+          <Component Categrization="C" Data="2" DataElement=" DOSE 7912 Dose Form Code Qualifier ()" Location="SIG.4.10"/>
+          <Component Categrization="C" Data="C42998" DataElement=" DOSE 7913 Dose Form Code ()" Location="SIG.4.11"/>
+    </Field>  
+    <Field DataElement="DOSE CALCULATION 7915 Dosing Basis Numeric Value" Location="SIG.5">  
+    </Field>  
+    <Field DataElement="VEHICLE 7926 Vehicle Name" Location="SIG.6">  
+    </Field>  
+    <Field DataElement="ROUTE OF ADMINISTRATION  7934 Route of Administration Text" Location="SIG.7">  
+          <Component Categrization="C" Data="by mouth" DataElement=" ROUTE OF ADMINISTRATION  7934 Route of Administration Text ()" Location="SIG.7.1"/>
+          <Component Categrization="C" Data="1" DataElement=" ROUTE OF ADMINISTRATION  7935 Route of Administration Code Qualifier ()" Location="SIG.7.2"/>
+          <Component Categrization="C" Data="26643006" DataElement=" ROUTE OF ADMINISTRATION  7936 Route of Administration Code ()" Location="SIG.7.3"/>
+    </Field>  
+    <Field DataElement="SITE OF ADMINISTRATION   7938 Site of Administration Text" Location="SIG.8">  
+    </Field>  
+    <Field DataElement="TIMING   7942 Administration Timing Text" Location="SIG.9">  
+          <Component Categrization="C" Data="" DataElement=" TIMING   7942 Administration Timing Text ()" Location="SIG.9.1"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7943 Administration Timing Code Qualifier ()" Location="SIG.9.2"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7944 Administration Timing Code ()" Location="SIG.9.3"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7945 Multiple Administration Timing Modifier ()" Location="SIG.9.4"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7946 Rate of Administration ()" Location="SIG.9.5"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7947 Rate Unit of Measure Text ()" Location="SIG.9.6"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7948 Rate Unit of Measure Code Qualifier ()" Location="SIG.9.7"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7949 Rate Unit of Measure Code ()" Location="SIG.9.8"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7950 Time Period Basis Text ()" Location="SIG.9.9"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7951 Time Period Basis Code Qualifier ()" Location="SIG.9.10"/>
+          <Component Categrization="C" Data="" DataElement=" TIMING   7952 Time Period Basis Code ()" Location="SIG.9.11"/>
+          <Component Categrization="C" Data="1" DataElement=" TIMING   7953 Frequency Numeric Value ()" Location="SIG.9.12"/>
+          <Component Categrization="C" Data="day" DataElement=" TIMING   7942 Administration Timing Text ()" Location="SIG.9.13"/>
+          <Component Categrization="C" Data="1" DataElement=" TIMING   7955 Frequency Units Code Qualifier ()" Location="SIG.9.14"/>
+          <Component Categrization="C" Data="258703001" DataElement=" TIMING   7956 Frequency Units Code ()" Location="SIG.9.15"/>
+    </Field>  
+    <Field DataElement="DURATION 7963 Duration Numeric Value" Location="SIG.10">  
+    </Field>  
+    <Field DataElement="MAXIMUM DOSE RESTRICTION 7967 Maximum Dose Restriction Numeric Value" Location="SIG.11">  
+    </Field>  
+    <Field DataElement="INDICATION 7976 Indication Precursor Text" Location="SIG.12">  
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="UIT">
+    <Field DataElement="" Location="UIT.0">  
+          <Component Categrization="" Data="UIT" DataElement="  ()" Location="UIT.0.1"/>
+    </Field>  
+    <Field DataElement="Message REference Number" Location="UIT.1">  
+          <Component Categrization="C" Data="80572" DataElement=" Message REference Number (/MessageID)" Location="UIT.1.1"/>
+    </Field>  
+    <Field DataElement="Number of Segments" Location="UIT.2">  
+          <Component Categrization="C" Data="9" DataElement=" Number of Segments ()" Location="UIT.2.1"/>
+    </Field>  
+</Segment>  
+   <Segment Description="" Name="UIZ">
+    <Field DataElement="" Location="UIZ.0">  
+          <Component Categrization="" Data="UIZ" DataElement="  ()" Location="UIZ.0.1"/>
+    </Field>  
+    <Field DataElement="" Location="UIZ.1">  
+    </Field>  
+    <Field DataElement="" Location="UIZ.2">  
+          <Component Categrization="" Data="1" DataElement="  ()" Location="UIZ.2.1"/>
+    </Field>  
+</Segment>  
+</MessageContent>   

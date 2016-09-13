@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message version="010" release="006" HighestVersionSupported="" xmlns="http://www.ncpdp.org/schema/SCRIPT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ncpdp.org/schema/SCRIPT Script_10.6_XML\SCRIPT_XML_10_6.xsd">
+    
+    <Header>
+        <To Qualifier="P">RECIPIENT_ID</To>
+        <From Qualifier="D">SENDER_ID</From>
+        <MessageID>MU103</MessageID>
+        <SentTime>2015-10-15T14:05:00</SentTime>
+        <Security>
+            <Sender>
+                <SecondaryIdentification>PASSWORD</SecondaryIdentification>
+                <TertiaryIdentification>3RYIDENTIFIER</TertiaryIdentification>
+            </Sender>
+            <Receiver></Receiver>
+        </Security>
+        <PrescriberOrderNumber>ORDMU203</PrescriberOrderNumber>
+    </Header>
+    <Body>
+        <NewRx>
+            <Pharmacy>
+                <Identification>
+                    <NCPDPID>1367084</NCPDPID>
+                    <NPI>2030000006</NPI>
+                </Identification>
+                <StoreName>TX Pharmacy 10.6MU</StoreName>
+                <Address>
+                    <AddressLine1>W136 Texans Way</AddressLine1>
+                    <AddressLine2>N7084</AddressLine2>
+                    <City>Houston</City>
+                    <State >TX</State >
+                    <ZipCode>77001</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(832) 555-8232</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Pharmacy>
+            <Prescriber>
+                <Identification>
+                    <NPI>1891724563</NPI>
+                    <DEANumber>BB1234567</DEANumber>
+                </Identification>
+                <ClinicName></ClinicName>
+                <Name>
+                    <LastName>Branson</LastName>
+                    <FirstName>Thomas</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Address>
+                    <AddressLine1>9989 Rockets Rd</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Houston</City>
+                    <State >TX</State >
+                    <ZipCode>77001</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(281) 555-1233</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Prescriber>
+            <Patient >
+                <Name>
+                    <LastName>Notch</LastName>
+                    <FirstName>Frank</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Gender>Male</Gender>
+                <DateOfBirth>
+                    <Date>10/02/1965</Date>
+                </DateOfBirth>
+                <Address>
+                    <AddressLine1>3919 Peck Street</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Peterborough</City>
+                    <State >NH</State >
+                    <ZipCode>03458</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(705) 555-1218</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Patient >
+            <MedicationPrescribed>
+                <DrugDescription>Catapres 0.1 MG Oral Tablet</DrugDescription>
+                <DrugCoded>
+                    <ProductCode>00597000601</ProductCode>
+                    <ProductCodeQualifier>ND</ProductCodeQualifier>
+                    <Strength>0.1</Strength>
+                    <DrugDBCode>884175</DrugDBCode>
+                    <DrugDBCodeQualifier>SBD</DrugDBCodeQualifier>
+                    <FormSourceCode>AA</FormSourceCode>
+                    <FormCode>C42998</FormCode>
+                    <StrengthSourceCode>AB</StrengthSourceCode>
+                    <StrengthCode>C28253</StrengthCode>
+                </DrugCoded>
+                <Quantity>
+                    <Value>60</Value>
+                    <CodeListQualifier>38</CodeListQualifier>
+                    <UnitSourceCode>AC</UnitSourceCode>
+                    <PotencyUnitCode>C48542</PotencyUnitCode>
+                </Quantity>
+                <DaysSupply>30</DaysSupply>
+                <Directions>Take 1 tablet twice a day (am and hs)</Directions>
+                <Refills>
+                    <Qualifier>R</Qualifier>
+                    <Value>2</Value>
+                </Refills>
+                <Substitutions>Allowed</Substitutions>
+                <WrittenDate>
+                    <Date>2015-15-10</Date>
+                </WrittenDate>
+            </MedicationPrescribed>
+        </NewRx>
+    </Body>
+</Message>
+<!-- ************************************************ -->
+<!-- Scenario: MU2-03: New Prescription - Catapres 0.1 mg tablet | MU2 Test 03 | Ambulatory | Three PatientThree -->
+<!-- ************************************************ -->

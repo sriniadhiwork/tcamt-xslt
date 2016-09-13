@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8"?><html>
+   <head>
+      <style type="text/css">
+            @media screen{
+                .jurorContainer fieldset{
+                    font-size:100%;
+                }
+                .jurorContainer fieldset table tbody tr th{
+                    font-size:90%
+                }
+                .jurorContainer fieldset table tbody tr td{
+                    font-size:90%;
+                }
+            }
+            @media print{
+                .jurorContainer fieldset{
+                    font-size:small;
+                }
+                .jurorContainer fieldset table th{
+                    font-size:x-small;
+                }
+                .jurorContainer fieldset table td{
+                    font-size:xx-small
+                }
+                * [type = text]{
+                    width:98%;
+                    height:15px;
+                    margin:2px;
+                    padding:0px;
+                    background:1px #ccc;
+                }
+            
+                .jurorContainer * [type = checkbox]{
+                    width:10px;
+                    height:10px;
+                    margin:2px;
+                    padding:0px;
+                    background:1px #ccc;
+                }
+            }
+            
+            
+            .jurorContainer * [type = text]{
+                width:95%;
+            }
+            
+            .jurorContainer fieldset{
+                page-break-inside:avoid;
+            }
+            .jurorContainer fieldset table{
+                width:98%;
+                border:1px groove;
+                margin:0 auto;
+                page-break-inside:avoid;
+            }
+            .jurorContainer fieldset table tr{
+                border:1px groove;
+            }
+            .jurorContainer fieldset table th{
+                border:1px groove;
+            }
+            .jurorContainer fieldset table td{
+                border:1px groove;
+                empty-cells:show;
+            }
+            .jurorContainer fieldset table[id = inspectionStatus] thead tr th:last-child{
+                width:2%;
+                color:black;
+            }
+            .jurorContainer fieldset table[id = inspectionStatus] thead tr th:nth-last-child(2){
+                width:2%;
+                color:black;
+            }
+            .jurorContainer fieldset table[id = inspectionStatus] thead tr th:nth-last-child(3){
+                width:45%;
+            }
+            .jurorContainer fieldset table thead{
+                border:1px groove;
+                background:#446BEC;
+                text-align:center;
+                color:white;
+            }
+            .jurorContainer fieldset table thead tr td{
+                text-align:left;
+                color:black;
+                background:white;
+            }
+            .jurorContainer fieldset table tbody tr th{
+                text-align:left;
+                background:#C6DEFF;
+            }
+            .jurorContainer fieldset table tbody tr td{
+                text-align:left
+            }
+            .jurorContainer fieldset table tbody tr td [type = text]{
+                text-align:left;
+                margin-left:1%
+            }
+            .jurorContainer fieldset table caption{
+                font-weight:bold;
+                color:#0840F8;
+            }
+            .jurorContainer fieldset legend{
+                font-weight:bold;
+            }
+            .jurorContainer fieldset pre{
+                font-family:Times New Roman;
+            }
+            .jurorContainer fieldset p{
+                text-align:left;
+            }
+            .jurorContainer fieldset{
+                width:98%;
+                border:1px solid #446BEC;
+            }
+            .jurorContainer .embSpace{
+                padding-left:25px;
+            }
+            .jurorContainer .noData{
+                background:#B8B8B8;
+            }
+            .jurorContainer .boldItalic{
+                font-style:italic;
+                font-weight:bold;
+            }
+            .jurorContainer .bold{
+                font-weight:bold;
+            }
+            .jurorContainer .normal{
+                font-weight:normal;
+            }
+            
+            }</style>
+      <script type="text/javascript">
+            
+            
+            function comment(){
+            
+            $("textarea").on("keyup",function (){
+            var h=$(this);
+            h.height(20).height(h[0].scrollHeight);
+            });
+            
+            } 
+      
+            if(typeof jQuery =='undefined') {
+            var headTag = document.getElementsByTagName("head")[0];
+            var jqTag = document.createElement('script');
+            jqTag.type = 'text/javascript';
+            jqTag.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js';
+            jqTag.onload = comment;
+            
+            headTag.appendChild(jqTag);
+            }
+            else {  
+            $(document).ready(function (){
+            
+            comment();
+            
+            
+            });
+            
+            }
+        </script>
+   </head>
+   <body>
+      <div class="jurorContainer">
+         <fieldset>
+            <table id="headerTable">
+               <thead>
+                  <tr>
+                     <th colspan="2">HL7 v2.5 ORU^R01^ORU_R01 Message: Incorporation of
+                        Laboratory Results
+                     </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th>Test Case ID</th>
+                     <td></td>
+                  </tr>
+                  <tr>
+                     <th>Juror ID</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Juror Name</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>HIT System Tested</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Inspection Date/Time</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Inspection Settlement (Pass/Fail)</th>
+                     <td>
+                        <table id="inspectionStatus">
+                           <thead>
+                              <tr>
+                                 <th>Pass</th>
+                                 <th>Fail</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td>
+                                    <input type="checkbox" value=""></input>
+                                 </td>
+                                 <td>
+                                    <input type="checkbox" value=""></input>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Reason Failed</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Juror Comments</th>
+                     <td>
+                        <input style="background: 1px  #E2E2E2;" type="text" maxlength="50" value=""></input>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <p>This Test Case-specific Juror Document provides a checklist for the
+               Tester to use during testing for assessing the Health IT Module's
+               ability to display and incorporate required data elements from the
+               information received in the LRI message. Additional data from the
+               message or from the Health IT Module are permitted to be displayed and
+               incorporated by the Module. Grayed-out fields in the Juror Document
+               indicate where no data for that data element were included in the LRI
+               message for the given Test Case. 
+            </p>
+            <p>The format of the Display Verification section of this Juror Document is
+               for ease-of-use by the Tester and does not indicate how the Health IT
+               Module display must be designed. 
+            </p>
+         </fieldset>
+         <h2>Display Verification</h2>
+         <fieldset>
+            <h4 align="left">Legend for Display Requirement</h4>
+            <p>Data in 
+               <b>bold</b> text: HIT Module must display exact version of stored
+               data
+            </p>
+            <p>Data in 
+               <b>
+                  <i>bold italics</i>
+               </b> text: HIT Module must display exact
+               version of data received in the LRI message
+            </p>
+            <p>Data in regular text: HIT Module may display equivalent version of stored
+               data
+            </p>
+         </fieldset>
+         <br></br>
+         <fieldset id="Patient.1.Table">
+            <table id="patientInformationDisplay">
+               <thead>
+                  <tr>
+                     <th colspan="5">Patient Information - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th>Patient Identifier</th>
+                     <th>Patient Name</th>
+                     <th>DOB</th>
+                     <th>Sex</th>
+                     <th>Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td class="boldItalic">PATID1239</td>
+                     <td class="boldItalic">Peggy  Smirnoff </td>
+                     <td class="normal">04/01/1975</td>
+                     <td class="normal">F</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="5">When a given patient has more than one Patient ID
+                        Number, the HIT module may display the ID Number that is most
+                        appropriate for the context (e.g., inpatient ID Number versus
+                        ambulatory ID Number.) 
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <table id="labResultsDisplay">
+               <thead>
+                  <tr>
+                     <th colspan="10">Lab Results - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th width="15%">Test Performed:</th>
+                     <td colspan="10" width="75%" style="font-style:italic;font-weight:bold;">Hepatitis A B C Panel</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Test Report Date:</th>
+                     <td colspan="10" width="75%" style="font-weight:normal;">06/28/2012 10:05:00</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Result Report Status</th>
+                     <td colspan="10" width="75%" style="font-weight:normal;">F</td>
+                  </tr>
+                  <tr>
+                     <th colspan="10">Result Report Status</th>
+                  </tr>
+                  <tr>
+                     <td colspan="10">&nbsp;</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Result Observation Name</th>
+                     <th width="5%">Result Value</th>
+                     <th width="5%">UOM</th>
+                     <th width="7%">Reference Range</th>
+                     <th width="7%">Abnormal Flag</th>
+                     <th width="6%">Status</th>
+                     <th width="10%">Date/Time of Observation</th>
+                     <th width="10%">End Date/Time of Observation</th>
+                     <th width="10%">Date/Time of Analysis</th>
+                     <th width="20%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td class="boldItalic">Hepatitis A IgM antibodies (IgM anti-HAV)</td>
+                     <td class="bold">Negative (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis A antibodies (anti-HAV)</td>
+                     <td class="bold">Negative (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis B core antibodies (anti-HBVc)</td>
+                     <td class="bold">Negative (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis B core antibodies (anti-HBVc) Quant</td>
+                     <td class="normal"> 0.40  </td>
+                     <td class="boldItalic">international unit per milliliter</td>
+                     <td class="bold"><0.50 IU/mL</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis B e antibodies (anti-HBVe)</td>
+                     <td class="bold">Negative (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis B surface antigen (HBsAg)</td>
+                     <td class="bold">Negative (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis B surface antibody (anti-HBVs)</td>
+                     <td class="bold">Negative (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">N</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis C antibody screen  (anti-HCV)</td>
+                     <td class="bold">Positive (qualifier value)</td>
+                     <td class="noData"></td>
+                     <td class="bold">Negative</td>
+                     <td class="normal">A</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="boldItalic">Hepatitis C antibodies Signal to Cut-off Ratio</td>
+                     <td class="normal"> 10.8  </td>
+                     <td class="boldItalic">Signal to cutoff ratio</td>
+                     <td class="bold">0.0-0.9 s/co</td>
+                     <td class="normal">H</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">09/26/2015 14:00:  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Note</td>
+                     <td colspan="8">Negative:   < 0.8 <br/> Indeterminate 0.8 - 0.9 <br/> Positive:  > 0.9 <br/> In order to reduce the incidence of a false positive result, the CDC recommends that all s/co ratios between 1.0 and 10.9 be confirmed with additional Verification or PCR testing.</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Note</td>
+                     <td colspan="8">In order to reduce the incidence of a false positive result, the CDC recommends that
+                        all s/co ratios between 1.0 and 10.9 be confirmed with additional Verification or
+                        PCR testing.
+                     </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <br></br>
+               </tbody>
+            </table>
+            <table id="labResultsDisplay">
+               <thead>
+                  <tr>
+                     <th colspan="10">Lab Results - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th width="15%">Test Performed:</th>
+                     <td colspan="10" width="75%" style="font-style:italic;font-weight:bold;">Hepatitis C RNA PCR</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Test Report Date:</th>
+                     <td colspan="10" width="75%" style="font-weight:normal;">09/26/2015 14:05:51</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Result Report Status</th>
+                     <td colspan="10" width="75%" style="font-weight:normal;">F</td>
+                  </tr>
+                  <tr>
+                     <th colspan="10">Result Report Status</th>
+                  </tr>
+                  <tr>
+                     <td colspan="10">&nbsp;</td>
+                  </tr>
+                  <tr>
+                     <th width="15%">Result Observation Name</th>
+                     <th width="5%">Result Value</th>
+                     <th width="5%">UOM</th>
+                     <th width="7%">Reference Range</th>
+                     <th width="7%">Abnormal Flag</th>
+                     <th width="6%">Status</th>
+                     <th width="10%">Date/Time of Observation</th>
+                     <th width="10%">End Date/Time of Observation</th>
+                     <th width="10%">Date/Time of Analysis</th>
+                     <th width="20%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td class="boldItalic">Hepatitis C RNA PCR</td>
+                     <td class="normal"> 7611200  </td>
+                     <td class="boldItalic">international unit per milliliter</td>
+                     <td class="bold"><43 IU/mL</td>
+                     <td class="normal">H</td>
+                     <td class="normal">F</td>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td class="noData"></td>
+                     <td class="normal">06/29/2012 09:27:00</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <br></br>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <table id="performingOrganizationNameAdd">
+               <thead>
+                  <tr>
+                     <th colspan="3">Performing Organization Information - Display
+                        Verification
+                     </th>
+                  </tr>
+                  <tr>
+                     <th width="30%">Data Element Name</th>
+                     <th width="30%">Data</th>
+                     <th width="40%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th>Organization Name</th>
+                     <td class="bold">Century Hospital</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th colspan="3">Organization Address</th>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Street address</th>
+                     <td class="boldItalic">2070 Test Park</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Other designation</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">City</th>
+                     <td class="boldItalic">Los Angeles</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">State</th>
+                     <td class="boldItalic">CA</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Zip code</th>
+                     <td class="boldItalic">90067</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <table id="performingOrganizationMedDr">
+               <thead>
+                  <tr>
+                     <th colspan="3">Performing Organization Medical Director Information -
+                        Display Verification
+                     </th>
+                  </tr>
+                  <tr>
+                     <th width="30%">Data Element Name</th>
+                     <th width="30%">Data</th>
+                     <th width="40%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th colspan="3">Medical Director Name</th>
+                  </tr>
+                  <tr>
+                     <th colspan="3" class="embSpace">Family Name</th>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Surname</th>
+                     <td class="normal">Knowsalot</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Given Name</th>
+                     <td class="normal">Phil</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Second and Further Given Names or Initials Thereof</th>
+                     <td class="normal">J.</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Suffix (e.g., JR or III)</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th class="embSpace">Prefix (e.g., DR)</th>
+                     <td class="normal">Dr.</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <table id="specimenInformation">
+               <thead>
+                  <tr>
+                     <th colspan="3">Specimen Information - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th width="30%">Data Element Name</th>
+                     <th width="30%">Data</th>
+                     <th width="40%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th>Specimen Type(Specimen Source)</th>
+                     <td class="boldItalic">Serum</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Collection Date/Time - Start</th>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Collection Date/Time - End</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Reject Reason</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Condition</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <fieldset>
+            <table id="specimenInformation">
+               <thead>
+                  <tr>
+                     <th colspan="3">Specimen Information - Display Verification</th>
+                  </tr>
+                  <tr>
+                     <th width="30%">Data Element Name</th>
+                     <th width="30%">Data</th>
+                     <th width="40%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th>Specimen Type(Specimen Source)</th>
+                     <td class="boldItalic">Serum</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Collection Date/Time - Start</th>
+                     <td class="normal">09/25/2015   :  :  </td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Collection Date/Time - End</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Reject Reason</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>Specimen Condition</th>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+         <h2>Incorporate Verification</h2>
+         <fieldset>
+            <h4 align="left">Legend for Store Requirement</h4>
+            <p> S-EX : Store exact</p>
+            <p> S-TR-R : Translate and store translation (exact value can be re-created
+               from translation any time)
+            </p>
+            <p> S-EX-A : Store exact by association</p>
+            <p> S-RC : Process and re-create</p>
+            <p> S-EQ : Store equivalent</p>
+            <p> S-MA : Made available for specific processing</p>
+            <p>(See 
+               <b> "Instructions to Testers for Verification of Store
+                  Requirements"
+               </b> at the end of this Juror Document for
+               additional details.)
+            </p>
+         </fieldset>
+         <br></br>
+         <fieldset>
+            <table id="identifierInformation">
+               <thead>
+                  <tr>
+                     <th colspan="5">Patient Information Details- Incorporate
+                        Verification
+                     </th>
+                  </tr>
+                  <tr>
+                     <th width="15%">Location</th>
+                     <th width="20%">Data Element Name</th>
+                     <th width="5%">Store Requirement</th>
+                     <th width="20%">Data</th>
+                     <th width="40%">Tester Comment</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <th>PID-3</th>
+                     <th>Patient Identifier List</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-3.1</th>
+                     <td>ID Number(Note 1)</td>
+                     <td>S-EX-A</td>
+                     <td>PATID1239</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent:20px">PID-3.4</th>
+                     <th>Assigning Property</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 30px; font-weight:normal">PID-3.4.1</th>
+                     <td>Namespace ID</td>
+                     <td>S-EX-A</td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 30px; font-weight:normal">PID-3.4.2</th>
+                     <td>Universal ID</td>
+                     <td>S-EX-A</td>
+                     <td>2.16.840.1.113883.3.72.5.30.2</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 30px; font-weight:normal">PID-3.4.3</th>
+                     <td>Universal ID Type</td>
+                     <td>S-EX-A</td>
+                     <td>ISO</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-3.5</th>
+                     <td>Identifier Type Code</td>
+                     <td>S-RC</td>
+                     <td>MR</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>PID-5</th>
+                     <th>Patient Name</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <th style="text-indent:20px">PID-5.1</th>
+                     <th>Family Name</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 30px; font-weight:normal">PID-5.1.1</th>
+                     <td>Surname</td>
+                     <td>S-EX-A</td>
+                     <td>Smirnoff</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-5.2</th>
+                     <td>Given Name</td>
+                     <td>S-EX-A</td>
+                     <td>Peggy</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-5.3</th>
+                     <td>Second and Further Given Names or Initials Thereof</td>
+                     <td>S-EX-A</td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-5.4</th>
+                     <td>Suffix (e.g., JR or III)</td>
+                     <td>S-EX-A</td>
+                     <td class="noData"></td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-5.7</th>
+                     <td>Name Type Code</td>
+                     <td>S-RC</td>
+                     <td>L</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>PID-7</th>
+                     <th>Date/Time of Birth</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-7.1</th>
+                     <td>Time</td>
+                     <td>S-EQ</td>
+                     <td>04/01/1975</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 0px; font-weight:normal">PID-8</th>
+                     <td>Administrative Sex</td>
+                     <td>S-TR-R</td>
+                     <td>F</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th>PID-10</th>
+                     <th>Race</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-10.1</th>
+                     <td>Identifier</td>
+                     <td>S-MA</td>
+                     <td>2106-3</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-10.2</th>
+                     <td>Text</td>
+                     <td>S-MA</td>
+                     <td>White</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+                  <tr>
+                     <th style="text-indent: 20px; font-weight:normal">PID-10.3</th>
+                     <td>Name of Coding System</td>
+                     <td>S-MA</td>
+                     <td>HL70005</td>
+                     <td bgcolor="#F2F2F2">
+                        <textarea maxLength="100" style="width: 100%; height: 100%; border: 1px; background: 1px  #F2F2F2; resize:vertical; overflow-y:hidden " rows="1"></textarea>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset>
+         <br></br>
+      </div>
+   </body>
+</html>

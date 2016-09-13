@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ACK testcaseName="IZ-AD-10_Historical_IIS-SysError">
+  <MSH>
+    <MSH.1>|</MSH.1>
+    <MSH.2>^~\&amp;</MSH.2>
+    <MSH.3>
+      <MSH.3.1>NISTIISAPP</MSH.3.1>
+    </MSH.3>
+    <MSH.4>
+      <MSH.4.1>NISTIISFAC</MSH.4.1>
+    </MSH.4>
+    <MSH.5>
+      <MSH.5.1>NISTEHRAPP</MSH.5.1>
+    </MSH.5>
+    <MSH.6>
+      <MSH.6.1>NISTEHRFAC</MSH.6.1>
+    </MSH.6>
+    <MSH.7>
+      <MSH.7.1>20150625072816.602-0500</MSH.7.1>
+    </MSH.7>
+    <MSH.9>
+      <MSH.9.1>ACK</MSH.9.1>
+      <MSH.9.2>V04</MSH.9.2>
+      <MSH.9.3>ACK</MSH.9.3>
+    </MSH.9>
+    <MSH.10>NIST-IZ-AD-10.2_Receive_ACK_Z23</MSH.10>
+    <MSH.11>
+      <MSH.11.1>P</MSH.11.1>
+    </MSH.11>
+    <MSH.12>
+      <MSH.12.1>2.5.1</MSH.12.1>
+    </MSH.12>
+    <MSH.15>NE</MSH.15>
+    <MSH.16>NE</MSH.16>
+    <MSH.21>
+      <MSH.21.1>Z23</MSH.21.1>
+      <MSH.21.2>CDCPHINVS</MSH.21.2>
+    </MSH.21>
+    <MSH.22>
+      <MSH.22.1>NISTIISFAC</MSH.22.1>
+    </MSH.22>
+    <MSH.23>
+      <MSH.23.1>NISTEHRFAC</MSH.23.1>
+    </MSH.23>
+  </MSH>
+  <MSA>
+    <MSA.1>AR</MSA.1>
+    <MSA.2>NIST-IZ-AD-10.1_Send_V04_Z22</MSA.2>
+  </MSA>
+  <ERR>
+    <ERR.2>
+      <ERR.2.1>MSH</ERR.2.1>
+      <ERR.2.2>12</ERR.2.2>
+      <ERR.2.3>1</ERR.2.3>
+      <ERR.2.4>1</ERR.2.4>
+    </ERR.2>
+    <ERR.3>
+      <ERR.3.1>203</ERR.3.1>
+      <ERR.3.2>Unsupported Version ID</ERR.3.2>
+      <ERR.3.3>HL70357</ERR.3.3>
+    </ERR.3>
+    <ERR.4>E</ERR.4>
+    <ERR.8>Version ID not recognized - message rejected</ERR.8>
+  </ERR>
+</ACK>

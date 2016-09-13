@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Message version="010" release="006" HighestVersionSupported="" xmlns="http://www.ncpdp.org/schema/SCRIPT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ncpdp.org/schema/SCRIPT Script_10.6_XML\SCRIPT_XML_10_6.xsd">
+    
+    
+    <Header>
+        <To Qualifier="P">RECIPIENT_ID</To>
+        <From Qualifier="D">SENDER_ID</From>
+        <MessageID>MU101</MessageID>
+        <SentTime>2015-11-15T10:20:10</SentTime>
+        <Security>
+            <Sender>
+                <SecondaryIdentification>PASSWORD</SecondaryIdentification>
+                <TertiaryIdentification>3RYIDENTIFIER</TertiaryIdentification>
+            </Sender>
+            <Receiver></Receiver>
+        </Security>
+        <PrescriberOrderNumber>ORDMU201</PrescriberOrderNumber>
+    </Header>
+    <Body>
+        <NewRx>
+            <Pharmacy>
+                <Identification>
+                    <NCPDPID>1120188</NCPDPID>
+                    <NPI>2010000000</NPI>
+                </Identification>
+                <StoreName>NYC Pharmacy 10.6MU</StoreName>
+                <Address>
+                    <AddressLine1>88 Park Street</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Brooklyn</City>
+                    <State >NY</State >
+                    <ZipCode>11201</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(718) 555-7181</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Pharmacy>
+            <Prescriber>
+                <Identification>
+                    <NPI>1356602296</NPI>
+                    <DEANumber>DD1234567</DEANumber>
+                </Identification>
+                <ClinicName></ClinicName>
+                <Name>
+                    <LastName>Bates</LastName>
+                    <FirstName>Anna</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Address>
+                    <AddressLine1>15521-A Jackson Avenue</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>Long Island City</City>
+                    <State >NY</State >
+                    <ZipCode>11101</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(718) 555 1212</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Prescriber>
+            <Patient >
+                <Name>
+                    <LastName>Adirondack</LastName>
+                    <FirstName>Susanne</FirstName>
+                    <MiddleName></MiddleName>
+                </Name>
+                <Gender>Female</Gender>
+                <DateOfBirth>
+                    <Date>08/01/1955</Date>
+                </DateOfBirth>
+                <Address>
+                    <AddressLine1>4447 Lake Forest Drive</AddressLine1>
+                    <AddressLine2></AddressLine2>
+                    <City>La Grange (Dutchess)</City>
+                    <State >NY</State >
+                    <ZipCode>12540</ZipCode>
+                </Address>
+                <CommunicationNumbers>
+                    <Communication>
+                        <Number>(979) 555-1216</Number>
+                        <Qualifier>TE</Qualifier>
+                    </Communication>
+                </CommunicationNumbers>
+            </Patient >
+            <MedicationPrescribed>
+                <DrugDescription>Hydrochlorothiazide 50 MG Oral Tablet</DrugDescription>
+                <DrugCoded>
+                    <ProductCode>00143125701</ProductCode>
+                    <ProductCodeQualifier>ND</ProductCodeQualifier>
+                    <Strength>50</Strength>
+                    <DrugDBCode>197770</DrugDBCode>
+                    <DrugDBCodeQualifier>SCD</DrugDBCodeQualifier>
+                    <FormSourceCode>AA</FormSourceCode>
+                    <FormCode>C42998</FormCode>
+                    <StrengthSourceCode>AB</StrengthSourceCode>
+                    <StrengthCode>C28253</StrengthCode>
+                </DrugCoded>
+                <Quantity>
+                    <Value>30</Value>
+                    <CodeListQualifier>38</CodeListQualifier>
+                    <UnitSourceCode>AC</UnitSourceCode>
+                    <PotencyUnitCode>C48542</PotencyUnitCode>
+                </Quantity>
+                <DaysSupply>30</DaysSupply>
+                <Directions>Take 1 tablet every morning</Directions>
+                <Refills>
+                    <Qualifier>R</Qualifier>
+                    <Value>2</Value>
+                </Refills>
+                <Substitutions>Allowed</Substitutions>
+                <WrittenDate>
+                    <Date>2015-15-10</Date>
+                </WrittenDate>
+            </MedicationPrescribed>
+        </NewRx>
+    </Body>
+</Message>
+<!-- ************************************************ -->
+<!-- Scenario: MU2-01: New Prescription - Hydrochlorothiazide 50 mg tablet | MU2 Test 01 | Ambulatory | One PatientOne -->
+<!-- ************************************************ -->
