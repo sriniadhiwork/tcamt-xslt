@@ -1,4 +1,4 @@
-<?altova_samplexml file:///C:/Users/sna10/DEV/Source/xslt/nistmu2hl7xslt/trunk/xsl/common/modules/_common_tdspec_with_imports.xsl?>
+<?altova_samplexml file:///E:/git/sriniadhiwork/tcamt-xslt/xsl/common/modules/_common_tdspec_with_imports.xsl?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:import href="_expand_imports_in_xsl.xslt"/>
 	<xsl:template match="/">

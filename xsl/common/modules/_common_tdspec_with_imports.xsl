@@ -113,6 +113,10 @@
 				<xsl:when test="starts-with(name(.), 'ORU')">
 					<xsl:value-of select="$LRI"/>
 				</xsl:when>
+
+				<xsl:when test="starts-with(name(.), 'OML')">
+					<xsl:value-of select="$LRI"/>
+				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -720,7 +724,7 @@
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of select="util:title-no-tab('title',  'Lab results', 'Lab results', $ind2, false())"/>
 		<xsl:value-of select="util:elements-with-colspan(9, $ind2)"/>
-		<xsl:value-of select="util:element-var-cols('Test performed', util:or5(..//OBR.4.9, ..//OBR-4.2, ..//OBR-4.5, '', ''), 9, $ind1)"/>
+		<xsl:value-of select="util:element-var-cols('Test performed', util:or5(..//OBR.4.9, ..//OBR.4.2, ..//OBR.4.5, '', ''), 9, $ind1)"/>
 		<xsl:value-of select="util:element-var-cols('Test Report date', util:format-date(..//OBR.22.1), 9, $ind1)"/>
 
 		<xsl:variable name="at-least-one-obx" select="count(..//OBX) > 0"/>
