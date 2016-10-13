@@ -10,6 +10,7 @@
 			Version 1.0: Code transfer to sriniadhi.work@gmail.com - restructuring with imports and comments; no change of functionality.
 						1.1: Updates changing the Parent/Child order and other updates from the latest template.
 						1.2: added nte after orc, fixed "Parent Information" in the title not being included in the Order contd
+						1.3: Dropped the S-MA references, and added the media print formatting regarding line breaks.
 		</xsl:text>    
     </xsl:variable>    
     

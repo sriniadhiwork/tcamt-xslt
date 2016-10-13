@@ -41,6 +41,12 @@
                     padding:0px;
                     background:1px #ccc;
                 }
+                
+                
+                .jurorContainer fieldset table tr {
+                           page-break-inside: avoid;
+            }
+ 
             }
             
             

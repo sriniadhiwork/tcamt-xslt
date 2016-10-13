@@ -6,6 +6,7 @@
 			Version 1.0: Code transfer to sriniadhi.work@gmail.com - restructuring with imports and comments; no change of functionality.
 						1.1: Updates changing the Parent/Child order and other updates from the latest template.
 						1.2: added nte after orc, fixed "Parent Information" in the title not being included in the Order contd
+						1.3: Dropped the S-MA references, and added the media print formatting regarding line breaks.
 		</xsl:text>    
     </xsl:variable>    
     
@@ -66,6 +67,12 @@
                     padding:0px;
                     background:1px #ccc;
                 }
+                
+                
+                .jurorContainer fieldset table tr {
+                           page-break-inside: avoid;
+            }
+ 
             }
             
             
@@ -1533,7 +1540,8 @@
                             <th/>
                         </tr>
                         <xsl:copy-of select="                                 util:ID-text-format('OBR-8.1/SPM-17.2.1', 'Time', 'S-EQ', if ($obrSegment/OBR.8/OBR.8.1 = $obrSegment/following-sibling::ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN/SPM/SPM.17/SPM.17.2/SPM.17.2.1) then                                     util:formatDateTime($obrSegment/OBR.8/OBR.8.1)                                 else                                     util:formatDateTime(following-sibling::ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN/SPM/SPM.17/SPM.17.2/SPM.17.2.1), '20px', 'normal')"/>
-                        <xsl:copy-of select="util:ID-text-format('OBR-11', 'Specimen Action Code', 'S-MA', OBR.4/OBR.4.1, '0px', 'normal')"/>
+                        <!--xsl:copy-of
+                            select="util:ID-text-format('OBR-11', 'Specimen Action Code', 'S-MA', OBR.4/OBR.4.1, '0px', 'normal')"/-->
                         <tr>
                             <th> OBR-13 </th>
                             <th>Relevant Clinical Information</th>
@@ -1660,18 +1668,22 @@
                                 select="util:ID-text-format('OBR-29.2.4', 'Universal ID Type', 'S-EX-A', OBR.29/OBR.29.2/OBR.29.2.4, '30px', 'normal')"
                             />
                         </xsl:if> -->
-                        <tr>
+                        <!--tr>
                             <th> OBR-49 </th>
                             <th>Results Handling</th>
                             <th/>
                             <th/>
                             <th/>
                         </tr>
-                        <xsl:copy-of select="util:ID-text-format('OBR-49.1', 'Identifier', 'S-MA', OBR.49/OBR.49.1, '20px', 'normal')"/>
-                        <xsl:copy-of select="util:ID-text-format('OBR-49.2', 'Text', 'S-MA', OBR.49/OBR.49.2, '20px', 'normal')"/>
-                        <xsl:copy-of select="util:ID-text-format('OBR-49.3', 'Name of Coding System', 'S-MA', OBR.49/OBR.49.3, '20px', 'normal')"/>
+                        <xsl:copy-of
+                            select="util:ID-text-format('OBR-49.1', 'Identifier', 'S-MA', OBR.49/OBR.49.1, '20px', 'normal')"/>
+                        <xsl:copy-of
+                            select="util:ID-text-format('OBR-49.2', 'Text', '', OBR.49/OBR.49.2, '20px', 'normal')"/>
+                        <xsl:copy-of
+                            select="util:ID-text-format('OBR-49.3', 'Name of Coding System', 'S-MA', OBR.49/OBR.49.3, '20px', 'normal')"/>
 
-                        <xsl:copy-of select="util:ID-text-format('OBR-49.9', 'Original Text', 'S-MA', OBR.49/OBR.49.9, '20px', 'normal')"/>
+                        <xsl:copy-of
+                            select="util:ID-text-format('OBR-49.9', 'Original Text', 'S-MA', OBR.49/OBR.49.9, '20px', 'normal')"/-->
                         <!--    <xsl:if test="exists(OBR.50)">
                             <tr>
                                 <th> OBR-50 </th>
