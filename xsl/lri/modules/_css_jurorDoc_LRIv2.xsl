@@ -43,12 +43,11 @@
                 }
                 
                 
-                .jurorContainer fieldset table tr {
-                           page-break-inside: avoid;
-            }
- 
             }
             
+             .jurorContainer fieldset table tr {
+            page-break-inside: avoid;
+            }
             
             .jurorContainer * [type = text]{
                 width:95%;
