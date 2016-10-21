@@ -11,6 +11,7 @@
 						1.1: Updates changing the Parent/Child order and other updates from the latest template.
 						1.2: added nte after orc, fixed "Parent Information" in the title not being included in the Order contd
 						1.3: Dropped the S-MA references, and added the media print formatting regarding line breaks.
+						1.4: Fixed a bug in parent child.
 		</xsl:text>    
     </xsl:variable>    
     

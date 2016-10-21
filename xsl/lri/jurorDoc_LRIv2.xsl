@@ -7,6 +7,7 @@
 						1.1: Updates changing the Parent/Child order and other updates from the latest template.
 						1.2: added nte after orc, fixed "Parent Information" in the title not being included in the Order contd
 						1.3: Dropped the S-MA references, and added the media print formatting regarding line breaks.
+						1.4: Fixed a bug in parent child.
 		</xsl:text>    
     </xsl:variable>    
     
@@ -2228,8 +2229,8 @@
                 <!--xsl:if
                     test="($messageID = 'LRI_4.1_2.1-GU_FRU') or ($messageID = 'LRI_4.1_3.1-GU_FRU') or ($messageID = 'LRI_4.2_2.1-GU_FRN') or ($messageID = 'LRI_4.2_3.1-GU_FRN')"-->
 
-                <xsl:if test="util:isParentChildTestCase($messageID)">
-
+                <xsl:if test="util:isParentChildTestCase($messageID) = true()">
+                    <xsl:message>IS PARENTCHILD = TRUE</xsl:message>
                     <xsl:choose>
                         <xsl:when test="position() &lt; 3">
 

@@ -2413,8 +2413,8 @@
                     test="($messageID = 'LRI_4.1_2.1-GU_FRU') or ($messageID = 'LRI_4.1_3.1-GU_FRU') or ($messageID = 'LRI_4.2_2.1-GU_FRN') or ($messageID = 'LRI_4.2_3.1-GU_FRN')"-->
 
                 <xsl:if
-                    test="util:isParentChildTestCase($messageID)">
-
+                    test="util:isParentChildTestCase($messageID) = true()">
+                    <xsl:message>IS PARENTCHILD = TRUE</xsl:message>
                     <xsl:choose>
                         <xsl:when test="position() &lt; 3">
 
