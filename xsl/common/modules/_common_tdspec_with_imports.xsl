@@ -3,7 +3,7 @@
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
 	<!--xsl:param name="output" select="'json'" /-->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
-	<!--xsl:param name="output" select="'plain-html'"/-->
+	<!-- <xsl:param name="output" select="'plain-html'"/> -->
 	<xsl:param name="output" select="'ng-tab-html'"/>
 	<xsl:variable name="version" select="'2.9.11'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -617,11 +617,14 @@
 	<xsl:template match="ORC" mode="LRI">
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
-		<xsl:value-of select="util:title('title', concat('Order Observation', $counter), 'Ordering Provider', $ind1, true(), $vertical-orientation, false())"/>
-		<xsl:value-of select="util:elements($ind1)"/>
+		<xsl:value-of select="util:title('title', concat('Order Observation', $counter), 'Order Observation', $ind1, true(), $vertical-orientation, false())"/>
+		<xsl:value-of select="util:begin-sub-table($ind2)"/>
+		<xsl:value-of select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
+		<xsl:value-of select="util:elements($ind2)"/>
 		<xsl:value-of select="util:element('Name', concat(util:format-with-space(.//ORC.12.2.6), util:format-with-space(.//ORC.12.2.3), util:format-with-space(.//ORC.12.2.4), util:format-with-space(.//ORC.12.2.2.1), .//ORC.12.2.5), $ind1)"/>
 		<xsl:value-of select="util:element('Identifier number', .//ORC.12.1, $ind1)"/>
-		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		<xsl:value-of select="util:end-table-fieldset($ind1)"/> 
+    	<xsl:value-of select="util:end-table($ind1)"/>
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of select="util:title-no-tab('title', 'Observation Details', 'Observation Details', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
