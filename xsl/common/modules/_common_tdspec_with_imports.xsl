@@ -19,8 +19,14 @@
 .9 LRI lab results
 .10 added /.br/ for LRI NTE
 .11 SS update for Observation Value condition
-
 	-->
+	
+	<!--  Release notes author: caroline.rosin@nist.gov 
+2.10 Bug fixes for LRI : 
+	- fixed a bug in plain-html (fieldset not present)
+	- fixed a bug in ng-tab-html : fixed Order Observation[*] tab 
+	- removed comments and fixed minor typos
+-->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- character map is used for being able to output these special html entities directly after escaping -->
