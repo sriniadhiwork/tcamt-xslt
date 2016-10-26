@@ -260,7 +260,6 @@
 		<xsl:param name="endprevioustable" as="xs:boolean"/>
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="full" as="xs:boolean"/>
-
 		<xsl:value-of select="util:_title($name, $tabname, $value, '', $ind, $endprevioustable, $vertical-orientation, $full)" />
 	</xsl:function>
 
@@ -299,6 +298,7 @@
 				</xsl:if>
 			</xsl:when>
 			<xsl:otherwise>
+				<!-- json -->
 				<xsl:value-of select="concat($prelude, $ind, '{', $nl, $ind, $indent, '&quot;', $name, '&quot;', ':', '&quot;', $value, '&quot;,', $nl)"/>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -318,8 +318,12 @@
 				<xsl:value-of select="util:tag('fieldset', $ind)"/>
 				<xsl:value-of select="util:tags('legend', $value, $ind)"/>
 			</xsl:when>
+			<xsl:when test="$output = 'plain-html'">
+				<xsl:value-of select="util:tag('fieldset', $ind)"/>
+				<xsl:value-of select="util:tags('legend', $value, $ind)"/>
+			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="util:title($name, $tabname, $value, $ind, $endprevioustable, false(), true())"/>
+				<xsl:value-of select="util:title($name, $tabname, $value, $ind, $endprevioustable, false(), true())"/> <!-- [Caro] why call util:title in a function that is not supposed to produce tabs ? util:title DOES produce tabs under certain circumstances-->
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -427,10 +431,10 @@
 			<xsl:when test="$generate-plain-html">
 				<xsl:value-of select="util:tag('table', $ind)"/>
 				<xsl:value-of select="util:tag('tr', $ind)"/>
-				<xsl:value-of select="util:tag(concat('th colspan=', $col1span), $ind)"/>
+				<xsl:value-of select="util:tag(concat('th colspan=&quot;', $col1span,'&quot;'), $ind)"/>
 				<xsl:value-of select="'Element'"/>
 				<xsl:value-of select="util:tag('/th', $ind)"/>
-				<xsl:value-of select="util:tag(concat('th colspan=', $col2span), $ind)"/>
+				<xsl:value-of select="util:tag(concat('th colspan=&quot;', $col2span,'&quot;'), $ind)"/>
 				<xsl:value-of select="'Data'"/>
 				<xsl:value-of select="util:tag('/th', $ind)"/>
 				<xsl:value-of select="util:tag('/tr', $ind)"/>
@@ -450,7 +454,7 @@
 			<xsl:when test="$generate-plain-html">
 				<xsl:value-of select="util:tag('table', $ind)"/>
 				<xsl:value-of select="util:tag('tr', $ind)"/>
-				<xsl:value-of select="util:tag('th colspan=2 ', $ind)"/>
+				<xsl:value-of select="util:tag('th colspan=&quot;2&quot; ', $ind)"/>
 				<xsl:value-of select="$title"/>
 				<xsl:value-of select="util:tag('/th ', $ind)"/>
 				<xsl:value-of select="util:tag('/tr', $ind)"/>
@@ -560,7 +564,6 @@
 		<xsl:param name="name"/>
 		<xsl:param name="value"/>
 		<xsl:param name="ind"/>
-		<xsl:message> Processing <xsl:value-of select="$name"></xsl:value-of></xsl:message>
 		<xsl:value-of select="util:element-with-delimiter($name, $value, ',', 2, $ind)"/>
 	</xsl:function>
 
@@ -569,7 +572,6 @@
 		<xsl:param name="value"/>
 		<xsl:param name="cols" as="xs:integer"/>
 		<xsl:param name="ind"/>
-		<xsl:message> Processing <xsl:value-of select="$name"></xsl:value-of></xsl:message>
 		<xsl:value-of select="util:element-with-delimiter($name, $value, ',', $cols, $ind)"/>
 	</xsl:function>
 
@@ -686,18 +688,17 @@
 		<xsl:choose>
 			<xsl:when test="$generate-plain-html">
 				<xsl:variable name='td-element'>
-					<xsl:value-of select="util:tag(concat('td colspan=', $col1span), $ind)" />
+					<xsl:value-of select="util:tag(concat('td colspan=&quot;', $col1span,'&quot;'), $ind)" />
 					<xsl:value-of select="$name" />
 					<xsl:value-of select="util:tag('/td', $ind)"/>
-					<xsl:message><xsl:value-of select="$name"/> </xsl:message>
 					<xsl:choose>
 						<xsl:when test="normalize-space($value) = ''">
-							<xsl:value-of select="util:tag(concat('td class=''noData'' colspan=', $col2span), $ind)"/>
+							<xsl:value-of select="util:tag(concat('td class=''noData'' colspan=&quot;', $col2span,'&quot;'), $ind)"/>
 							<xsl:value-of select="$value"/>
 							<xsl:value-of select="util:tag('/td', $ind)"/>
 						</xsl:when>
 						<xsl:otherwise>
-								<xsl:value-of select="util:tag(concat('td colspan=', $col2span), $ind)" />
+								<xsl:value-of select="util:tag(concat('td colspan=&quot;', $col2span,'&quot;'), $ind)" />
 								<xsl:value-of select="$value" />
 								<xsl:value-of select="util:tag('/td', $ind)"/>
 						</xsl:otherwise>
@@ -779,7 +780,6 @@
 	<xsl:function name="util:blank-if-1">
 		<xsl:param name="pos"/>
 		<xsl:param name="total"/>
-		<xsl:message><xsl:value-of select="$total"></xsl:value-of></xsl:message>
 		<xsl:choose>
 			<xsl:when test="$total = 1">
 			</xsl:when>
@@ -896,11 +896,6 @@
 		<xsl:param name="key"/>
 		<xsl:param name="tablename"/>
 		<xsl:if test="count($HL7Tables/Tables/TableDefinition[@Id=$tablename]/t[@c=$key]) = 0">
-			<xsl:message>Problem!  Tablename = 
-				<xsl:value-of select="$tablename"/>
-				Keyname = 
-				<xsl:value-of select="$key"/>
-			</xsl:message>
 		</xsl:if>
 		<xsl:value-of select="$HL7Tables/Tables/TableDefinition[@Id=$tablename]/t[@c=$key]/@d"/>
 	</xsl:function>
@@ -930,7 +925,6 @@
 		<xsl:param name="val"/>
 		<xsl:param name="key"/>
 		<xsl:param name="tablename"/>
-		<xsl:message> Valueset:  <xsl:value-of select="$key" /> </xsl:message>
 		<xsl:choose>
 			<xsl:when test="string-length(normalize-space($val)) = 0">
 				<xsl:value-of select="util:valueset($key, $tablename)"/>
@@ -1010,6 +1004,11 @@
 			<xsl:when test="$seg = 'RXA'">
 				<xsl:value-of select="'Vaccine Administration Information'"/>
 			</xsl:when>
+			<!-- [Caro] add LRI Order Observation -->
+			<!-- TODO : make sure it does not impact IZ or SS -->
+			<xsl:when test="$seg = 'ORC'">
+				<xsl:value-of select="'Order Observation'"/>
+			</xsl:when>		
 			<xsl:otherwise>
 				<xsl:value-of select="'Other'"/>
 			</xsl:otherwise>
