@@ -362,7 +362,8 @@
 		<xsl:param name="ind"/>
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<!-- use the tabname to convert into a valid javascript variable name that is used to track open and close of the accordions -->
-		<xsl:variable name="isOpenVar" select="concat('xsl', replace($tabname, '[ \\-]', ''))"/>
+		<xsl:variable name="isOpenVar" select="concat('xsl', replace(replace($tabname,'-',''), '[ \\-]', ''))"/>
+		
 		<xsl:choose>
 			<xsl:when test="$output = 'ng-tab-html'">
 				<xsl:value-of select="util:tag(concat(util:IfThenElse($vertical-orientation, 
