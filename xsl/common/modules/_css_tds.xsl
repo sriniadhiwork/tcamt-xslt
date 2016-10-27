@@ -17,6 +17,7 @@
 			.test-data-specs-main table tbody tr th {text-align:left;background:#C6DEFF}
 			.test-data-specs-main table thead tr th {text-align:center;}
 			.test-data-specs-main fieldset {text-align:center;}
+			.test-data-specs-main fieldset table tr { page-break-inside: avoid; }
 			.test-data-specs-main table { width:98%;border: 1px groove;table-layout: fixed; margin:0 auto;border-collapse: collapse;}
 			.test-data-specs-main table  tr { border: 3px groove; }
 			.test-data-specs-main table  th { border: 2px groove;}
@@ -48,6 +49,7 @@
 			.test-data-specs-main table tbody tr th {text-align:left;background:#C6DEFF}
 			.test-data-specs-main table thead tr th {text-align:center;background:#4682B4}
 			.test-data-specs-main fieldset {text-align:center;page-break-inside: avoid;}
+			.test-data-specs-main fieldset table tr { page-break-inside: avoid; }
 			.test-data-specs-main table { width:98%;border: 1px groove;table-layout: fixed; margin:0 auto;page-break-inside: avoid;border-collapse: collapse;}
 			.test-data-specs-main table[id=vendor-labResults] thead tr {font-size:80%}
 			.test-data-specs-main table[id=vendor-labResults] tbody tr {font-size:75%}
