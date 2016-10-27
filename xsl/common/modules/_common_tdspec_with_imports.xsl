@@ -3,9 +3,9 @@
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
 	<!--xsl:param name="output" select="'json'" /-->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
-	 <xsl:param name="output" select="'plain-html'"/> 
-	<!-- <xsl:param name="output" select="'ng-tab-html'"/> -->
-	<xsl:variable name="version" select="'2.9.11'"/>
+	<!-- <xsl:param name="output" select="'plain-html'"/> --> 
+	<xsl:param name="output" select="'ng-tab-html'"/>
+	<xsl:variable name="version" select="'2.10'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- Release notes author:sriniadhi.work@gmail.com
@@ -26,6 +26,7 @@
 	- fixed a bug in plain-html (fieldset not present)
 	- fixed a bug in ng-tab-html : fixed Order Observation[*] tab 
 	- removed comments and fixed minor typos
+	- fixed css to avoid break in table
 -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -619,7 +620,7 @@
 			<xsl:param name="vertical-orientation" as="xs:boolean"/>
 			<xsl:param name="counter"/>
 			<xsl:value-of select="util:title('title', concat('Order Observation', $counter), 'Order Observation', $ind1, true(), $vertical-orientation, false())"/>
-
+			
 			<!-- Ordering Provider subtable -->
 			<xsl:value-of select="util:begin-sub-table($ind2)"/> 
 			<xsl:value-of select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
