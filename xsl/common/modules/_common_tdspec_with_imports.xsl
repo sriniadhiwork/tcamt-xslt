@@ -683,15 +683,13 @@
 			<xsl:value-of select="util:element('End Date/time', ..//TQ1-8.1, $ind2)"/>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
-			<xsl:variable name="multiple-obx" select="count(..//OBX) > 1"/>
+			<!-- <xsl:variable name="multiple-obx" select="count(..//OBX) > 1"/>
 				<xsl:for-each select="..//OBX">
-					<!-- [Caro] TODO only show one Results Performing Laboratory subtable -->
 					<xsl:variable name="index">
 						<xsl:if test="$multiple-obx">
 							<xsl:value-of select="concat(' - ', position())"/>
 						</xsl:if>
 					</xsl:variable>
-					<!-- Results Performing Laboratory subtable -->
 					<xsl:value-of select="util:begin-sub-table($ind2)"/>
 					<xsl:value-of select="util:title-no-tab('title', concat('Results Performing Laboratory', $index), concat('Results Performing Laboratory',  $index), $ind2, false())"/>
 					<xsl:value-of select="util:elements($ind2)"/>
@@ -701,7 +699,21 @@
 					<xsl:value-of select="util:element('Director Name', concat(util:format-with-space(.//OBX.25.6), util:format-with-space(.//OBX.25.3), util:format-with-space(.//OBX.25.4), util:format-with-space(.//OBX.25.2.1), util:format-with-space(.//OBX.25.5)), $ind1)"/>
 					<xsl:value-of select="util:element('Director identifier', .//OBX.25.1, $ind1)"/>
 					<xsl:value-of select="util:end-table-fieldset($ind1)"/>
-				</xsl:for-each>
+				</xsl:for-each> -->
+				
+			<xsl:variable name="at-least-one-obx" select="count(..//OBX) &gt; 0"/>
+				<xsl:if test="$at-least-one-obx">
+				<!-- Results Performing Laboratory subtable -->
+					<xsl:value-of select="util:begin-sub-table($ind2)"/>
+					<xsl:value-of select="util:title-no-tab('title', 'Results Performing Laboratory', 'Results Performing Laboratory', $ind2, false())"/>
+					<xsl:value-of select="util:elements($ind2)"/>
+					<xsl:value-of select="util:element('Laboratory Name', ../OBX[1]/OBX.23.1, $ind1)"/>
+					<xsl:value-of select="util:element('Organization identifier', ../OBX[1]/OBX.23.10, $ind1)"/>
+					<xsl:value-of select="util:element('Address', util:format-address(../OBX[1]/OBX.24.1.1, ../OBX[1]/OBX.24.2, concat(../OBX[1]/OBX.24.3, ' ', ../OBX[1]/OBX.24.4), ../OBX[1]/OBX.24.5, ../OBX[1]/OBX.24.6), $ind1)"/>
+					<xsl:value-of select="util:element('Director Name', concat(util:format-with-space(../OBX[1]/OBX.25.6), util:format-with-space(../OBX[1]/OBX.25.3), util:format-with-space(../OBX[1]/OBX.25.4), util:format-with-space(../OBX[1]/OBX.25.2.1), util:format-with-space(../OBX[1]/OBX.25.5)), $ind1)"/>
+					<xsl:value-of select="util:element('Director identifier', ../OBX[1]/OBX.25.1, $ind1)"/>
+					<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+				</xsl:if>
 
 				<xsl:variable name="multiple-specimens" select="count(..//SPM) > 1"/>
 					<xsl:for-each select="..//SPM">
