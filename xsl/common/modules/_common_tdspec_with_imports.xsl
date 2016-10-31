@@ -27,6 +27,9 @@
 	- fixed a bug in ng-tab-html : fixed Order Observation[*] tab 
 	- removed comments and fixed minor typos
 	- fixed css to avoid break in table
+	- fixed typos in Ordering Provider Name table
+	- fixed typos in Timing/Quantity Information table
+
 -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -625,7 +628,7 @@
 			<xsl:value-of select="util:begin-sub-table($ind2)"/> 
 			<xsl:value-of select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
-			<xsl:value-of select="util:element('Name', concat(util:format-with-space(.//ORC.12.2.6), util:format-with-space(.//ORC.12.2.3), util:format-with-space(.//ORC.12.2.4), util:format-with-space(.//ORC.12.2.2.1), .//ORC.12.2.5), $ind1)"/>
+			<xsl:value-of select="util:element('Name', concat(util:format-with-space(.//ORC.12.6), util:format-with-space(.//ORC.12.3), util:format-with-space(.//ORC.12.4), util:format-with-space(.//ORC.12.2.1), .//ORC.12.5), $ind1)"/>
 			<xsl:value-of select="util:element('Identifier number', .//ORC.12.1, $ind1)"/>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
@@ -679,9 +682,9 @@
 			<xsl:value-of select="util:begin-sub-table($ind1)"/>
 			<xsl:value-of select="util:title-no-tab('title', 'Timing/Quantity Information', 'Timing/Quantity Information', $ind1, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
-			<xsl:value-of select="util:element('Priority', ..//TQ1-9.2, $ind2)"/>
-			<xsl:value-of select="util:element('Start Date/time	', ..//TQ1-7.1, $ind2)"/>
-			<xsl:value-of select="util:element('End Date/time', ..//TQ1-8.1, $ind2)"/>
+			<xsl:value-of select="util:element('Priority', ..//TQ1.9.2, $ind2)"/>
+			<xsl:value-of select="util:element('Start Date/time	', util:format-time(..//TQ1.7.1), $ind2)"/>
+			<xsl:value-of select="util:element('End Date/time', util:format-time(..//TQ1.8.1), $ind2)"/>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 			<!-- <xsl:variable name="multiple-obx" select="count(..//OBX) > 1"/>
