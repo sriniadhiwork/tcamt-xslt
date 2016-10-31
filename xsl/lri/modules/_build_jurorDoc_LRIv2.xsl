@@ -11,6 +11,7 @@
 								- removed Results Report Status header row  in Lab Results – Display Verification
 								- removed “(Note 2)” for OBR-28 in Order Information - Incorporate Verification 
 								- removed “Note 2” and associated verbiage at the end of the Order Information - Incorporate Verification
+						1.6:	- fixed C&amp;S and Hepatatatis parent-child incorporsate display
 		</xsl:text>
 	</xsl:variable>
 	<xsl:output method="html" encoding="UTF-8" indent="yes" use-character-maps="tags"/>
@@ -18,7 +19,6 @@
 	<xsl:param name="testCaseName" select="//MSH.10"/>
 	<xsl:param name="output" select="'plain-html'"/>
 	<!-- <xsl:param name="output" select="'ng-tab-html'"/>-->
-	<xsl:variable name="generate-plain-html" select="$output = 'plain-html' or $output = 'ng-tab-html'"/>
 	<xsl:character-map name="tags">
 		<xsl:output-character character="&lt;" string="&lt;"/>
 		<xsl:output-character character="&gt;" string="&gt;"/>
@@ -30,7 +30,7 @@
 	<xsl:include href="_alltemplates_jurorDoc_LRIv2.xsl"/>
 	<xsl:template name="buildJurorDoc">
 		<xsl:param name="er7XMLMessage"/>
-		<xsl:param name="messageID" select="$er7XMLMessage/ORU_R01/MSH/MSH.10"/>
+		<xsl:param name="messageID" select="$er7XMLMessage/ORU_R01/MSH/MSH.10"/> <!-- Caro : what is the difference btween $messageID and $testCaseName ??? -->
 		<xsl:param name="groupedLabResults"/>
 		<!--- message type is either ORU_R01 or ACK, based on the root tag -->
 		<xsl:variable name="message-type">

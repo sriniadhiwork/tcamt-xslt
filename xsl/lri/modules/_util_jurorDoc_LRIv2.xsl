@@ -162,15 +162,11 @@
 	</xsl:function>
 	<xsl:function name="util:start">
 		<xsl:param name="div"/>
-		<xsl:choose>
-			<xsl:when test="$generate-plain-html">
-				<!-- output version number and profile info at the start with the comment -->
-				<xsl:value-of select="concat('&lt;div class=&quot;', $div, ' &quot;>')"/>
-				<xsl:if test="$output = 'ng-tab-html'">
-					<xsl:value-of select="'&lt;tabset>'"/>
-				</xsl:if>
-			</xsl:when>
-		</xsl:choose>
+		<!-- output version number and profile info at the start with the comment -->
+		<xsl:value-of select="concat('&lt;div class=&quot;', $div, ' &quot;>')"/>
+		<xsl:if test="$output = 'ng-tab-html'">
+			<xsl:value-of select="'&lt;tabset>'"/>
+		</xsl:if>
 	</xsl:function>
 	<xsl:function name="util:end">
 		<xsl:if test="$output = 'ng-tab-html'">
@@ -180,15 +176,11 @@
 	</xsl:function>
 	<xsl:function name="util:start-tab">
 		<xsl:param name="tabName"/>
-		<xsl:choose>
-			<xsl:when test="$generate-plain-html">
-				<!-- output version number and profile info at the start with the comment -->
-				<xsl:if test="$output = 'ng-tab-html'">
-					<xsl:value-of select="concat('&lt;tab heading=&quot;', $tabName, '&quot;>')"/>
-					<xsl:value-of select="'&lt;div class=&quot;panel-body&quot;>'"/>
-				</xsl:if>
-			</xsl:when>
-		</xsl:choose>
+		<!-- output version number and profile info at the start with the comment -->
+		<xsl:if test="$output = 'ng-tab-html'">
+			<xsl:value-of select="concat('&lt;tab heading=&quot;', $tabName, '&quot;>')"/>
+			<xsl:value-of select="'&lt;div class=&quot;panel-body&quot;>'"/>
+		</xsl:if>
 	</xsl:function>
 	<xsl:function name="util:end-tab">
 		<xsl:if test="$output = 'ng-tab-html'">
