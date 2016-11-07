@@ -239,11 +239,9 @@
 			<xsl:value-of select="util:element('Administrative Sex', util:admin-sex(.//PID.8), $ind1)"/>
 			<xsl:value-of select="util:element('Date/Time of Birth',util:format-date(.//PID.7.1), $ind1)"/>
 			<xsl:value-of select="util:element('Death Date/Time',util:format-date(.//PID.29.1), $ind1)"/>
-			<xsl:value-of select="util:element('Patient Address', .//PID.11.1.1, $ind1)"/>
-			<xsl:value-of select="util:element(' ', .//PID.11.2, $ind1)"/>
-			<xsl:value-of select="util:element(' ', concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), $ind1)"/>
-			<xsl:value-of select="util:element(' ', .//PID.11.6, $ind1)"/>
 			
+			<xsl:value-of select="util:format-address-multilines('Patient Address', .//PID.11.1.1, .//PID.11.2, concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), .//PID.11.6, $ind1)" />
+
 			<xsl:variable name="hpn" as="xs:boolean" select=".//PID.13.3 = 'PH'"/>
 			<xsl:value-of select="util:element('Home phone number', util:IfThenElse($hpn, concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), ''), $ind1)"/>
 			
@@ -318,23 +316,16 @@
 		<xsl:value-of select="util:element('Organization identifier', NK1.13.10, $ind1)"/>
 		<xsl:value-of select="util:element('Contact person''s name', NK1.30, $ind1)"/>
 		
-		<xsl:value-of select="util:element('Contact person''s address', .//NK1.32.1.1, $ind1)"/>
-		<xsl:value-of select="util:element(' ', .//NK1.32.2, $ind1)"/>
-		<xsl:value-of select="util:element(' ', concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), $ind1)"/>
-		<xsl:value-of select="util:element(' ', .//NK1.32.6, $ind1)"/>
+		<xsl:value-of select="util:format-address-multilines('Contact person''s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)" />
 		
-		<xsl:value-of select="util:element('Address', .//NK1.4.1.1, $ind1)"/>
-		<xsl:value-of select="util:element(' ', .//NK1.4.2, $ind1)"/>
-		<xsl:value-of select="util:element(' ', concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), $ind1)"/>
-		<xsl:value-of select="util:element(' ', .//NK1.4.6, $ind1)"/>
+		<xsl:value-of select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)" />
 		
 		<xsl:variable name="pn" as="xs:boolean" select=".//NK1.5.3 = 'PH'"/>
 		<xsl:value-of select="util:element('Phone number', util:IfThenElse($pn, concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), ''), $ind1)"/>
 		
 		<xsl:variable name="ema" as="xs:boolean" select=".//NK1.5.3 = 'X.400' or .//NK1.5.3 = 'Internet'"/>
 		<xsl:value-of select="util:element('Email address', util:IfThenElse($ema, .//NK1.5.4, ''), $ind1)"/>
-		
-		
+				
 		<xsl:value-of select="util:element('Contact role', concat(util:format-with-space(.//NK1.7.9), util:format-with-space(.//NK1.7.2), .//NK1.7.1), $ind1)"/>	
 		<xsl:value-of select="util:element('Next of kin/Associated parties job code/Class', .//NK1.11.3, $ind1)"/>	
 		
@@ -353,7 +344,7 @@
 		<xsl:param name="counter"/>
 		<xsl:value-of select="util:title('title', concat('Visit Information', $counter), 'Visit Information', $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
-
+		
 		<xsl:value-of select="util:element('Patient Class', PV1.2, $ind1)"/>
 		<xsl:value-of select="util:element('Financial Class', PV1.20.1, $ind1)"/>
 		
@@ -377,7 +368,70 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - Insurance information - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<xsl:template match="IN1">
+		<xsl:param name="vertical-orientation" as="xs:boolean"/>
+		<xsl:param name="counter"/>
+		<xsl:value-of select="util:title('title', concat('Insurance Information', $counter), 'Insurance Information', $ind1, false(), $vertical-orientation, false())"/>
+		<xsl:value-of select="util:elements($ind1)"/>
 
+		<xsl:choose>
+			<xsl:when test="count(IN1.2.9) > 0">
+				<xsl:value-of select="util:element('Insurance Plan ID', IN1.2.9, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.2.2) > 0">
+				<xsl:value-of select="util:element('Insurance Plan ID', IN1.2.2, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.2.2) = 0 and count(IN1.2.1) > 0">
+				<xsl:value-of select="util:element('Insurance Plan ID', IN1.2.1, $ind1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="util:element('Insurance Plan ID', '', $ind1)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		<xsl:value-of select="util:element('Insurance Company ID', IN1.3.1, $ind1)"/>
+		<xsl:value-of select="util:element('Insurance Company Name', IN1.4.1, $ind1)"/>
+		
+		<xsl:value-of select="util:format-address-multilines('Insurance Company Address', .//IN1.5.1.1, .//IN1.5.2, concat(util:format-with-space(.//IN1.5.3), util:format-with-space(.//IN1.5.4), util:format-with-space(.//IN1.5.5)), .//IN1.5.6, $ind1)" />
+		
+		<xsl:value-of select="util:element('Group Number', IN1.8, $ind1)"/>
+		<xsl:value-of select="util:element('Insured''s Group Employer Name', IN1.11, $ind1)"/>
+		<xsl:value-of select="util:element('Plan Expiration Date', IN1.13, $ind1)"/>
+		<xsl:value-of select="util:element('Name Of Insured', concat(util:format-with-space(.//IN1.16.2), util:format-with-space(.//IN1.16.3), util:format-with-space(.//IN1.16.1.1), util:format-with-space(.//IN1.16.4)), $ind1)"/>
+		
+		<xsl:choose>
+			<xsl:when test="count(IN1.17.9) > 0">
+				<xsl:value-of select="util:element('Insured''s Relationship To Patient', IN1.17.9, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.17.2) > 0">
+				<xsl:value-of select="util:element('Insured''s Relationship To Patient', IN1.17.2, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(IN1.17.9) = 0 and count(IN1.17.2) = 0 and count(IN1.17.1) > 0">
+				<xsl:value-of select="util:element('Insured''s Relationship To Patient', IN1.17.1, $ind1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="util:element('Insured''s Relationship To Patient', '', $ind1)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		<xsl:value-of select="util:element('Insured''s Date Of Birth',util:format-date(.//IN1.18.1), $ind1)"/>
+		
+		<xsl:value-of select="util:format-address-multilines('Insured Address', .//IN1.19.1.1, .//IN1.19.2, concat(util:format-with-space(.//IN1.19.3), util:format-with-space(.//IN1.19.4), util:format-with-space(.//IN1.19.5)), .//IN1.19.6, $ind1)" />
+		
+		<xsl:value-of select="util:element('Type Of Agreement Code', IN1.31, $ind1)"/>
+		<xsl:value-of select="util:element('Policy Number', IN1.36, $ind1)"/>
+
+		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+	</xsl:template>
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	
+	
 	
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
