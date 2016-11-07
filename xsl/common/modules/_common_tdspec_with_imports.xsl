@@ -43,24 +43,14 @@
 	<xsl:output method="html" use-character-maps="tags"/>
 	<xsl:variable name="generate-plain-html" select="$output = 'plain-html' or $output = 'ng-tab-html'"/>
 	<!--  Use this section for supportd profiles -->
-	<xsl:variable name="VXU" select="'VXU'"/>
-	<xsl:variable name="QBP" select="'QBP'"/>
 	<xsl:variable name="ACK" select="'ACK'"/>
 	<xsl:variable name="RSP" select="'RSP'"/>
-	<xsl:variable name="SS" select="'SS'"/>
-	<xsl:variable name="LRI" select="'LRI'"/>
+	<xsl:variable name="LOI" select="'LOI'"/>
 
 	<xsl:variable name="br">
 		<xsl:value-of select="util:tag('br/', '')" />
 	</xsl:variable>
 
-	<!--  This is the example format for the JSON output -->
-	<!-- Example format: { "tables": [ { "title": "Patient Information", "elements": 
-		[ { "element" : "Patient Name", "data" : "Madelynn Ainsley" }, { "element" 
-		: "Mother's Maiden Name", "data" : "Morgan" }, { "element" : "ID Number", 
-		"data" : "A26376273 D26376273 " }, { "element" : "Date/Time of Birth", "data" 
-		: "07/02/2015" }, ... ] }, ] }
-	 -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!--  ROOT TEMPLATE. Call corresponding sub templates based on the output desired (parametrized) -->
@@ -68,9 +58,6 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:template match="*">
 		<xsl:choose>
-			<xsl:when test="$output = 'json'">
-				<xsl:call-template name="main"/>
-			</xsl:when>
 			<xsl:when test="$output = 'plain-html'">
 				<xsl:call-template name="plain-html"/>
 			</xsl:when>
@@ -84,12 +71,10 @@
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- This generates the structured DATA (json if output is 'json' and html if it is 'plain-html'. Note that the main-html/jquery-tab-html call this in return -->
+	<!-- This generates the structured DATA (html if it is 'plain-html'. Note that the main-html/jquery-tab-html call this in return -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:template name="main">
-		<!-- Add profile information if it is json -->
-		<xsl:value-of select="util:start(name(.), 'test-data-specs-main')"/>
 		<!-- - - - programatically determine if it is a VXU or a QBP - -->
 		<xsl:if test="$output = 'ng-tab-html'">
 			<xsl:variable name="full">
@@ -105,40 +90,18 @@
 	<xsl:template name="_main">
 		<xsl:variable name="message-type">
 			<xsl:choose>
-				<xsl:when test="starts-with(name(.), 'ADT_A0')">
-					<xsl:value-of select="$SS"/>
-				</xsl:when>
 				<xsl:when test="starts-with(name(.), 'ACK')">
 					<xsl:value-of select="$ACK"/>
 				</xsl:when>
-				<xsl:when test="starts-with(name(.), 'QBP')">
-					<xsl:value-of select="$QBP"/>
-				</xsl:when>
-				<xsl:when test="starts-with(name(.), 'RSP')">
-					<xsl:value-of select="$ACK"/>
-				</xsl:when>
-				<xsl:when test="starts-with(name(.), 'VXU')">
-					<xsl:value-of select="$VXU"/>
-				</xsl:when>
 				<xsl:when test="starts-with(name(.), 'ORU')">
-					<xsl:value-of select="$LRI"/>
+					<xsl:value-of select="$LOI"/>
 				</xsl:when>
-
 				<xsl:when test="starts-with(name(.), 'OML')">
-					<xsl:value-of select="$LRI"/>
+					<xsl:value-of select="$LOI"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - -  QBP - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:if test="$message-type = $QBP">
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//QPD"/>
-			</xsl:call-template>
-		</xsl:if>
+
 		<!-- - - - - - Acknolwedgement profiles: showing a template saying that it is supplied by the system- - - - - - - - - - - -->
 		<xsl:if test="$message-type = $ACK or $message-type = $RSP">
 			<xsl:value-of select="util:title('title', 'Patient Information', 'Patient Information', $ind1, false(), false(), false())"/>
@@ -146,65 +109,59 @@
 			<xsl:value-of select="util:single-element('This information will be automatically supplied by the System', $ind1)"/>
 			<xsl:value-of select="util:end-elements($ind1, false(), false())"/>
 		</xsl:if>
+
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - VXU segments - - - - - - - - - - - - -->
+		<!-- - - - - - LOI display - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:if test="$message-type = $VXU">
-			<!-- - - - - - Patient information  - - - - - - - - - - - -->
+		<xsl:if test="$message-type = $LOI">
+			<!-- - - - - - LOI - - - - - - - - - - - -->
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
-			</xsl:call-template>
-			<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//PD1"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//NK1"/>
 			</xsl:call-template>
-			<!-- - - - - - Vaccine Administration Information - - - - - - - - -->
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//RXA"/>
-			</xsl:call-template>
-		</xsl:if>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Syndoromic segments - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:if test="$message-type = $SS">
-			<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//PID"/>
-				<xsl:with-param name="mode" select="'Syndromic'"/>
-			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PV1"/>
-				<xsl:with-param name="mode" select="'Syndromic'"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//OBX"/>
-				<xsl:with-param name="mode" select="'Syndromic'"/>
+				<xsl:with-param name="segments" select="//IN1"/>
 			</xsl:call-template>
-		</xsl:if>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - LRI display- - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:if test="$message-type = $LRI">
-			<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//PID"/>
-				<xsl:with-param name="mode" select="'LRI'"/>
+				<xsl:with-param name="segments" select="//GT1"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ORC"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//TQ1"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//OBR"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//NTE"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//PRT"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//OBX"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//SPM"/>
+			</xsl:call-template>
+			<!-- - - - Call with mode - - -  
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//PID"/>
 				<xsl:with-param name="mode" select="'LRI'"/>
 			</xsl:call-template>
+			-->
 		</xsl:if>
 	</xsl:template>
+	
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- Indentation values so that the output is readable -->
@@ -264,24 +221,9 @@
 						<xsl:with-param name="counter" select="$counter"/>
 					</xsl:apply-templates>
 				</xsl:when>
-				<xsl:when test="$mode = 'Syndromic'">
-					<xsl:apply-templates select="." mode="Syndromic">
-						<xsl:with-param name="vertical-orientation" as="xs:boolean" select="$vertical-orientation"/>
-						<xsl:with-param name="counter" select="$counter"/>
-					</xsl:apply-templates>
-				</xsl:when>
-				<xsl:when test="$mode = 'LRI'">
-					<xsl:apply-templates select="." mode="LRI">
-						<xsl:with-param name="vertical-orientation" as="xs:boolean" select="$vertical-orientation"/>
-						<xsl:with-param name="counter" select="$counter"/>
-					</xsl:apply-templates>
-				</xsl:when>
 			</xsl:choose>
 		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - Patient information - - - - - - - - - - - -->
@@ -292,56 +234,174 @@
 			<xsl:param name="counter"/>
 			<xsl:value-of select="util:title('title', concat('Patient Information', $counter), 'Patient Information', $ind1, false(), $vertical-orientation, false())"/>
 			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of select="util:element('Patient Name', concat(util:format-with-space(.//PID.5.2), util:format-with-space(.//PID.5.3),.//PID.5.1.1), $ind1)"/>
-			<xsl:value-of select="util:element('Mother''s Maiden Name', concat(util:format-with-space(.//PID.6.2), .//PID.6.1.1), $ind1)"/>
-			<xsl:value-of select="util:element('ID Number', concat(util:format-with-space(.//PID.3.1[1]), .//PID.3.1[2]), $ind1)"/>
-			<xsl:value-of select="util:element('Date/Time of Birth',util:format-date(.//PID.7.1), $ind1)"/>
+			<xsl:value-of select="util:element('Patient Name', concat(util:format-with-space(.//PID.5.2), util:format-with-space(.//PID.5.3), util:format-with-space(.//PID.5.1.1), .//PID.5.4), $ind1)"/>
+			<xsl:value-of select="util:element('Mother''s Maiden Name', concat(util:format-with-space(.//PID.6.2), util:format-with-space(.//PID.6.3), util:format-with-space(.//PID.6.1.1), .//PID.6.4), $ind1)"/>
 			<xsl:value-of select="util:element('Administrative Sex', util:admin-sex(.//PID.8), $ind1)"/>
-			<xsl:for-each select="PID.11">
-				<xsl:value-of select="util:element(concat('Patient Address', ' ', util:blank-if-1(position(), count(..//PID.11))), util:format-address(PID.11.1/PID.11.1.1, PID.11.3, PID.11.4, PID.11.5, PID.11.6), $ind1)"/>
-			</xsl:for-each>
-			<xsl:for-each select="PID.13">
-				<xsl:choose>
-					<xsl:when test="PID.13.2 = 'NET'">
-						<xsl:value-of select="util:element('Email', PID.13.4, $ind1)"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="util:element('Local Number', util:format-tel(PID.13.6, PID.13.7), $ind1)"/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:for-each>
-			<xsl:for-each select="PID.10">
-				<xsl:value-of select="util:element(concat('Race', util:blank-if-1(position(), count(..//PID.10))), .//PID.10.2, $ind1)"/>
-			</xsl:for-each>
-			<xsl:for-each select="PID.22">
-				<xsl:value-of select="util:element(concat('Ethnic Group', util:blank-if-1(position(), count(..//PID.22))), .//PID.22.2, $ind1)"/>
-			</xsl:for-each>
-			<xsl:value-of select="util:element('Multiple Birth Indicator',util:yes-no(.//PID.24), $ind1)"/>
-			<xsl:value-of select="util:last-element('Birth Order',.//PID.25, $ind1, $vertical-orientation, false())"/>
+			<xsl:value-of select="util:element('Date/Time of Birth',util:format-date(.//PID.7.1), $ind1)"/>
+			<xsl:value-of select="util:element('Death Date/Time',util:format-date(.//PID.29.1), $ind1)"/>
+			<xsl:value-of select="util:element('Patient Address', .//PID.11.1.1, $ind1)"/>
+			<xsl:value-of select="util:element(' ', .//PID.11.2, $ind1)"/>
+			<xsl:value-of select="util:element(' ', concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), $ind1)"/>
+			<xsl:value-of select="util:element(' ', .//PID.11.6, $ind1)"/>
+			
+			<xsl:variable name="hpn" as="xs:boolean" select=".//PID.13.3 = 'PH'"/>
+			<xsl:value-of select="util:element('Home phone number', util:IfThenElse($hpn, concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), ''), $ind1)"/>
+			
+			<xsl:variable name="ema" as="xs:boolean" select=".//PID.13.3 = 'X.400' or .//PID.13.3 = 'Internet'"/>
+			<xsl:value-of select="util:element('Email address', util:IfThenElse($ema, .//PID.13.4, ''), $ind1)"/>
+			
+			<xsl:variable name="bpn" as="xs:boolean" select=".//PID.14.3 = 'PH'"/>
+			<xsl:value-of select="util:element('Business phone number', util:IfThenElse($bpn, concat(util:format-with-space(.//PID.14.6), util:format-with-space(.//PID.14.7), util:format-with-space(.//PID.14.8)), ''), $ind1)"/>
+			
+			<xsl:variable name="bema" as="xs:boolean" select=".//PID.14.3 = 'X.400' or .//PID.14.3 = 'Internet'"/>
+			<xsl:value-of select="util:element('Business email address', util:IfThenElse($bema, .//PID.14.4, ''), $ind1)"/>
+			
+			<xsl:choose>
+				<xsl:when test="count(.//PID.10.9) > 0">
+					<xsl:value-of select="util:element('Race', .//PID.10.9, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//PID.10.9) = 0 and count(.//PID.10.2) > 0">
+					<xsl:value-of select="util:element('Race', .//PID.10.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//PID.10.9) = 0 and count(.//PID.10.2) = 0 and count(.//PID.10.1) > 0">
+					<xsl:value-of select="util:element('Race', .//PID.10.1, $ind1)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="util:element('Race', '', $ind1)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+			
+			<xsl:choose>
+				<xsl:when test="count(.//PID.22.9) > 0">
+					<xsl:value-of select="util:element('Ethnic group', .//PID.22.9, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//PID.22.9) = 0 and count(.//PID.22.2) > 0">
+					<xsl:value-of select="util:element('Ethnic group', .//PID.22.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//PID.10.9) = 0 and count(.//PID.22.2) = 0 and count(.//PID.22.1) > 0">
+					<xsl:value-of select="util:element('Ethnic group', .//PID.22.1, $ind1)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="util:element('Ethnic group', '', $ind1)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>	
 		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Patient information for QPD - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:template match="QPD">
-			<xsl:param name="vertical-orientation" as="xs:boolean"/>
-			<xsl:param name="counter"/>
-			<xsl:value-of select="util:title('title', concat('Patient Information', $counter), 'Patient Information', $ind1, false(), $vertical-orientation, false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of select="util:element('Patient Name', concat(util:format-with-space (.//QPD.4.2), util:format-with-space(.//QPD.4.3), .//QPD.4.1.1), $ind1)"/>
-			<xsl:value-of select="util:element('Mother''s Maiden Name', .//QPD.5.1.1, $ind1)"/>
-			<xsl:value-of select="util:element('ID Number', concat(util:format-with-space (.//QPD.3.1[1]), .//QPD.3.1[2]), $ind1)"/>
-			<xsl:value-of select="util:element('Date/Time of Birth', util:format-date (.//QPD.6.1), $ind1)"/>
-			<xsl:value-of select="util:element('Sex', util:admin-sex(.//QPD.7), $ind1)"/>
-			<xsl:value-of select="util:element('Patient Address', util:format-address(.//QPD.8.1.1, .//QPD.8.3, .//QPD.8.4, .//QPD.8.5, .//QPD.8.6), $ind1)"/>
-			<xsl:value-of select="util:element('Patient Phone', util:format-tel (.//QPD.9.6, .//QPD.9.7), $ind1)"/>
-			<xsl:value-of select="util:element('Birth Indicator',util:yes-no(.//QPD.10), $ind1)"/>
-			<xsl:value-of select="util:last-element('Birth Order',.//QPD.11, $ind1, $vertical-orientation, false())"/>
-		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - Next of kin - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<xsl:template match="NK1">
+		<xsl:param name="vertical-orientation" as="xs:boolean"/>
+		<xsl:param name="counter"/>
+		<xsl:value-of select="util:title('title', concat('Next of kin information', $counter), 'Next of kin information', $ind1, true(), $vertical-orientation, false())"/>
+		<xsl:value-of select="util:elements($ind1)"/>		
+		<xsl:choose>
+			<xsl:when test="count(.//NK1.3.9) > 0">
+				<xsl:value-of select="util:element('Relationship', .//NK1.3.9, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(.//NK1.3.9) = 0 and count(.//NK1.3.2) > 0">
+				<xsl:value-of select="util:element('Relationship', NK1.3.2, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(.//NK1.3.9) = 0 and count(.//NK1.3.2) = 0 and count(.//NK1.3.1) > 0">
+				<xsl:value-of select="util:element('Relationship', NK1.3.1, $ind1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="util:element('Relationship', '', $ind1)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		<xsl:value-of select="util:element('Name', concat(util:format-with-space(.//NK1.2.2), util:format-with-space(.//NK1.2.3), util:format-with-space(.//NK1.2.1.1), .//NK1.2.4), $ind1)"/>
+		<xsl:value-of select="util:element('Organization name', NK1.13.1, $ind1)"/>
+		<xsl:value-of select="util:element('Organization identifier', NK1.13.10, $ind1)"/>
+		<xsl:value-of select="util:element('Contact person''s name', NK1.30, $ind1)"/>
+		
+		<xsl:value-of select="util:element('Contact person''s address', .//NK1.32.1.1, $ind1)"/>
+		<xsl:value-of select="util:element(' ', .//NK1.32.2, $ind1)"/>
+		<xsl:value-of select="util:element(' ', concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), $ind1)"/>
+		<xsl:value-of select="util:element(' ', .//NK1.32.6, $ind1)"/>
+		
+		<xsl:value-of select="util:element('Address', .//NK1.4.1.1, $ind1)"/>
+		<xsl:value-of select="util:element(' ', .//NK1.4.2, $ind1)"/>
+		<xsl:value-of select="util:element(' ', concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), $ind1)"/>
+		<xsl:value-of select="util:element(' ', .//NK1.4.6, $ind1)"/>
+		
+		<xsl:variable name="pn" as="xs:boolean" select=".//NK1.5.3 = 'PH'"/>
+		<xsl:value-of select="util:element('Phone number', util:IfThenElse($pn, concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), ''), $ind1)"/>
+		
+		<xsl:variable name="ema" as="xs:boolean" select=".//NK1.5.3 = 'X.400' or .//NK1.5.3 = 'Internet'"/>
+		<xsl:value-of select="util:element('Email address', util:IfThenElse($ema, .//NK1.5.4, ''), $ind1)"/>
+		
+		
+		<xsl:value-of select="util:element('Contact role', concat(util:format-with-space(.//NK1.7.9), util:format-with-space(.//NK1.7.2), .//NK1.7.1), $ind1)"/>	
+		<xsl:value-of select="util:element('Next of kin/Associated parties job code/Class', .//NK1.11.3, $ind1)"/>	
+		
+		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+	</xsl:template>
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - Patient Visit information - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<xsl:template match="PV1">
+		<xsl:param name="vertical-orientation" as="xs:boolean"/>
+		<xsl:param name="counter"/>
+		<xsl:value-of select="util:title('title', concat('Visit Information', $counter), 'Visit Information', $ind1, false(), $vertical-orientation, false())"/>
+		<xsl:value-of select="util:elements($ind1)"/>
+
+		<xsl:value-of select="util:element('Patient Class', PV1.2, $ind1)"/>
+		<xsl:value-of select="util:element('Financial Class', PV1.20.1, $ind1)"/>
+		
+		<xsl:choose>
+			<xsl:when test="count(PV1.22.9) > 0">
+				<xsl:value-of select="util:element('Courtesy Code', PV1.22.9, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) > 0">
+				<xsl:value-of select="util:element('Courtesy Code', PV1.22.2, $ind1)"/>
+			</xsl:when>
+			<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) = 0 and count(PV1.22.1) > 0">
+				<xsl:value-of select="util:element('Courtesy Code', PV1.22.1, $ind1)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="util:element('Courtesy Code', '', $ind1)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+		
+		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+	</xsl:template>
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	
+
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - Patient information for QPD - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<xsl:template match="QPD">
+		<xsl:param name="vertical-orientation" as="xs:boolean"/>
+		<xsl:param name="counter"/>
+		<xsl:value-of select="util:title('title', concat('Patient Information', $counter), 'Patient Information', $ind1, false(), $vertical-orientation, false())"/>
+		<xsl:value-of select="util:elements($ind1)"/>
+		<xsl:value-of select="util:element('Patient Name', concat(util:format-with-space (.//QPD.4.2), util:format-with-space(.//QPD.4.3), .//QPD.4.1.1), $ind1)"/>
+		<xsl:value-of select="util:element('Mother''s Maiden Name', .//QPD.5.1.1, $ind1)"/>
+		<xsl:value-of select="util:element('ID Number', concat(util:format-with-space (.//QPD.3.1[1]), .//QPD.3.1[2]), $ind1)"/>
+		<xsl:value-of select="util:element('Date/Time of Birth', util:format-date (.//QPD.6.1), $ind1)"/>
+		<xsl:value-of select="util:element('Sex', util:admin-sex(.//QPD.7), $ind1)"/>
+		<xsl:value-of select="util:element('Patient Address', util:format-address(.//QPD.8.1.1, .//QPD.8.3, .//QPD.8.4, .//QPD.8.5, .//QPD.8.6), $ind1)"/>
+		<xsl:value-of select="util:element('Patient Phone', util:format-tel (.//QPD.9.6, .//QPD.9.7), $ind1)"/>
+		<xsl:value-of select="util:element('Birth Indicator',util:yes-no(.//QPD.10), $ind1)"/>
+		<xsl:value-of select="util:last-element('Birth Order',.//QPD.11, $ind1, $vertical-orientation, false())"/>
+	</xsl:template>
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<xsl:template match="PD1">
@@ -356,148 +416,10 @@
 			<xsl:value-of select="util:element('Protection Indicator', util:protection-indicator(.//PD1.12), $ind1)"/>
 			<xsl:value-of select="util:last-element('Protection Indicator Effective Date', util:format-date(.//PD1.13), $ind1, $vertical-orientation, false())"/>
 		</xsl:template>
+
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Guardian or Responsible Party - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:template match="NK1">
-			<xsl:param name="vertical-orientation" as="xs:boolean"/>
-			<xsl:param name="counter"/>
-			<xsl:value-of select="util:title('title', concat('Guardian or Responsible Party', $counter), 'Guardian or Responsible Party', $ind1, true(), $vertical-orientation, false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of select="util:element('Name', concat(util:format-with-space(.//NK1.2.2), util:format-with-space(.//NK1.2.3), .//NK1.2.1.1), $ind1)"/>
-			<xsl:value-of select="util:element('Relationship', .//NK1.3.2, $ind1)"/>
-			<xsl:for-each select="NK1.4">
-				<xsl:value-of select="util:element(concat('Address', util:blank-if-1(position(), count(..//NK1.4))), util:format-address(.//NK1.4.1.1, .//NK1.4.3, .//NK1.4.4, .//NK1.4.5, .//NK1.4.6), $ind1)"/>
-			</xsl:for-each>
-			<xsl:for-each select="NK1.5">
-				<xsl:value-of select="util:element('Phone Number', util:format-tel(NK1.5.6, NK1.5.7), $ind1)"/>
-			</xsl:for-each>
-			<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Patient information - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:template match="PID" mode="Syndromic">
-			<xsl:param name="vertical-orientation" as="xs:boolean"/>
-			<xsl:param name="counter"/>
-			<xsl:value-of select="util:title('title', concat('Patient Information', $counter), 'Patient Information', $ind1, false(), $vertical-orientation, false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of select="util:element('Name', util:valueset(.//PID.5[2]/PID.5.7, 'HL70200'), $ind1)"/>
-			<xsl:value-of select="util:element('Sex', util:valueset(.//PID.8, 'PHVS_AdministrativeSex_HL7_2x'), $ind1)"/>
-			<xsl:for-each select="PID.10">
-				<xsl:value-of select="util:element(concat('Race', util:blank-if-1(position(), count(..//PID.10))), util:value-or-valueset(.//PID.10.2, .//PID.10.1, 'CDCREC'), $ind1)"/>
-			</xsl:for-each>
-			<xsl:for-each select="PID.22">
-				<xsl:value-of select="util:element(concat('Ethnic Group', util:blank-if-1(position(), count(..//PID.22))), util:value-or-valueset(.//PID.22.2, .//PID.22.1, 'CDCREC'), $ind1)"/>
-			</xsl:for-each>
-			<xsl:value-of select="util:element('City', .//PID.11.3, $ind1)"/>
-			<xsl:value-of select="util:element('State', util:valueset(.//PID.11.4, 'PHVS_State_FIPS_5-2'), $ind1)"/>
-			<xsl:value-of select="util:element('Zip Code', .//PID.11.5, $ind1)"/>
-			<xsl:value-of select="util:element('Country', util:valueset(//PID.11.6, 'PHVS_Country_ISO_3166-1'), $ind1)"/>
-			<xsl:value-of select="util:element('County/Parish Code', .//PID.11.9, $ind1)"/>
-			<xsl:if test="not(//MSH.9.2 = 'A01')">
-				<xsl:value-of select="util:element('Patient Death  Date and Time', util:format-time(.//PID.29.1), $ind1)"/>
-				<!-- - - - - - time? - - - - - - - - - - - -->
-				<xsl:variable name="yes" as="xs:boolean" select=".//PID.30 = 'Y' or .//PID.30 = 'y'"/>
-				<xsl:value-of select="util:element('Patient Death Indicator', util:IfThenElse($yes, 'Yes', .//PID.30), $ind1)"/>
-			</xsl:if>
-			<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Patient information - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:template match="PID" mode="LRI">
-			<xsl:param name="vertical-orientation" as="xs:boolean"/>
-			<xsl:param name="counter"/>
-			<xsl:value-of select="util:title('title', concat('Patient Information', $counter), 'Patient Information', $ind1, false(), $vertical-orientation, false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of select="util:element('Name', concat(util:format-with-space(.//PID.5.2), util:format-with-space(.//PID.5.3), util:format-with-space(.//PID.5.1.1), .//PID.5.4), $ind1)"/>
-			<xsl:value-of select="util:element('Date/Time of Birth',util:format-date(.//PID.7.1), $ind1)"/>
-			<xsl:value-of select="util:element('Administrative Sex', util:admin-sex(.//PID.8), $ind1)"/>
-			<xsl:for-each select="PID.10">
-				<xsl:value-of select="util:element(concat('Race', util:blank-if-1-variant2(position(), count(..//PID.10))), .//PID.10.2, $ind1)"/>
-				<xsl:value-of select="util:element(concat('Alt Race', util:blank-if-1-variant2(position(), count(..//PID.10))), .//PID.10.5, $ind1)"/>
-			</xsl:for-each>
-			<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Patient Visit information - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:template match="PV1" mode="Syndromic">
-			<xsl:param name="vertical-orientation" as="xs:boolean"/>
-			<xsl:param name="counter"/>
-			<xsl:value-of select="util:title('title', concat('Visit Information', $counter), 'Visit Information', $ind1, false(), $vertical-orientation, false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:variable name="encounter-reason">
-				<xsl:choose>
-					<xsl:when test="..//PV2.3.2  != ''">
-						<xsl:value-of select="..//PV2.3.2"/>
-					</xsl:when>
-					<xsl:when test="..//PV2.3.3 = 'I9CDX'">
-						<xsl:value-of select="util:valueset(..//PV2.3.1, 'PHVS_AdministrativeDiagnosis_CDC_ICD-9CM')"/>
-					</xsl:when>
-					<xsl:when test="..//PV2.3.3 = 'I10'">
-						<xsl:value-of select="util:valueset(..//PV2.3.1, 'PHVS_CauseOfDeath_ICD-10_CDC ')"/>
-					</xsl:when>
-					<xsl:when test="..//PV2.3.3 = 'SCT'">
-						<xsl:value-of select="util:valueset(..//PV2.3.1, 'PHVS_Disease_CDC')"/>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:variable>
-			<xsl:value-of select="util:element('Admit or Encounter Reason', $encounter-reason, $ind1)"/>
-			<xsl:value-of select="util:element('Admit Date and Time', util:format-time(.//PV1.44.1), $ind1)"/>
-			<!-- - - - - - time? - - - - - - - - - - - -->
-			<xsl:value-of select="util:element('Patient Class', util:valueset(.//PV1.2, 'PHVS_PatientClass_SyndromicSurveillance'), $ind1)"/>
-			<xsl:if test="not(//MSH.9.2 = 'A01' or //MSH.9.2 = 'A04')">
-				<xsl:value-of select="util:element('Discharge Disposition', util:valueset(.//PV1.36, 'HL70112'), $ind1)"/>
-				<xsl:value-of select="util:element('Discharge Date/Time', util:format-time(.//PV1.45.1), $ind1)"/>
-			</xsl:if>
-			<xsl:value-of select="util:element('Diagnosis Type', util:valueset(..//DG1.6, 'HL70052'), $ind1)"/>
-			<xsl:for-each select="..//DG1">
-				<xsl:variable name="diagnosis">
-					<xsl:choose>
-						<xsl:when test=".//DG1.3.2  != ''">
-							<xsl:value-of select=".//DG1.3.2"/>
-						</xsl:when>
-						<xsl:when test=".//DG1.3.3  = 'I9CDX'">
-							<xsl:value-of select="util:valueset(.//DG1.3.1, 'PHVS_AdministrativeDiagnosis_CDC_ICD-9CM')"/>
-						</xsl:when>
-						<xsl:when test=".//DG1.3.3 = 'I10'">
-							<xsl:value-of select="util:valueset(.//DG1.3.1, 'PHVS_CauseOfDeath_ICD-10_CDC ')"/>
-						</xsl:when>
-						<xsl:when test=".//DG1.3.3 = 'SCT'">
-							<xsl:value-of select="util:valueset(.//DG1.3.1, 'PHVS_Disease_CDC')"/>
-						</xsl:when>
-					</xsl:choose>
-				</xsl:variable>
-				<xsl:value-of select="util:element('Diagnosis', $diagnosis, $ind1)"/>
-			</xsl:for-each>
-			<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - Vaccine Administration Information - - - - - - - - - - - -->
