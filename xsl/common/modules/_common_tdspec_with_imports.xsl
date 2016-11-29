@@ -148,6 +148,9 @@
 				<xsl:with-param name="segments" select="//PRT"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//DG1"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//OBX"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
