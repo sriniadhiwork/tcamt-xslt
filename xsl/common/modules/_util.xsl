@@ -91,6 +91,36 @@
 		<xsl:value-of select="util:element(' ', $country, $ind)"/>
 		
 	</xsl:function>
+	
+	
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<xsl:function name="util:chooseAmongThree">
+		<xsl:param name="elementName" />
+		<xsl:param name="option1" />
+		<xsl:param name="option2" />
+		<xsl:param name="option3" />
+		<xsl:param name="ind" />
+		<xsl:choose>
+			<xsl:when test="count($option1) > 0">
+				<xsl:value-of select="util:element($elementName, $option1, $ind)"/>
+			</xsl:when>
+			<xsl:when test="count($option1) = 0 and count($option2) > 0">
+				<xsl:value-of select="util:element($elementName, $option2, $ind)"/>
+			</xsl:when>
+			<xsl:when
+				test="count($option1) = 0 and count($option2) = 0 and count($option3) > 0">
+				<xsl:value-of select="util:element($elementName, $option3, $ind)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="util:element($elementName, '', $ind)"/>
+				
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:function>
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- tags: most important functions; if you pass X, Y, and indentation it outputs <X> Y </X> ; if Y is empty, however, it produces only <X>  -->
