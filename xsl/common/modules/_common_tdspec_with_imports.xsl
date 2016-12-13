@@ -249,7 +249,7 @@
 		<xsl:value-of
 			select="util:element('Patient Name', concat(util:format-with-space(.//PID.5.2), util:format-with-space(.//PID.5.3), util:format-with-space(.//PID.5.1.1), .//PID.5.4), $ind1)"/>
 		<xsl:value-of
-			select="util:element('Mother''s Maiden Name', concat(util:format-with-space(.//PID.6.2), util:format-with-space(.//PID.6.3), util:format-with-space(.//PID.6.1.1), .//PID.6.4), $ind1)"/>
+			select="util:element('Mother s Maiden Name', concat(util:format-with-space(.//PID.6.2), util:format-with-space(.//PID.6.3), util:format-with-space(.//PID.6.1.1), .//PID.6.4), $ind1)"/>
 		<xsl:value-of select="util:element('Administrative Sex', util:admin-sex(.//PID.8), $ind1)"/>
 		<xsl:value-of
 			select="util:element('Date/Time of Birth', util:format-date(.//PID.7.1), $ind1)"/>
@@ -341,10 +341,10 @@
 			select="util:element('Name', concat(util:format-with-space(.//NK1.2.2), util:format-with-space(.//NK1.2.3), util:format-with-space(.//NK1.2.1.1), .//NK1.2.4), $ind1)"/>
 		<xsl:value-of select="util:element('Organization name', NK1.13.1, $ind1)"/>
 		<xsl:value-of select="util:element('Organization identifier', NK1.13.10, $ind1)"/>
-		<xsl:value-of select="util:element('Contact person''s name', NK1.30, $ind1)"/>
+		<xsl:value-of select="util:element('Contact person s name', NK1.30, $ind1)"/>
 
 		<xsl:value-of
-			select="util:format-address-multilines('Contact person''s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"/>
+			select="util:format-address-multilines('Contact person s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"/>
 
 		<xsl:value-of
 			select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)"/>
@@ -437,7 +437,7 @@
 			select="util:format-address-multilines('Insurance Company Address', .//IN1.5.1.1, .//IN1.5.2, concat(util:format-with-space(.//IN1.5.3), util:format-with-space(.//IN1.5.4), util:format-with-space(.//IN1.5.5)), .//IN1.5.6, $ind1)"/>
 
 		<xsl:value-of select="util:element('Group Number', IN1.8, $ind1)"/>
-		<xsl:value-of select="util:element('Insured''s Group Employer Name', IN1.11, $ind1)"/>
+		<xsl:value-of select="util:element('Insured s Group Employer Name', IN1.11, $ind1)"/>
 		<xsl:value-of select="util:element('Plan Expiration Date', IN1.13, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Name Of Insured', concat(util:format-with-space(.//IN1.16.2), util:format-with-space(.//IN1.16.3), util:format-with-space(.//IN1.16.1.1), util:format-with-space(.//IN1.16.4)), $ind1)"/>
@@ -445,24 +445,24 @@
 		<xsl:choose>
 			<xsl:when test="count(IN1.17.9) > 0">
 				<xsl:value-of
-					select="util:element('Insured''s Relationship To Patient', IN1.17.9, $ind1)"/>
+					select="util:element('Insured s Relationship To Patient', IN1.17.9, $ind1)"/>
 			</xsl:when>
 			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.17.2) > 0">
 				<xsl:value-of
-					select="util:element('Insured''s Relationship To Patient', IN1.17.2, $ind1)"/>
+					select="util:element('Insured s Relationship To Patient', IN1.17.2, $ind1)"/>
 			</xsl:when>
 			<xsl:when test="count(IN1.17.9) = 0 and count(IN1.17.2) = 0 and count(IN1.17.1) > 0">
 				<xsl:value-of
-					select="util:element('Insured''s Relationship To Patient', IN1.17.1, $ind1)"/>
+					select="util:element('Insured s Relationship To Patient', IN1.17.1, $ind1)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="util:element('Insured''s Relationship To Patient', '', $ind1)"
+				<xsl:value-of select="util:element('Insured s Relationship To Patient', '', $ind1)"
 				/>
 			</xsl:otherwise>
 		</xsl:choose>
 
 		<xsl:value-of
-			select="util:element('Insured''s Date Of Birth', util:format-date(.//IN1.18.1), $ind1)"/>
+			select="util:element('Insured s Date Of Birth', util:format-date(.//IN1.18.1), $ind1)"/>
 
 		<xsl:value-of
 			select="util:format-address-multilines('Insured Address', .//IN1.19.1.1, .//IN1.19.2, concat(util:format-with-space(.//IN1.19.3), util:format-with-space(.//IN1.19.4), util:format-with-space(.//IN1.19.5)), .//IN1.19.6, $ind1)"/>
@@ -548,10 +548,10 @@
 		<xsl:value-of
 			select="util:element('Email address', util:IfThenElse($ema, .//ORC.14.4, ''), $ind1)"/>
 
-		<xsl:value-of select="util:element('Ordering Facility Name', ORC.21.1, $ind1)"/>
+		<xsl:value-of select="util:element('Ordering Facility Name', .//ORC.21.1, $ind1)"/>
 
 		<xsl:value-of
-			select="util:format-address-multilines('Ordering Facility Address', ORC.21.1, ORC.22.1.1, concat(util:format-with-space(ORC.22.3), util:format-with-space(ORC.22.4), util:format-with-space(ORC.22.5)), ORC.22.6, $ind1)"/>
+			select="util:format-address-multilines('Ordering Facility Address', .//ORC.21.1, .//ORC.22.1.1, concat(util:format-with-space(.//ORC.22.3), util:format-with-space(.//ORC.22.4), util:format-with-space(.//ORC.22.5)), .//ORC.22.6, $ind1)"/>
 
 		<xsl:variable name="ofp" as="xs:boolean" select="ORC.23.3 = 'PH'"/>
 		<xsl:value-of
@@ -842,7 +842,7 @@
 		<xsl:value-of select="util:elements($ind1)"/>
 		<xsl:value-of
 			select="util:element('Patient Name', concat(util:format-with-space(.//QPD.4.2), util:format-with-space(.//QPD.4.3), .//QPD.4.1.1), $ind1)"/>
-		<xsl:value-of select="util:element('Mother''s Maiden Name', .//QPD.5.1.1, $ind1)"/>
+		<xsl:value-of select="util:element('Mother s Maiden Name', .//QPD.5.1.1, $ind1)"/>
 		<xsl:value-of
 			select="util:element('ID Number', concat(util:format-with-space(.//QPD.3.1[1]), .//QPD.3.1[2]), $ind1)"/>
 		<xsl:value-of
