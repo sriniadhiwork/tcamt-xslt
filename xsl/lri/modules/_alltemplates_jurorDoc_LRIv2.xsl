@@ -194,22 +194,15 @@
 		</xsl:for-each>
 	</xsl:template>
 	<xsl:template name="labResults-DV">
-		<xsl:param name="orderGroup"/>
-		<xsl:param name="messageID"/>
+		<xsl:param name="order" as="node()"/>
+		<xsl:param name="orderNotes" as="node()*"/>
+		<xsl:param name="results" as="node()+"/>
+		<xsl:param name="specimen" as="node()?"/>
+		<xsl:param name="childOrder" as="node()?"/>
+		<xsl:param name="childResults" as="node()*"/>
+		
+		<!-- <xsl:param name="messageID"/> -->
 		<fieldset id="LabResults-DV">
-			<!--   <xsl:copy-of select="$groupedLabResults"/>-->
-			<xsl:for-each select="$orderGroup">
-<!--				<xsl:variable name="pos" select="position()"/>
---><!--				<xsl:variable name="testName">
-					<xsl:choose>
-						<xsl:when test="(($messageID = 'LRI_5.0_2.1-GU_FRU' or $messageID = 'LRI_5.0_2.1-GU_FRN' or $messageID = 'LRI_5.0_2.1-NG_FRU' or $messageID = 'LRI_5.0_2.1-NG_FRN') and $pos = 2)">
-							<xsl:copy-of select="$er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[2]/*"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:copy-of select="$er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]/*"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>-->
 				<table id="labResultsDisplay">
 					<thead>
 						<tr>
@@ -218,21 +211,21 @@
 						<tr>
 							<th width="15%">Test Performed:</th>
 							<xsl:choose>
-								<xsl:when test="exists(OBR/OBR.4/OBR.4.9)">
+								<xsl:when test="exists($order/OBR.4/OBR.4.9)">
 									<td colspan="9" width="75%" style="font-weight:bold; color:red">
-										<xsl:value-of select="OBR/OBR.4/OBR.4.9"/>
+										<xsl:value-of select="$order/OBR.4/OBR.4.9"/>
 									</td>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:choose>
-										<xsl:when test="exists(OBR/OBR.4/OBR.4.5)">
+										<xsl:when test="exists($order/OBR.4/OBR.4.5)">
 											<td colspan="9" width="75%" style="font-style:italic;font-weight:bold;">
-												<xsl:value-of select="OBR/OBR.4/OBR.4.5"/>
+												<xsl:value-of select="$order/OBR.4/OBR.4.5"/>
 											</td>
 										</xsl:when>
 										<xsl:otherwise>
 											<td colspan="9" width="75%" style="font-style:italic;font-weight:bold;">
-												<xsl:value-of select="OBR/OBR.4/OBR.4.2"/>
+												<xsl:value-of select="$order/OBR.4/OBR.4.2"/>
 											</td>
 										</xsl:otherwise>
 									</xsl:choose>
@@ -242,16 +235,16 @@
 						<tr>
 							<th width="15%">Test Report Date:</th>
 							<td colspan="9" width="75%" style="font-weight:normal;">
-								<xsl:value-of select="util:formatDateTime(OBR/OBR.22/OBR.22.1)"/>
+								<xsl:value-of select="util:formatDateTime($order/OBR.22/OBR.22.1)"/>
 							</td>
 						</tr>
 						<tr>
 							<th width="15%">Result Report Status</th>
 							<td colspan="9" width="75%" style="font-weight:normal;">
-								<xsl:value-of select="OBR/OBR.25"/>
+								<xsl:value-of select="$order/OBR.25"/>
 							</td>
 						</tr>
-						<xsl:for-each select="NTE">
+						<xsl:for-each select="$orderNotes">
 							<tr>
 								<th width="15%">Note:</th>
 								<td colspan="9" width="75%">
@@ -259,9 +252,6 @@
 								</td>
 							</tr>
 						</xsl:for-each>
-						<!-- <tr>
-                            <th colspan="10">Result Report Status</th>
-                        </tr> -->
 						<tr>
 							<td colspan="10" class="addSpace"/>
 						</tr>
@@ -275,12 +265,11 @@
 							<th width="10%">Date/Time of Observation</th>
 							<th width="10%">End Date/Time of Observation</th>
 							<th width="10%">Date/Time of Analysis</th>
-							<!-- <th width="15%"> Notes</th> -->
 							<th width="20%">Tester Comment</th>
 						</tr>
 					</thead>
 					<tbody>
-						<xsl:for-each select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION/OBX">
+						<xsl:for-each select="$results/OBX">
 							<xsl:variable name="OBX_5">
 								<xsl:choose>
 									<xsl:when test="OBX.2 = 'NM'">
@@ -328,30 +317,34 @@
 								</xsl:choose>
 							</xsl:variable>
 							<tr>
-								<xsl:copy-of select="util:displayCond(OBX.3/OBX.3.2, OBX.3/OBX.3.5, OBX.3/OBX.3.2)"/>
+								<xsl:copy-of select="util:displayCond(OBX.3/OBX.3.9, OBX.3/OBX.3.5, OBX.3/OBX.3.2)"/>
 								<xsl:copy-of select="$OBX_5"/>
 								<xsl:copy-of select="util:displayCond(OBX.6/OBX.6.9, OBX.6/OBX.6.5, OBX.6/OBX.6.2)"/>
 								<xsl:copy-of select="util:formatData(OBX.7, 'bold')"/>
 								<xsl:copy-of select="util:formatData(OBX.8, 'normal')"/>
 								<xsl:copy-of select="util:formatData(OBX.11, 'normal')"/>
-								<xsl:copy-of select="util:formatData(util:formatDateTime(../../OBR/OBR.7/OBR.7.1), 'normal')"/>
-								<xsl:copy-of select="util:formatData(util:formatDateTime(../../OBR/OBR.8/OBR.8.1), 'normal')"/>
+								<xsl:variable name="observationDateTime">
+									<xsl:choose>
+										<xsl:when test="OBX.14/OBX.14.1">
+											<xsl:value-of select="OBX.14/OBX.14.1"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:choose>
+												<xsl:when test="$order/OBR.7/OBR.7.1">
+													<xsl:value-of select="$order/OBR.7/OBR.7.1"/>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:if test="$specimen/SPM.17/SPM.17.1/SPM.17.1.1">
+														<xsl:value-of select="$specimen/SPM.17/SPM.17.1/SPM.17.1.1"/>
+													</xsl:if>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:otherwise>
+									</xsl:choose>								
+								</xsl:variable>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($observationDateTime), 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($order/OBR.8/OBR.8.1), 'normal')"/>
 								<xsl:copy-of select="util:formatData(util:formatDateTime(OBX.19/OBX.19.1), 'normal')"/>
-								<!-- <xsl:choose>
-                                   <xsl:when test="exists(following-sibling::NTE)">
-                                       <td>
-                                           <table style="width:100%; border:none">
-                                               <xsl:for-each select="following-sibling::NTE">
-                                                   <tr >
-                                                       <xsl:copy-of select="util:formatData(.,'normal')"/>  
-                                                   </tr>   </xsl:for-each>
-                                           </table>
-                                       </td> 
-                                   </xsl:when>
-                                   <xsl:otherwise>
-                                       <td class="noData"/>
-                                   </xsl:otherwise>
-                               </xsl:choose> -->
 								<xsl:call-template name="commentTemplate"/>
 							</tr>
 							<xsl:for-each select="following-sibling::NTE">
@@ -364,6 +357,80 @@
 								</tr>
 							</xsl:for-each>
 						</xsl:for-each>
+						
+						<!-- TODO insert child results here -->
+
+
+						<xsl:for-each select="$childResults/OBX">
+															<xsl:variable name="OBX_5">
+								<xsl:choose>
+									<xsl:when test="OBX.2 = 'NM'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'boldItalic')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'SN'">
+										<xsl:choose>
+											<xsl:when test="exists(OBX.5)">
+												<td>
+													<xsl:copy-of select="concat(concat('&lt;font color=&quot;red&quot;>&lt;b>', OBX.5/OBX.5.1, '&lt;/b>&lt;/font>'), ' ', concat('&lt;font color=&quot;black&quot;>&lt;b>&lt;i>', OBX.5/OBX.5.2, '&lt;/i>&lt;/b>&lt;/font>'), ' ', concat('&lt;font color=&quot;red&quot;>&lt;b>', OBX.5/OBX.5.3, '&lt;/b>&lt;/font>'), ' ', concat('&lt;font color=&quot;black&quot;>&lt;b>&lt;i>', OBX.5/OBX.5.4, '&lt;/i>&lt;/b>&lt;/font>'))"/>
+												</td>
+											</xsl:when>
+											<xsl:otherwise>
+												<td class="noData"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'FT'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'bold')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'ST'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'bold')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'TX'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'bold')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'DT'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'TS'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'TM'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'CWE'">
+										<xsl:copy-of select="util:displayCond(OBX.5/OBX.5.9, OBX.5/OBX.5.5, OBX.5/OBX.5.2)"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'ED'">
+										<td>PDF is created</td>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:variable>
+						<tr>
+								<xsl:copy-of select="util:displayCond(OBX.3/OBX.3.9, OBX.3/OBX.3.5, OBX.3/OBX.3.2)"/>
+								<xsl:copy-of select="$OBX_5"/>
+								<xsl:copy-of select="util:displayCond(OBX.6/OBX.6.9, OBX.6/OBX.6.5, OBX.6/OBX.6.2)"/>
+								<xsl:copy-of select="util:formatData(OBX.7, 'bold')"/>
+								<xsl:copy-of select="util:formatData(OBX.8, 'normal')"/>
+								<xsl:copy-of select="util:formatData(OBX.11, 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($childOrder/OBR.7/OBR.7.1), 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($childOrder/OBR.8/OBR.8.1), 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime(OBX.19/OBX.19.1), 'normal')"/>
+								<xsl:call-template name="commentTemplate"/>
+							</tr> 
+						<!-- <xsl:for-each select="following-sibling::NTE">
+							<tr>
+									<td>Note</td>
+									<td colspan="8">
+										<xsl:value-of select="util:parseText(NTE.3)"/>
+									</td>
+									<xsl:call-template name="commentTemplate"/>
+								</tr>
+							</xsl:for-each> -->
+						</xsl:for-each>
+						
 						<xsl:if test="OBX.2 = 'NM'">
 							<tr>
 								<td colspan="10">For all numeric Result values that are less than 1,
@@ -377,144 +444,8 @@
 						<br/>
 					</tbody>
 				</table>
-			</xsl:for-each>
 		</fieldset>
-	</xsl:template><!--
-	<xsl:variable name="groupedLabResults">
-		<xsl:call-template name="processLabResults">
-			<xsl:with-param name="er7XMLMessage" select="/"/>
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:template name="processLabResults">
-		<xsl:param name="er7XMLMessage"/>
-		<xsl:choose>
-			--><!-- multiple ORDER_OBSERVATION groups in the message --><!--
-			<xsl:when test="count($er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION) > 1">
-				<xsl:call-template name="groupER7XMLLabResults">
-					<xsl:with-param name="er7XMLMessage" select="$er7XMLMessage"/>
-				</xsl:call-template>
-			</xsl:when>
-			--><!-- a single ORDER_OBSERVATION group in the message --><!--
-			<xsl:otherwise>
-				<xsl:call-template name="groupFinalLabResults">
-					<xsl:with-param name="groupedResults" select="$er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
 	</xsl:template>
---><!--	<xsl:template name="groupER7XMLLabResults">
-		<xsl:param name="er7XMLMessage"/>
-		<xsl:variable name="labResults" as="node()*">
-			--><!-- Caro : not sure if the group-by is usefull, every ORDER_OBSERVATION has a different ORC --><!--
-			<xsl:for-each-group select="$er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION" group-by="ORC">
-				<xsl:for-each select="current-group()">
-					<xsl:copy-of select="."/>
-				</xsl:for-each>
-			</xsl:for-each-group>
-		</xsl:variable>
-		--><!-- <xsl:copy-of select="$labResults/OBR[count(OBR.26/OBR.26.2/OBR.26.2.3) = 0]/../ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION/OBX/OBX.2[.='CWE']/.."/> --><!--
-		<xsl:call-template name="processParentOBR">
-			--><!-- Caro : not sure about that condition
-					OBR-26.2 is RE so it could be not present. Why not test on the presence of OBR-26 only ?
-			--><!--
-			<xsl:with-param name="parentOBR" select="$labResults/OBR[count(OBR.26/OBR.26.2/OBR.26.2.3) = 0]/.."/>
-			<xsl:with-param name="groupedLabRes" select="$labResults"/>
-		</xsl:call-template>
-	</xsl:template>--><!--
-	<xsl:template name="processParentOBR">
-		<xsl:param name="parentOBR" as="node()*"/> --><!-- a list of parent OBRs--><!--
-		<xsl:param name="groupedLabRes" as="node()*"/> --><!-- a list of all ORDER_OBSERVATION--><!--
-		<xsl:variable name="results">
-			<xsl:for-each select="$parentOBR/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION/OBX/OBX.2[. = 'CWE']">
-				--><!-- OBX-4 is NOT required and not present in Hepatitis ! --><!--		
-				<xsl:variable name="currentObservationId" select="../OBX.3/OBX.3.1"/> 		
-				<xsl:variable name="currentGroupId" select="../OBX.4/OBX.4.2"/> 
-
-					--><!--START CARO --><!--
-					--><!-- should first test for OBR.26.1 and if multiples, then test for OBR.26.1 and OBR.26.2 --><!--
---><!--					<xsl:choose>
-						<xsl:when test="count($groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId]]) >1"> --><!-- TODO not working here --><!--
-						
-						
-							<xsl:message select="'1'"/>
-							<xsl:message select="count($groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId]])"/>
-							<xsl:message select="count($groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId] and OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]]/ORC)"/>							
-							--><!-- copy of child ORC/OBR --><!--
-							<xsl:copy-of select="$groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId] and OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]]/ORC"/>
-							<xsl:copy-of select="$groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId] and OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]]/OBR"/>
-							--><!-- copy of parent OBSERVATION (current)--><!--
-							<xsl:copy-of select="../.."/>
-							--><!-- copy of child OBSERVATIONs --><!--
-							<xsl:copy-of select="$groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId] and OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]]/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
-						</xsl:when>
-						<xsl:when test="count($groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId]]) =1">
-							<xsl:message select="'2'"/>
-							--><!-- copy of child ORC/OBR --><!--
-							<xsl:copy-of select="$groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId]]/ORC"/>
-							<xsl:copy-of select="$groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId]]/OBR"/>
-							--><!-- copy of parent OBSERVATION (current)--><!--
-							<xsl:copy-of select="../.."/>
-							--><!-- copy of child OBSERVATIONs --><!--
-							<xsl:copy-of select="$groupedLabRes[OBR/OBR.26/OBR.26.1/OBR.26.1.1[. = $currentObservationId]]/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:message select="'3'"/>
-							--><!-- copy of parent ORC/OBR --><!--
-							<xsl:copy-of select="$parentOBR/OBR"/>
-							--><!-- copy of parent OBSERVATION (current)--><!--
-							<xsl:copy-of select="../.."/>
-							--><!-- no child OBX --><!--
-					</xsl:otherwise>
-					</xsl:choose>--><!--
-
-
-
-				
-				--><!-- START SRINI --><!--
-				<xsl:copy-of select="$groupedLabRes/OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]/../../../../ORC"/>
-				<xsl:choose>
-					<xsl:when test="$groupedLabRes/OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]/../../../../OBR">
-						<xsl:copy-of select="$groupedLabRes/OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]/../../../../OBR"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:copy-of select="$parentOBR/OBR"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:copy-of select="$parentOBR/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION/OBX/OBX.4/OBX.4.2[. = $currentGroupId]/../../.."/>
-				<xsl:copy-of select="$groupedLabRes/OBR/OBR.26/OBR.26.2/OBR.26.2.2[. = $currentGroupId]/../../../../ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
-			</xsl:for-each>
-		</xsl:variable>
-		<xsl:variable name="resultsStage">
-			<xsl:choose>
-				<xsl:when test="count($results//ORC) = 0 and exists($parentOBR//OBR/OBR.2)">
-					<xsl:copy-of select="$groupedLabRes"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:copy-of select="$results"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		--><!-- <xsl:copy-of select="$resultsStage"/>--><!--
-		<xsl:call-template name="groupFinalLabResults">
-			<xsl:with-param name="groupedResults" select="$resultsStage"/>
-		</xsl:call-template>
-	</xsl:template>
--->	<!-- wrap the groupedResults into lab-results observations* -->
-<!--	<xsl:template name="groupFinalLabResults">
-		<xsl:param name="groupedResults" as="node()*"/>
-		<xsl:variable name="finalGroupedResults" as="node()*">
-			<lab-results>
-				<xsl:for-each-group select="$groupedResults/*" group-starting-with="ORC | ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION">
-					<observations>
-						<xsl:for-each select="current-group()">
-							<xsl:copy-of select="."/>
-						</xsl:for-each>
-					</observations>
-				</xsl:for-each-group>
-			</lab-results>
-		</xsl:variable>
-		<xsl:copy-of select="$finalGroupedResults"/>
-	</xsl:template>-->
 	<xsl:template name="performingOrganizationNameAdd-DV">
 		<xsl:param name="obxSegment"/>
 		<fieldset id="PerformingOrg-DV">
@@ -719,7 +650,6 @@
 		<xsl:param name="orcSegment"/> <!-- ORC Segment -->
 		<fieldset id="OrderInfo-DV">
 			<xsl:for-each select="$orcSegment/..">
-				<xsl:message select="name(.)"/>
 				<table id="orderInformation">
 					<thead>
 						<tr>
@@ -946,7 +876,6 @@
     </xsl:template>  -->
 	<xsl:template name="headerforIV">
 		<xsl:param name="title"/>
-		<xsl:message select="$title"/>
 		<thead>
 			<tr>
 				<th colspan="5">
@@ -1325,7 +1254,8 @@
 							<th/>
 						</tr>
 						<xsl:copy-of select="util:ID-text-format('OBR-22.1', 'Time', 'S-EQ', util:formatDateTime(OBR.22/OBR.22.1), '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-25', 'Time', 'S-TR-R', OBR.25, '20px', 'normal')"/>
+						
+						<xsl:copy-of select="util:ID-text-format('OBR-25', 'Result Status', 'S-TR-R', OBR.25, '0px', 'normal')"/>
 
 						<!-- <xsl:if test="exists(OBR.26)">
 							<tr>
@@ -2385,7 +2315,7 @@
 									<xsl:copy-of select="util:ID-text-format('OBX-5.9', 'Original Text', 'S-EX', OBX.5/OBX.5.9, '20px', 'normal')"/>
 								</xsl:when>
 								<xsl:when test="OBX.2 = 'ED'">
-									<xsl:copy-of select="'PDF is stored'"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'PDF is stored', '', '0px', 'normal')"/>
 								</xsl:when>
 							</xsl:choose>
 						</xsl:variable>

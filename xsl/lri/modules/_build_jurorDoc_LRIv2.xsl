@@ -35,11 +35,8 @@
 	<xsl:include href="_util_jurorDoc_LRIv2.xsl"/>
 	<xsl:include href="_alltemplates_jurorDoc_LRIv2.xsl"/>
 	<xsl:template name="buildJurorDoc">
-<!--		<xsl:param name="er7XMLMessage"/>
--->		<!-- Caro : what is the difference between $messageID and $testCaseName ??? -->
 		<xsl:param name="messageID" select="$testCaseName"/>
-<!--		<xsl:param name="groupedLabResults"/>
--->		<!--- message type is either ORU_R01 or ACK, based on the root tag -->
+		<!--- message type is either ORU_R01 or ACK, based on the root tag -->
 		<xsl:variable name="message-type">
 			<xsl:choose>
 				<xsl:when test="starts-with(name(.), 'ORU_R01')">
@@ -72,13 +69,6 @@
                     ease-of-use by the Tester and does not indicate how the Health IT Module display
                     must be designed. </p>
 			</fieldset>
-			<!-- xsl:call-template name="DisplayVerification">
-            <xsl:with-param name="er7MsgId" />
-        </xsl:call-template>
-            
-        <xsl:call-template name="IncorporateVerification">
-            <xsl:with-param name="er7MsgId" />
-        </xsl:call-template -->
 			<h2>Display Verification</h2>
 			<fieldset>
 				<h4 align="left">Legend for Display Requirement</h4>
@@ -100,10 +90,62 @@
 			</xsl:call-template>
 			<br/>
 			<!--Lab Results – Display Verification -->
-			<xsl:call-template name="labResults-DV">
-				<xsl:with-param name="orderGroup" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION"/>
-				<xsl:with-param name="messageID" select="$messageID"/>
-			</xsl:call-template>
+			<!-- TODO : different for C and S and maybe hepatitis -->
+			<xsl:choose>
+				<xsl:when test="util:isParentChild_CS_TestCase($messageID) = fn:true()">
+				<xsl:variable name="parentOrder" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]"/>
+				<xsl:variable name="childOrder1" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[2]"/>
+				<xsl:variable name="childOrder2" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[3]"/>
+
+					<!-- PARENT OBX 1 -->
+					<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="$parentOrder/OBR"/>
+							<xsl:with-param name="orderNotes" select="$parentOrder/NTE"/>
+							<xsl:with-param name="results" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]"/>
+							<xsl:with-param name="specimen" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
+						</xsl:call-template>
+					<!-- PARENT OBX 2 -->
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="$parentOrder/OBR"/>
+							<xsl:with-param name="orderNotes" select="$parentOrder/NTE"/>
+							<xsl:with-param name="results" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]"/>
+							<xsl:with-param name="specimen" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
+							<xsl:with-param name="childOrder" select="$childOrder1/OBR"/>
+							<xsl:with-param name="childResults" select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+						</xsl:call-template>
+					<!-- PARENT OBX 3 -->
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="$parentOrder/OBR"/>
+							<xsl:with-param name="orderNotes" select="$parentOrder/NTE"/>
+							<xsl:with-param name="results" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]"/>
+							<xsl:with-param name="specimen" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
+							<xsl:with-param name="childOrder" select="$childOrder2"/>
+							<xsl:with-param name="childResults" select="$childOrder2/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+						</xsl:call-template>
+
+				</xsl:when>
+				<xsl:when test="util:isParentChild_Hepatitis_TestCase($messageID) = fn:true()">
+					<xsl:for-each select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION">
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="OBR"/>
+							<xsl:with-param name="orderNotes" select="NTE"/>
+							<xsl:with-param name="results" select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+							<xsl:with-param name="specimen" select="(ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN/SPM)[1]"/>
+						</xsl:call-template>
+					</xsl:for-each>
+				
+			</xsl:when>
+				<xsl:otherwise>
+					<xsl:for-each select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION">
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="OBR"/>
+							<xsl:with-param name="orderNotes" select="NTE"/>
+							<xsl:with-param name="results" select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+							<xsl:with-param name="specimen" select="(ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN/SPM)[1]"/>
+						</xsl:call-template>
+					</xsl:for-each>
+				</xsl:otherwise>
+			</xsl:choose>
 			<br/>
 			<!--Performing Organization Information – Display Verification-->
 			<xsl:call-template name="performingOrganizationNameAdd-DV">
@@ -176,20 +218,19 @@
 					<xsl:variable name="childOrder1" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[2]"/>
 					<!-- Child ORDER 2 -->
 					<xsl:variable name="childOrder2" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[3]"/>
-				
 					<!-- Order Information (cont’d) Parent Information - Incorporate Verification -->
 					<xsl:call-template name="orderInfocontd-IV">
 						<xsl:with-param name="messageID" select="$messageID"/>
 						<xsl:with-param name="obrSegment" select="$parentOrder/OBR"/>
 					</xsl:call-template>
-	
-					<h4 align="center">PARENT - <xsl:value-of select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]/OBX/OBX.1"/></h4>
+					<h4 align="center">PARENT - <xsl:value-of select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]/OBX/OBX.1"/>
+					</h4>
 					<!-- Result Information - Incorporate Verification PARENT-1 -->
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]"/>
 					</xsl:call-template>
-					
-					<h4 align="center">PARENT - <xsl:value-of select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]/OBX/OBX.1"/></h4>
+					<h4 align="center">PARENT - <xsl:value-of select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]/OBX/OBX.1"/>
+					</h4>
 					<!-- Result Information - Incorporate Verification PARENT-2 -->
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]"/>
@@ -200,37 +241,40 @@
 						<xsl:with-param name="messageID" select="$messageID"/>
 					</xsl:call-template>
 					<!-- Result Information - Incorporate Verification CHILD-1 -->
-					<h4 align="center">CHILD - <xsl:value-of select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]/OBX/OBX.1"/></h4>
+					<h4 align="center">CHILD - <xsl:value-of select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]/OBX/OBX.1"/>
+					</h4>
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]"/>
 					</xsl:call-template>
 					<!-- Result Information - Incorporate Verification CHILD-2 -->
-					<h4 align="center">CHILD - <xsl:value-of select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]/OBX/OBX.1"/></h4>
+					<h4 align="center">CHILD - <xsl:value-of select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]/OBX/OBX.1"/>
+					</h4>
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]"/>
 					</xsl:call-template>
 					<!-- Result Information - Incorporate Verification CHILD-3 -->
-					<h4 align="center">CHILD - <xsl:value-of select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]/OBX/OBX.1"/></h4>
+					<h4 align="center">CHILD - <xsl:value-of select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]/OBX/OBX.1"/>
+					</h4>
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]"/>
 					</xsl:call-template>
-
-					<h4 align="center">PARENT - <xsl:value-of select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]/OBX/OBX.1"/></h4>
+					<h4 align="center">PARENT - <xsl:value-of select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]/OBX/OBX.1"/>
+					</h4>
 					<!-- Result Information - Incorporate Verification PARENT-3 -->
-						<xsl:call-template name="resultInfo-Generic-IV">
-							<xsl:with-param name="observationGroups" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]"/>
+					<xsl:call-template name="resultInfo-Generic-IV">
+						<xsl:with-param name="observationGroups" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]"/>
 					</xsl:call-template>
 					<!-- Order Information (cont’d) Child Information - Incorporate Verification -->
 					<xsl:call-template name="orderInfocontd_child-IV">
 						<xsl:with-param name="obrSegment" select="$childOrder2/OBR"/>
 						<xsl:with-param name="messageID" select="$messageID"/>
-					</xsl:call-template>					
+					</xsl:call-template>
 					<!-- Result Information - Incorporate Verification CHILD-1 -->
-					<h4 align="center">CHILD - <xsl:value-of select="$childOrder2/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]/OBX/OBX.1"/></h4>
+					<h4 align="center">CHILD - <xsl:value-of select="$childOrder2/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]/OBX/OBX.1"/>
+					</h4>
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$childOrder2/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]"/>
 					</xsl:call-template>
-					
 				</xsl:when>
 				<!-- Hepatitis Parent/Child -->
 				<xsl:when test="util:isParentChild_Hepatitis_TestCase($messageID) = fn:true()">
@@ -238,7 +282,6 @@
 					<xsl:variable name="parentOrder" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]"/>
 					<!-- Child ORDER 1 -->
 					<xsl:variable name="childOrder" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[2]"/>
-
 					<!-- Order Information (cont’d) Parent Information - Incorporate Verification -->
 					<xsl:call-template name="orderInfocontd-IV">
 						<xsl:with-param name="messageID" select="$messageID"/>
@@ -248,12 +291,10 @@
 					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[not(fn:position() = 9)]"/>
 					</xsl:call-template>
-					
 					<h4 align="center">PARENT INFORMATION</h4>
-						<xsl:call-template name="resultInfo-Generic-IV">
+					<xsl:call-template name="resultInfo-Generic-IV">
 						<xsl:with-param name="observationGroups" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[9]"/>
 					</xsl:call-template>
-
 					<!-- CHILD INFORMATION-->
 					<h4 align="center">CHILD INFORMATION</h4>
 					<!-- Order Information (cont’d) Child Information - Incorporate Verification -->
@@ -270,41 +311,38 @@
 				<xsl:otherwise>
 					<xsl:for-each select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION">
 						<!--Generic : Order Information (cont’d) - Incorporate Verification-->
-							<xsl:call-template name="orderInfocontd-IV">
-								<xsl:with-param name="messageID" select="$messageID"/>
-								<xsl:with-param name="obrSegment" select="OBR[1]"/>
-							</xsl:call-template>
-							<br/>
+						<xsl:call-template name="orderInfocontd-IV">
+							<xsl:with-param name="messageID" select="$messageID"/>
+							<xsl:with-param name="obrSegment" select="OBR[1]"/>
+						</xsl:call-template>
+						<br/>
 						<!--Generic : Result Information - Incorporate Verification-->
-								<xsl:call-template name="resultInfo-Generic-IV">
-									<xsl:with-param name="observationGroups" select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
-								</xsl:call-template>
-								<br/>
-
+						<xsl:call-template name="resultInfo-Generic-IV">
+							<xsl:with-param name="observationGroups" select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+						</xsl:call-template>
+						<br/>
 					</xsl:for-each>
-
 				</xsl:otherwise>
 			</xsl:choose>
 			<!--Specimen Information - Incorporate Verification-->
-				<xsl:call-template name="specimentInfo-IV">
-					<xsl:with-param name="spmSegment" select="(//SPM)[1]"/>
-				</xsl:call-template>
+			<xsl:call-template name="specimentInfo-IV">
+				<xsl:with-param name="spmSegment" select="(//SPM)[1]"/>
+			</xsl:call-template>
 			<br/>
-
-
 			<!-- Parent-Child test cases : Order Information (cont’d) Parent Information - Incorporate Verification-->
-<!--			<xsl:call-template name="orderInfocontd-IV">
+			<!--			<xsl:call-template name="orderInfocontd-IV">
 				<xsl:with-param name="er7XMLMessage" select="$er7XMLMessage"/>
 				<xsl:with-param name="messageID" select="$messageID"/>
 				<xsl:with-param name="obrSegment" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]/OBR[1]"/>
 			</xsl:call-template>
 			<br/>-->
-						
 			<!-- TODO switch based on test case and get rid of $groupedLabResults -->
-<!--			<xsl:for-each select="$groupedLabResults/lab-results/observations">
+			<!--			<xsl:for-each select="$groupedLabResults/lab-results/observations">
 				<br/>
 				<br/>
-				--><!--Result Information - Incorporate Verification--><!--
+				-->
+			<!--Result Information - Incorporate Verification-->
+			<!--
 				<xsl:call-template name="resultInfo-IV">
 					<xsl:with-param name="er7XMLMessage" select="$er7XMLMessage"/>
 					<xsl:with-param name="messageID" select="$messageID"/>
@@ -314,7 +352,7 @@
 			</xsl:for-each>
 			<br/>-->
 			<!--Specimen Information - Incorporate Verification-->
-	<!--		<xsl:call-template name="specimentInfo-IV">
+			<!--		<xsl:call-template name="specimentInfo-IV">
 				<xsl:with-param name="spmSegment" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
 			</xsl:call-template>
 			<br/>-->

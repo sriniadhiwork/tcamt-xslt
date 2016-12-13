@@ -31,7 +31,7 @@
 	<xsl:variable name="ACK" select="'ACK'"/>
 	<xsl:variable name="ORU_R01" select="'ORU_R01'"/>
 	<xsl:template xmlns:fo="http://www.w3.org/1999/XSL/Format" name="jurorAppearance">
-		<style type="text/css">
+        <style type="text/css">
             @media screen{
                 .jurorContainer fieldset{
                     font-size:100%;
@@ -171,7 +171,7 @@
                 height:20px;
             }
             }</style>
-		<script type="text/javascript">
+        <script type="text/javascript">
             
             
             function comment(){
@@ -202,7 +202,7 @@
             
             }
         </script>
-	</xsl:template>
+    </xsl:template>
 	<xsl:function name="util:parseText">
 		<xsl:param name="content"/>
 		<xsl:choose>
@@ -414,13 +414,15 @@
 				<xsl:call-template name="ng-tab-html"/>
 			</xsl:when>
 		</xsl:choose>
-		<!-- <xsl:result-document href="groupedLabResults.xml">
+		
+		
+					<!-- <xsl:result-document href="groupedLabResults.xml">
 							<groupedLabResults>
 					<xsl:copy-of select="$groupedLabResults"/>
 					</groupedLabResults>
 					</xsl:result-document>				-->
-	</xsl:template>
-	<xsl:template name="plain-html">
+					
+	</xsl:template><xsl:template name="plain-html">
 		<html>
 			<head>
 				<xsl:call-template name="jurorAppearance"/>
@@ -438,11 +440,9 @@
 		<xsl:copy-of select="util:start('jurorContainer')"/>
 		<xsl:variable name="full">
 			<xsl:call-template name="buildJurorDoc">
-				<!--				<xsl:with-param name="er7XMLMessage" select="/"/>
--->
-				<!--				<xsl:with-param name="groupedLabResults" select="$groupedLabResults"/>
--->
-			</xsl:call-template>
+<!--				<xsl:with-param name="er7XMLMessage" select="/"/>
+--><!--				<xsl:with-param name="groupedLabResults" select="$groupedLabResults"/>
+-->			</xsl:call-template>
 		</xsl:variable>
 		<xsl:if test="$output = 'ng-tab-html'">
 			<xsl:copy-of select="util:tabs('FULL', '', $full, '', '')"/>
@@ -596,23 +596,15 @@
 		</xsl:for-each>
 	</xsl:template>
 	<xsl:template name="labResults-DV">
-		<xsl:param name="orderGroup"/>
-		<xsl:param name="messageID"/>
+		<xsl:param name="order" as="node()"/>
+		<xsl:param name="orderNotes" as="node()*"/>
+		<xsl:param name="results" as="node()+"/>
+		<xsl:param name="specimen" as="node()?"/>
+		<xsl:param name="childOrder" as="node()?"/>
+		<xsl:param name="childResults" as="node()*"/>
+		
+		<!-- <xsl:param name="messageID"/> -->
 		<fieldset id="LabResults-DV">
-			<!--   <xsl:copy-of select="$groupedLabResults"/>-->
-			<xsl:for-each select="$orderGroup">
-				<!--				<xsl:variable name="pos" select="position()"/>
--->
-				<!--				<xsl:variable name="testName">
-					<xsl:choose>
-						<xsl:when test="(($messageID = 'LRI_5.0_2.1-GU_FRU' or $messageID = 'LRI_5.0_2.1-GU_FRN' or $messageID = 'LRI_5.0_2.1-NG_FRU' or $messageID = 'LRI_5.0_2.1-NG_FRN') and $pos = 2)">
-							<xsl:copy-of select="$er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[2]/*"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:copy-of select="$er7XMLMessage/ORU_R01/ORU_R01.PATIENT_RESULT/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]/*"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>-->
 				<table id="labResultsDisplay">
 					<thead>
 						<tr>
@@ -621,21 +613,21 @@
 						<tr>
 							<th width="15%">Test Performed:</th>
 							<xsl:choose>
-								<xsl:when test="exists(OBR/OBR.4/OBR.4.9)">
+								<xsl:when test="exists($order/OBR.4/OBR.4.9)">
 									<td colspan="9" width="75%" style="font-weight:bold; color:red">
-										<xsl:value-of select="OBR/OBR.4/OBR.4.9"/>
+										<xsl:value-of select="$order/OBR.4/OBR.4.9"/>
 									</td>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:choose>
-										<xsl:when test="exists(OBR/OBR.4/OBR.4.5)">
+										<xsl:when test="exists($order/OBR.4/OBR.4.5)">
 											<td colspan="9" width="75%" style="font-style:italic;font-weight:bold;">
-												<xsl:value-of select="OBR/OBR.4/OBR.4.5"/>
+												<xsl:value-of select="$order/OBR.4/OBR.4.5"/>
 											</td>
 										</xsl:when>
 										<xsl:otherwise>
 											<td colspan="9" width="75%" style="font-style:italic;font-weight:bold;">
-												<xsl:value-of select="OBR/OBR.4/OBR.4.2"/>
+												<xsl:value-of select="$order/OBR.4/OBR.4.2"/>
 											</td>
 										</xsl:otherwise>
 									</xsl:choose>
@@ -645,16 +637,16 @@
 						<tr>
 							<th width="15%">Test Report Date:</th>
 							<td colspan="9" width="75%" style="font-weight:normal;">
-								<xsl:value-of select="util:formatDateTime(OBR/OBR.22/OBR.22.1)"/>
+								<xsl:value-of select="util:formatDateTime($order/OBR.22/OBR.22.1)"/>
 							</td>
 						</tr>
 						<tr>
 							<th width="15%">Result Report Status</th>
 							<td colspan="9" width="75%" style="font-weight:normal;">
-								<xsl:value-of select="OBR/OBR.25"/>
+								<xsl:value-of select="$order/OBR.25"/>
 							</td>
 						</tr>
-						<xsl:for-each select="NTE">
+						<xsl:for-each select="$orderNotes">
 							<tr>
 								<th width="15%">Note:</th>
 								<td colspan="9" width="75%">
@@ -662,9 +654,6 @@
 								</td>
 							</tr>
 						</xsl:for-each>
-						<!-- <tr>
-                            <th colspan="10">Result Report Status</th>
-                        </tr> -->
 						<tr>
 							<td colspan="10" class="addSpace"/>
 						</tr>
@@ -678,12 +667,11 @@
 							<th width="10%">Date/Time of Observation</th>
 							<th width="10%">End Date/Time of Observation</th>
 							<th width="10%">Date/Time of Analysis</th>
-							<!-- <th width="15%"> Notes</th> -->
 							<th width="20%">Tester Comment</th>
 						</tr>
 					</thead>
 					<tbody>
-						<xsl:for-each select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION/OBX">
+						<xsl:for-each select="$results/OBX">
 							<xsl:variable name="OBX_5">
 								<xsl:choose>
 									<xsl:when test="OBX.2 = 'NM'">
@@ -731,30 +719,34 @@
 								</xsl:choose>
 							</xsl:variable>
 							<tr>
-								<xsl:copy-of select="util:displayCond(OBX.3/OBX.3.2, OBX.3/OBX.3.5, OBX.3/OBX.3.2)"/>
+								<xsl:copy-of select="util:displayCond(OBX.3/OBX.3.9, OBX.3/OBX.3.5, OBX.3/OBX.3.2)"/>
 								<xsl:copy-of select="$OBX_5"/>
 								<xsl:copy-of select="util:displayCond(OBX.6/OBX.6.9, OBX.6/OBX.6.5, OBX.6/OBX.6.2)"/>
 								<xsl:copy-of select="util:formatData(OBX.7, 'bold')"/>
 								<xsl:copy-of select="util:formatData(OBX.8, 'normal')"/>
 								<xsl:copy-of select="util:formatData(OBX.11, 'normal')"/>
-								<xsl:copy-of select="util:formatData(util:formatDateTime(../../OBR/OBR.7/OBR.7.1), 'normal')"/>
-								<xsl:copy-of select="util:formatData(util:formatDateTime(../../OBR/OBR.8/OBR.8.1), 'normal')"/>
+								<xsl:variable name="observationDateTime">
+									<xsl:choose>
+										<xsl:when test="OBX.14/OBX.14.1">
+											<xsl:value-of select="OBX.14/OBX.14.1"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:choose>
+												<xsl:when test="$order/OBR.7/OBR.7.1">
+													<xsl:value-of select="$order/OBR.7/OBR.7.1"/>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:if test="$specimen/SPM.17/SPM.17.1/SPM.17.1.1">
+														<xsl:value-of select="$specimen/SPM.17/SPM.17.1/SPM.17.1.1"/>
+													</xsl:if>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:otherwise>
+									</xsl:choose>								
+								</xsl:variable>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($observationDateTime), 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($order/OBR.8/OBR.8.1), 'normal')"/>
 								<xsl:copy-of select="util:formatData(util:formatDateTime(OBX.19/OBX.19.1), 'normal')"/>
-								<!-- <xsl:choose>
-                                   <xsl:when test="exists(following-sibling::NTE)">
-                                       <td>
-                                           <table style="width:100%; border:none">
-                                               <xsl:for-each select="following-sibling::NTE">
-                                                   <tr >
-                                                       <xsl:copy-of select="util:formatData(.,'normal')"/>  
-                                                   </tr>   </xsl:for-each>
-                                           </table>
-                                       </td> 
-                                   </xsl:when>
-                                   <xsl:otherwise>
-                                       <td class="noData"/>
-                                   </xsl:otherwise>
-                               </xsl:choose> -->
 								<xsl:call-template name="commentTemplate"/>
 							</tr>
 							<xsl:for-each select="following-sibling::NTE">
@@ -767,6 +759,80 @@
 								</tr>
 							</xsl:for-each>
 						</xsl:for-each>
+						
+						<!-- TODO insert child results here -->
+
+
+						<xsl:for-each select="$childResults/OBX">
+															<xsl:variable name="OBX_5">
+								<xsl:choose>
+									<xsl:when test="OBX.2 = 'NM'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'boldItalic')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'SN'">
+										<xsl:choose>
+											<xsl:when test="exists(OBX.5)">
+												<td>
+													<xsl:copy-of select="concat(concat('&lt;font color=&quot;red&quot;&gt;&lt;b&gt;', OBX.5/OBX.5.1, '&lt;/b&gt;&lt;/font&gt;'), ' ', concat('&lt;font color=&quot;black&quot;&gt;&lt;b&gt;&lt;i&gt;', OBX.5/OBX.5.2, '&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;'), ' ', concat('&lt;font color=&quot;red&quot;&gt;&lt;b&gt;', OBX.5/OBX.5.3, '&lt;/b&gt;&lt;/font&gt;'), ' ', concat('&lt;font color=&quot;black&quot;&gt;&lt;b&gt;&lt;i&gt;', OBX.5/OBX.5.4, '&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;'))"/>
+												</td>
+											</xsl:when>
+											<xsl:otherwise>
+												<td class="noData"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'FT'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'bold')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'ST'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'bold')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'TX'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'bold')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'DT'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'TS'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'TM'">
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'CWE'">
+										<xsl:copy-of select="util:displayCond(OBX.5/OBX.5.9, OBX.5/OBX.5.5, OBX.5/OBX.5.2)"/>
+									</xsl:when>
+									<xsl:when test="OBX.2 = 'ED'">
+										<td>PDF is created</td>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="util:formatData(OBX.5, 'normal')"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:variable>
+						<tr>
+								<xsl:copy-of select="util:displayCond(OBX.3/OBX.3.9, OBX.3/OBX.3.5, OBX.3/OBX.3.2)"/>
+								<xsl:copy-of select="$OBX_5"/>
+								<xsl:copy-of select="util:displayCond(OBX.6/OBX.6.9, OBX.6/OBX.6.5, OBX.6/OBX.6.2)"/>
+								<xsl:copy-of select="util:formatData(OBX.7, 'bold')"/>
+								<xsl:copy-of select="util:formatData(OBX.8, 'normal')"/>
+								<xsl:copy-of select="util:formatData(OBX.11, 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($childOrder/OBR.7/OBR.7.1), 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime($childOrder/OBR.8/OBR.8.1), 'normal')"/>
+								<xsl:copy-of select="util:formatData(util:formatDateTime(OBX.19/OBX.19.1), 'normal')"/>
+								<xsl:call-template name="commentTemplate"/>
+							</tr> 
+						<!-- <xsl:for-each select="following-sibling::NTE">
+							<tr>
+									<td>Note</td>
+									<td colspan="8">
+										<xsl:value-of select="util:parseText(NTE.3)"/>
+									</td>
+									<xsl:call-template name="commentTemplate"/>
+								</tr>
+							</xsl:for-each> -->
+						</xsl:for-each>
+						
 						<xsl:if test="OBX.2 = 'NM'">
 							<tr>
 								<td colspan="10">For all numeric Result values that are less than 1,
@@ -780,7 +846,6 @@
 						<br/>
 					</tbody>
 				</table>
-			</xsl:for-each>
 		</fieldset>
 	</xsl:template>
 	<xsl:template name="performingOrganizationNameAdd-DV">
@@ -984,11 +1049,9 @@
 		</fieldset>
 	</xsl:template>
 	<xsl:template name="orderInformation-DV">
-		<xsl:param name="orcSegment"/>
-		<!-- ORC Segment -->
+		<xsl:param name="orcSegment"/> <!-- ORC Segment -->
 		<fieldset id="OrderInfo-DV">
 			<xsl:for-each select="$orcSegment/..">
-				<xsl:message select="name(.)"/>
 				<table id="orderInformation">
 					<thead>
 						<tr>
@@ -1143,6 +1206,7 @@
 								<xsl:copy-of select="util:formatData($orcSegment/following-sibling::ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.TIMING_QTY[1]/TQ1/TQ1.9/TQ1.9.2, 'normal')"/>
 								<xsl:call-template name="commentTemplate"/>
 							</tr>
+
 						</xsl:if>
 					</tbody>
 				</table>
@@ -1151,7 +1215,6 @@
 	</xsl:template>
 	<xsl:template name="headerforIV">
 		<xsl:param name="title"/>
-		<xsl:message select="$title"/>
 		<thead>
 			<tr>
 				<th colspan="5">
@@ -1511,7 +1574,9 @@
 							<th/>
 						</tr>
 						<xsl:copy-of select="util:ID-text-format('OBR-22.1', 'Time', 'S-EQ', util:formatDateTime(OBR.22/OBR.22.1), '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-25', 'Time', 'S-TR-R', OBR.25, '20px', 'normal')"/>
+						
+						<xsl:copy-of select="util:ID-text-format('OBR-25', 'Result Status', 'S-TR-R', OBR.25, '0px', 'normal')"/>
+
 						<!-- <xsl:if test="exists(OBR.26)">
 							<tr>
 								<th> OBR-26 </th>
@@ -1673,141 +1738,140 @@
 				</table>
 			</fieldset>
 		</xsl:for-each>
-	</xsl:template>
-	<xsl:template name="orderInfocontd_child-IV">
+	</xsl:template><xsl:template name="orderInfocontd_child-IV">
 		<xsl:param name="obrSegment"/>
 		<xsl:param name="messageID"/>
-		<fieldset id="OrderInfo-IV">
-			<table id="orderInformation">
-				<xsl:call-template name="headerforIV">
-					<xsl:with-param name="title">Order Information (cont'd) Child Information - Incorporate Verification</xsl:with-param>
-				</xsl:call-template>
-				<tbody>
-					<!-- Only display ORC-3/OBR-3 for FRU -->
-					<xsl:if test="fn:ends-with($messageID,'_FRU')">
+			<fieldset id="OrderInfo-IV">
+				<table id="orderInformation">
+					<xsl:call-template name="headerforIV">
+						<xsl:with-param name="title">Order Information (cont'd) Child Information - Incorporate Verification</xsl:with-param>
+					</xsl:call-template>
+					<tbody>
+						<!-- Only display ORC-3/OBR-3 for FRU -->
+						<xsl:if test="fn:ends-with($messageID,'_FRU')">
+							<tr>
+								<th> ORC-3/OBR-3 </th>
+								<th>Filler Order Number</th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<xsl:copy-of select="util:ID-text-format('ORC-3.1/OBR-3.1', 'Entity Identifier', 'S-EX', $obrSegment/OBR.3/OBR.3.1, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-3.2/OBR-3.2', 'Namespace ID', 'S-EX-A', $obrSegment/OBR.3/OBR.3.2, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-3.3/OBR-3.3', 'Universal ID', 'S-EX-A', $obrSegment/OBR.3/OBR.3.3, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-3.4/OBR-3.4', 'Universal ID Type', 'S-EX-A', $obrSegment/OBR.3/OBR.3.4, '20px', 'normal')"/>
+						</xsl:if>
 						<tr>
-							<th> ORC-3/OBR-3 </th>
-							<th>Filler Order Number</th>
+							<th> OBR-4 </th>
+							<th>Universal Service Identifier (Note 1)</th>
 							<th/>
 							<th/>
 							<th/>
 						</tr>
-						<xsl:copy-of select="util:ID-text-format('ORC-3.1/OBR-3.1', 'Entity Identifier', 'S-EX', $obrSegment/OBR.3/OBR.3.1, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-3.2/OBR-3.2', 'Namespace ID', 'S-EX-A', $obrSegment/OBR.3/OBR.3.2, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-3.3/OBR-3.3', 'Universal ID', 'S-EX-A', $obrSegment/OBR.3/OBR.3.3, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-3.4/OBR-3.4', 'Universal ID Type', 'S-EX-A', $obrSegment/OBR.3/OBR.3.4, '20px', 'normal')"/>
-					</xsl:if>
-					<tr>
-						<th> OBR-4 </th>
-						<th>Universal Service Identifier (Note 1)</th>
-						<th/>
-						<th/>
-						<th/>
-					</tr>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.1', 'Identifier', 'S-TR-R', $obrSegment/OBR.4/OBR.4.1, '20px', 'normal')"/>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.2', 'Text', 'S-EX-A', $obrSegment/OBR.4/OBR.4.2, '20px', 'normal')"/>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.3', 'Name of the Coding System', 'S-RC', $obrSegment/OBR.4/OBR.4.3, '20px', 'normal')"/>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.4', 'Alternate Identifier', 'S-TR-R', $obrSegment/OBR.4/OBR.4.4, '20px', 'normal')"/>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.5', 'Alternate Text', 'S-EX-A', $obrSegment/OBR.4/OBR.4.5, '20px', 'normal')"/>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.6', 'Name of Alternate Coding System', 'S-RC', $obrSegment/OBR.4/OBR.4.6, '20px', 'normal')"/>
-					<xsl:copy-of select="util:ID-text-format('OBR-4.9', 'Original Text', 'S-EX', $obrSegment/OBR.4/OBR.4.9, '20px', 'normal')"/>
-					<xsl:if test="exists($obrSegment/OBR.26)">
+						<xsl:copy-of select="util:ID-text-format('OBR-4.1', 'Identifier', 'S-TR-R', $obrSegment/OBR.4/OBR.4.1, '20px', 'normal')"/>
+						<xsl:copy-of select="util:ID-text-format('OBR-4.2', 'Text', 'S-EX-A', $obrSegment/OBR.4/OBR.4.2, '20px', 'normal')"/>
+						<xsl:copy-of select="util:ID-text-format('OBR-4.3', 'Name of the Coding System', 'S-RC', $obrSegment/OBR.4/OBR.4.3, '20px', 'normal')"/>
+						<xsl:copy-of select="util:ID-text-format('OBR-4.4', 'Alternate Identifier', 'S-TR-R', $obrSegment/OBR.4/OBR.4.4, '20px', 'normal')"/>
+						<xsl:copy-of select="util:ID-text-format('OBR-4.5', 'Alternate Text', 'S-EX-A', $obrSegment/OBR.4/OBR.4.5, '20px', 'normal')"/>
+						<xsl:copy-of select="util:ID-text-format('OBR-4.6', 'Name of Alternate Coding System', 'S-RC', $obrSegment/OBR.4/OBR.4.6, '20px', 'normal')"/>
+						<xsl:copy-of select="util:ID-text-format('OBR-4.9', 'Original Text', 'S-EX', $obrSegment/OBR.4/OBR.4.9, '20px', 'normal')"/>
+						<xsl:if test="exists($obrSegment/OBR.26)">
+							<tr>
+								<th> OBR-26 </th>
+								<th>Parent Result</th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<tr>
+								<th style="text-indent:20px"> OBR-26.1 </th>
+								<th>Parent Observation Identifier (Note 2)</th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.1.1', 'Identifier', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.1, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.1.2', 'Text', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.2, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.1.3', 'Name of the Coding System', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.3, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.1.4', 'Alternate Identifier', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.4, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.1.5', 'Alternate Text', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.5, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.1.6', 'Name of Alternate Coding System', 'S-EX-A', OBR.26/OBR.26.1/OBR.26.1.6, '30px', 'normal')"/>
+							<tr>
+								<th style="text-indent:20px"> OBR-26.2 </th>
+								<th>Parent Observation Sub-Identifier</th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.2.2', 'Group', 'S-EX-A', $obrSegment/OBR.26/OBR.26.2/OBR.26.2.2, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.2.3', 'Sequence', 'S-EX-A', $obrSegment/OBR.26/OBR.26.2/OBR.26.2.3, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-26.2.4', 'Identifier', 'S-EX-A', $obrSegment/OBR.26/OBR.26.2/OBR.26.2.4, '30px', 'normal')"/>
+						</xsl:if>
+						<xsl:if test="exists($obrSegment/OBR.29)">
+							<tr>
+								<th> OBR-29 </th>
+								<th>Parent (Note 2)</th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<tr>
+								<th style="text-indent:20px"> OBR-29.1 </th>
+								<th>Placer Assigned Identifier </th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.1.1', 'Entity Identifier', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.1, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.1.2', 'Namespace ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.2, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.1.3', 'Universal ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.3, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.1.4', 'Universal ID Type', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.4, '30px', 'normal')"/>
+							<tr>
+								<th style="text-indent:20px"> OBR-29.2 </th>
+								<th>Filler Assigned Identifier </th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.2.1', 'Entity Identifier', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.1, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.2.2', 'Namespace ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.2, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.2.3', 'Universal ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.3, '30px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('OBR-29.2.4', 'Universal ID Type', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.4, '30px', 'normal')"/>
+						</xsl:if>
+						<xsl:if test="exists($obrSegment/OBR.50)">
+							<tr>
+								<th> ORC-31/OBR-50 </th>
+								<th>Parent Universal Service Identifier</th>
+								<th/>
+								<th/>
+								<th/>
+							</tr>
+                            <xsl:copy-of select="util:ID-text-format('ORC-31.1/OBR-50.1', 'Identifier', 'S-EX-A', $obrSegment/OBR.50/OBR.50.1, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-31.2/OBR-50.2', 'Text', 'S-EX-A', $obrSegment/OBR.50/OBR.50.2, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-31.3/OBR-50.3', 'Name of Coding System', 'S-EX-A', $obrSegment/OBR.50/OBR.50.3, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-31.4/OBR-50.4', 'Alternate Identifier', 'S-EX-A', $obrSegment/OBR.50/OBR.50.4, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-31.5/OBR-50.5', 'Alternate Text', 'S-EX-A', $obrSegment/OBR.50/OBR.50.5, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-31.6/OBR-50.6', 'Name of Alternate Coding System', 'S-EX-A', $obrSegment/OBR.50/OBR.50.6, '20px', 'normal')"/>
+							<xsl:copy-of select="util:ID-text-format('ORC-31.9/OBR-50.9', 'Original Text', 'S-EX-A', $obrSegment/OBR.50/OBR.50.7, '20px', 'normal')"/>
+						</xsl:if>
 						<tr>
-							<th> OBR-26 </th>
-							<th>Parent Result</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<tr>
-							<th style="text-indent:20px"> OBR-26.1 </th>
-							<th>Parent Observation Identifier (Note 2)</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.1.1', 'Identifier', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.1, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.1.2', 'Text', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.2, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.1.3', 'Name of the Coding System', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.3, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.1.4', 'Alternate Identifier', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.4, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.1.5', 'Alternate Text', 'S-EX-A', $obrSegment/OBR.26/OBR.26.1/OBR.26.1.5, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.1.6', 'Name of Alternate Coding System', 'S-EX-A', OBR.26/OBR.26.1/OBR.26.1.6, '30px', 'normal')"/>
-						<tr>
-							<th style="text-indent:20px"> OBR-26.2 </th>
-							<th>Parent Observation Sub-Identifier</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.2.2', 'Group', 'S-EX-A', $obrSegment/OBR.26/OBR.26.2/OBR.26.2.2, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.2.3', 'Sequence', 'S-EX-A', $obrSegment/OBR.26/OBR.26.2/OBR.26.2.3, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-26.2.4', 'Identifier', 'S-EX-A', $obrSegment/OBR.26/OBR.26.2/OBR.26.2.4, '30px', 'normal')"/>
-					</xsl:if>
-					<xsl:if test="exists($obrSegment/OBR.29)">
-						<tr>
-							<th> OBR-29 </th>
-							<th>Parent (Note 2)</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<tr>
-							<th style="text-indent:20px"> OBR-29.1 </th>
-							<th>Placer Assigned Identifier </th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.1.1', 'Entity Identifier', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.1, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.1.2', 'Namespace ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.2, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.1.3', 'Universal ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.3, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.1.4', 'Universal ID Type', 'S-EX-A', $obrSegment/OBR.29/OBR.29.1/OBR.29.1.4, '30px', 'normal')"/>
-						<tr>
-							<th style="text-indent:20px"> OBR-29.2 </th>
-							<th>Filler Assigned Identifier </th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.2.1', 'Entity Identifier', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.1, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.2.2', 'Namespace ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.2, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.2.3', 'Universal ID', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.3, '30px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBR-29.2.4', 'Universal ID Type', 'S-EX-A', $obrSegment/OBR.29/OBR.29.2/OBR.29.2.4, '30px', 'normal')"/>
-					</xsl:if>
-					<xsl:if test="exists($obrSegment/OBR.50)">
-						<tr>
-							<th> ORC-31/OBR-50 </th>
-							<th>Parent Universal Service Identifier</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.1/OBR-50.1', 'Identifier', 'S-EX-A', $obrSegment/OBR.50/OBR.50.1, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.2/OBR-50.2', 'Text', 'S-EX-A', $obrSegment/OBR.50/OBR.50.2, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.3/OBR-50.3', 'Name of Coding System', 'S-EX-A', $obrSegment/OBR.50/OBR.50.3, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.4/OBR-50.4', 'Alternate Identifier', 'S-EX-A', $obrSegment/OBR.50/OBR.50.4, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.5/OBR-50.5', 'Alternate Text', 'S-EX-A', $obrSegment/OBR.50/OBR.50.5, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.6/OBR-50.6', 'Name of Alternate Coding System', 'S-EX-A', $obrSegment/OBR.50/OBR.50.6, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('ORC-31.9/OBR-50.9', 'Original Text', 'S-EX-A', $obrSegment/OBR.50/OBR.50.7, '20px', 'normal')"/>
-					</xsl:if>
-					<tr>
-						<td colspan="5">
-							<b>Note 1</b> -Store the <u>Identifier</u> and the
+							<td colspan="5">
+								<b>Note 1</b> -Store the <u>Identifier</u> and the
                                     <u>Text</u> for each populated triplet using the S-EX-A, S-TR-R,
                                 or S-EX store requirement as indicated. If <u>Original Text</u>
                                 field is populated, MUST store the exact data received.</td>
-					</tr>
-					<tr>
-						<td colspan="5">
-							<b>Note 2 </b>- The HIT Module must display the
+						</tr>
+						<tr>
+							<td colspan="5">
+								<b>Note 2 </b>- The HIT Module must display the
                                 relationship to the parent, but is not required to store the actual
                                 received data when the association to a specific result is achieved,
                                 otherwise use S-EX to save the information.</td>
-					</tr>
-				</tbody>
-			</table>
-		</fieldset>
-		<br/>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+			<br/>
 	</xsl:template>
 	<xsl:template name="performingOrderInfo-IV">
 		<xsl:param name="obxSegment"/>
@@ -1912,163 +1976,165 @@
 		<xsl:param name="observationGroups"/>
 		<fieldset id="ResultInfo-IV">
 			<xsl:for-each select="$observationGroups/OBX">
-				<xsl:variable name="OBX_5">
-					<xsl:choose>
-						<xsl:when test="OBX.2 = 'NM'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'SN'">
-							<tr>
-								<th>OBX-5</th>
-								<th>Observation Value</th>
-								<th/>
-								<th/>
-								<th/>
-							</tr>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.1', 'Comparator', 'S-EX', OBX.5/OBX.5.1, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.2', 'Num1', 'S-EQ', OBX.5/OBX.5.2, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.3', 'Separator/Suffix', 'S-EX', OBX.5/OBX.5.3, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.4', 'Num2', 'S-EQ', OBX.5/OBX.5.4, '20px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'FT'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EX', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'ST'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EX', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'TX'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EX', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'DT'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'TS'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'TM'">
-							<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'CWE'">
-							<tr>
-								<th>OBX-5</th>
-								<th>Observation Value</th>
-								<th/>
-								<th/>
-								<th/>
-							</tr>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.1', 'Identifier', 'S-TR-R', OBX.5/OBX.5.1, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.2', 'Text', 'S-EX-A', OBX.5/OBX.5.2, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.3', 'Name of the Coding System', 'S-RC', OBX.5/OBX.5.3, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.4', 'Alternate Identifier', 'S-TR-R', OBX.5/OBX.5.4, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.5', 'Alternate Text', 'S-EX-A', OBX.5/OBX.5.5, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.6', 'Name of Alternate Coding System', 'S-RC', OBX.5/OBX.5.6, '20px', 'normal')"/>
-							<xsl:copy-of select="util:ID-text-format('OBX-5.9', 'Original Text', 'S-EX', OBX.5/OBX.5.9, '20px', 'normal')"/>
-						</xsl:when>
-						<xsl:when test="OBX.2 = 'ED'">
-							<xsl:copy-of select="'PDF is stored'"/>
-						</xsl:when>
-					</xsl:choose>
-				</xsl:variable>
-				<table id="identifierInformation">
-					<xsl:call-template name="headerforIV">
-						<xsl:with-param name="title">Result Information - Incorporate Verification</xsl:with-param>
-					</xsl:call-template>
-					<tbody>
-						<tr>
-							<th>OBX-3</th>
-							<th>Observation Identifier (Note 1)</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.1', 'Identifier', 'S-TR-R', OBX.3/OBX.3.1, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.2', 'Text', 'S-EX-A', OBX.3/OBX.3.2, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.3', 'Name of the Coding System', 'S-RC', OBX.3/OBX.3.3, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.4', 'Alternate Identifier', 'S-TR-R', OBX.3/OBX.3.4, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.5', 'Alternate Text', 'S-EX-A', OBX.3/OBX.3.5, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.6', 'Name of Alternate Coding System', 'S-RC', OBX.3/OBX.3.6, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-3.9', 'Original Text', 'S-EX', OBX.3/OBX.3.9, '20px', 'normal')"/>
-						<xsl:copy-of select="$OBX_5"/>
-						<tr>
-							<th>OBX-6</th>
-							<th>Units (Note 2)</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.1', 'Identifier', 'S-TR-R', OBX.6/OBX.6.1, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.2', 'Text', 'S-TR-R', OBX.6/OBX.6.2, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.3', 'Name of the Coding System', 'S-RC', OBX.6/OBX.6.3, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.4', 'Alternate Identifier', 'S-TR-R', OBX.6/OBX.6.4, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.5', 'Alternate Text', 'S-TR-R', OBX.6/OBX.6.5, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.6', 'Name of Alternate Coding System', 'S-RC', OBX.6/OBX.6.6, '20px', 'normal')"/>
-						<xsl:copy-of select="util:ID-text-format('OBX-6.9', 'Original Text', 'S-EX', OBX.6/OBX.6.9, '20px', 'normal')"/>
-						<tr>
-							<th>OBX-7</th>
-							<th>Reference Range</th>
-							<td>S-EX</td>
-							<xsl:copy-of select="util:formatData(OBX.7, 'normal')"/>
-							<xsl:call-template name="commentTemplate"/>
-						</tr>
-						<tr>
-							<th>OBX-8</th>
-							<th>Abnormal Flags</th>
-							<td>S-TR-R</td>
-							<xsl:copy-of select="util:formatData(OBX.8, 'normal')"/>
-							<xsl:call-template name="commentTemplate"/>
-						</tr>
-						<tr>
-							<th>OBX-11</th>
-							<th>Observation Result Status</th>
-							<td>S-TR-R</td>
-							<xsl:copy-of select="util:formatData(OBX.11, 'normal')"/>
-							<xsl:call-template name="commentTemplate"/>
-						</tr>
-						<tr>
-							<th>OBX-14</th>
-							<th>Date/Time of the Observation</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBX-14.1', 'Time', 'S-EQ', util:formatDateTime(OBX.14/OBX.14.1), '20px', 'normal')"/>
-						<tr>
-							<th>OBX-19</th>
-							<th>Date/Time of the Analysis</th>
-							<th/>
-							<th/>
-							<th/>
-						</tr>
-						<xsl:copy-of select="util:ID-text-format('OBX-19.1', 'Time', 'S-EQ', util:formatDateTime(OBX.19/OBX.19.1), '20px', 'normal')"/>
-						<tr>
-							<td colspan="5">
-								<b>Note 1</b> - Store the <u>Identifier</u> and the <u>Text</u> for
+						<xsl:variable name="OBX_5">
+							<xsl:choose>
+								<xsl:when test="OBX.2 = 'NM'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'SN'">
+									<tr>
+										<th>OBX-5</th>
+										<th>Observation Value</th>
+										<th/>
+										<th/>
+										<th/>
+									</tr>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.1', 'Comparator', 'S-EX', OBX.5/OBX.5.1, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.2', 'Num1', 'S-EQ', OBX.5/OBX.5.2, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.3', 'Separator/Suffix', 'S-EX', OBX.5/OBX.5.3, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.4', 'Num2', 'S-EQ', OBX.5/OBX.5.4, '20px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'FT'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EX', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'ST'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EX', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'TX'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EX', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'DT'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'TS'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'TM'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'S-EQ', OBX.5, '0px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'CWE'">
+									<tr>
+										<th>OBX-5</th>
+										<th>Observation Value</th>
+										<th/>
+										<th/>
+										<th/>
+									</tr>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.1', 'Identifier', 'S-TR-R', OBX.5/OBX.5.1, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.2', 'Text', 'S-EX-A', OBX.5/OBX.5.2, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.3', 'Name of the Coding System', 'S-RC', OBX.5/OBX.5.3, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.4', 'Alternate Identifier', 'S-TR-R', OBX.5/OBX.5.4, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.5', 'Alternate Text', 'S-EX-A', OBX.5/OBX.5.5, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.6', 'Name of Alternate Coding System', 'S-RC', OBX.5/OBX.5.6, '20px', 'normal')"/>
+									<xsl:copy-of select="util:ID-text-format('OBX-5.9', 'Original Text', 'S-EX', OBX.5/OBX.5.9, '20px', 'normal')"/>
+								</xsl:when>
+								<xsl:when test="OBX.2 = 'ED'">
+									<xsl:copy-of select="util:ID-text-format('OBX-5', 'Observation Value', 'PDF is stored', '', '0px', 'normal')"/>
+								</xsl:when>
+							</xsl:choose>
+						</xsl:variable>
+
+						<table id="identifierInformation">
+							<xsl:call-template name="headerforIV">
+								<xsl:with-param name="title">Result Information - Incorporate Verification</xsl:with-param>
+							</xsl:call-template>
+							<tbody>
+								<tr>
+									<th>OBX-3</th>
+									<th>Observation Identifier (Note 1)</th>
+									<th/>
+									<th/>
+									<th/>
+								</tr>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.1', 'Identifier', 'S-TR-R', OBX.3/OBX.3.1, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.2', 'Text', 'S-EX-A', OBX.3/OBX.3.2, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.3', 'Name of the Coding System', 'S-RC', OBX.3/OBX.3.3, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.4', 'Alternate Identifier', 'S-TR-R', OBX.3/OBX.3.4, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.5', 'Alternate Text', 'S-EX-A', OBX.3/OBX.3.5, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.6', 'Name of Alternate Coding System', 'S-RC', OBX.3/OBX.3.6, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-3.9', 'Original Text', 'S-EX', OBX.3/OBX.3.9, '20px', 'normal')"/>
+								
+								<xsl:copy-of select="$OBX_5"/>
+								<tr>
+									<th>OBX-6</th>
+									<th>Units (Note 2)</th>
+									<th/>
+									<th/>
+									<th/>
+								</tr>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.1', 'Identifier', 'S-TR-R', OBX.6/OBX.6.1, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.2', 'Text', 'S-TR-R', OBX.6/OBX.6.2, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.3', 'Name of the Coding System', 'S-RC', OBX.6/OBX.6.3, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.4', 'Alternate Identifier', 'S-TR-R', OBX.6/OBX.6.4, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.5', 'Alternate Text', 'S-TR-R', OBX.6/OBX.6.5, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.6', 'Name of Alternate Coding System', 'S-RC', OBX.6/OBX.6.6, '20px', 'normal')"/>
+								<xsl:copy-of select="util:ID-text-format('OBX-6.9', 'Original Text', 'S-EX', OBX.6/OBX.6.9, '20px', 'normal')"/>
+								<tr>
+									<th>OBX-7</th>
+									<th>Reference Range</th>
+									<td>S-EX</td>
+									<xsl:copy-of select="util:formatData(OBX.7, 'normal')"/>
+									<xsl:call-template name="commentTemplate"/>
+								</tr>
+								<tr>
+									<th>OBX-8</th>
+									<th>Abnormal Flags</th>
+									<td>S-TR-R</td>
+									<xsl:copy-of select="util:formatData(OBX.8, 'normal')"/>
+									<xsl:call-template name="commentTemplate"/>
+								</tr>
+								<tr>
+									<th>OBX-11</th>
+									<th>Observation Result Status</th>
+									<td>S-TR-R</td>
+									<xsl:copy-of select="util:formatData(OBX.11, 'normal')"/>
+									<xsl:call-template name="commentTemplate"/>
+								</tr>
+								<tr>
+									<th>OBX-14</th>
+									<th>Date/Time of the Observation</th>
+									<th/>
+									<th/>
+									<th/>
+								</tr>
+								<xsl:copy-of select="util:ID-text-format('OBX-14.1', 'Time', 'S-EQ', util:formatDateTime(OBX.14/OBX.14.1), '20px', 'normal')"/>
+								<tr>
+									<th>OBX-19</th>
+									<th>Date/Time of the Analysis</th>
+									<th/>
+									<th/>
+									<th/>
+								</tr>
+								<xsl:copy-of select="util:ID-text-format('OBX-19.1', 'Time', 'S-EQ', util:formatDateTime(OBX.19/OBX.19.1), '20px', 'normal')"/>
+								<tr>
+									<td colspan="5">
+										<b>Note 1</b> - Store the <u>Identifier</u> and the <u>Text</u> for
                                 each populated triplet using the S-EX-A, S-TR-R, or S-EX store
                                 requirement as indicated. If <u>Original Text</u> field is
                                 populated, MUST store the exact data received.</td>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<b>Note 2</b> - If both UOM triplets are populated, receiver may
+								</tr>
+								<tr>
+									<td colspan="5">
+										<b>Note 2</b> - If both UOM triplets are populated, receiver may
                                 choose to store the data received in either triplet; translations
                                 must result in equivalent UOM that do not require a change in the
                                 numeric result. </td>
-						</tr>
-					</tbody>
-				</table>
-				<xsl:if test="exists(following-sibling::NTE)">
-					<table id="note">
-						<xsl:call-template name="headerforIV">
-							<xsl:with-param name="title">Note - Incorporate Verification</xsl:with-param>
-						</xsl:call-template>
-						<tbody>
-							<xsl:for-each select="following-sibling::NTE">
-								<xsl:copy-of select="util:ID-text-format('NTE-3', 'Note', 'S-EX', util:parseText(NTE.3), '0px', 'normal')"/>
-							</xsl:for-each>
-						</tbody>
-					</table>
-				</xsl:if>
-				<br/>
+								</tr>
+							</tbody>
+						</table>
+						<xsl:if test="exists(following-sibling::NTE)">
+							<table id="note">
+								<xsl:call-template name="headerforIV">
+									<xsl:with-param name="title">Note - Incorporate Verification</xsl:with-param>
+								</xsl:call-template>
+								<tbody>
+									<xsl:for-each select="following-sibling::NTE">
+										<xsl:copy-of select="util:ID-text-format('NTE-3', 'Note', 'S-EX', util:parseText(NTE.3), '0px', 'normal')"/>
+									</xsl:for-each>
+								</tbody>
+							</table>
+						</xsl:if>
+						<br/>
 			</xsl:for-each>
 		</fieldset>
 	</xsl:template>
@@ -2181,6 +2247,7 @@
 							<th/>
 						</tr>
 						<xsl:copy-of select="util:ID-text-format('TQ1-8.1', 'Time', 'S-EQ', util:formatDateTime($timeSegment/TQ1.8/TQ1.8.1), '20px', 'normal')"/>
+						
 						<tr>
 							<th>TQ1-9</th>
 							<th>Priority</th>
@@ -2192,6 +2259,7 @@
 						<xsl:copy-of select="util:ID-text-format('TQ1-9.2', 'Text', 'S-EX-A', $timeSegment/TQ1.9/TQ1.9.2, '20px', 'normal')"/>
 						<xsl:copy-of select="util:ID-text-format('TQ1-9.3', 'Name of Coding System', 'S-RC', $timeSegment/TQ1.9/TQ1.9.3, '20px', 'normal')"/>
 						<xsl:copy-of select="util:ID-text-format('TQ1-9.9', 'Original Text', 'S-EX', $timeSegment/TQ1.9/TQ1.9.9, '20px', 'normal')"/>
+
 					</tbody>
 				</table>
 			</fieldset>
@@ -2366,8 +2434,7 @@
 				</tbody>
 			</table>
 		</fieldset>
-	</xsl:template>
-	<xsl:template name="printNode">
+	</xsl:template><xsl:template name="printNode">
 		<xsl:param name="node"/>
 		<xsl:message select="name(.)"/>
 		<xsl:for-each select="child::*">
@@ -2377,12 +2444,7 @@
 		</xsl:for-each>
 	</xsl:template>
 	<xsl:template name="buildJurorDoc">
-		<!--		<xsl:param name="er7XMLMessage"/>
--->
-		<!-- Caro : what is the difference between $messageID and $testCaseName ??? -->
 		<xsl:param name="messageID" select="$testCaseName"/>
-		<!--		<xsl:param name="groupedLabResults"/>
--->
 		<!--- message type is either ORU_R01 or ACK, based on the root tag -->
 		<xsl:variable name="message-type">
 			<xsl:choose>
@@ -2416,13 +2478,6 @@
                     ease-of-use by the Tester and does not indicate how the Health IT Module display
                     must be designed. </p>
 			</fieldset>
-			<!-- xsl:call-template name="DisplayVerification">
-            <xsl:with-param name="er7MsgId" />
-        </xsl:call-template>
-            
-        <xsl:call-template name="IncorporateVerification">
-            <xsl:with-param name="er7MsgId" />
-        </xsl:call-template -->
 			<h2>Display Verification</h2>
 			<fieldset>
 				<h4 align="left">Legend for Display Requirement</h4>
@@ -2444,10 +2499,62 @@
 			</xsl:call-template>
 			<br/>
 			<!--Lab Results – Display Verification -->
-			<xsl:call-template name="labResults-DV">
-				<xsl:with-param name="orderGroup" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION"/>
-				<xsl:with-param name="messageID" select="$messageID"/>
-			</xsl:call-template>
+			<!-- TODO : different for C and S and maybe hepatitis -->
+			<xsl:choose>
+				<xsl:when test="util:isParentChild_CS_TestCase($messageID) = fn:true()">
+				<xsl:variable name="parentOrder" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[1]"/>
+				<xsl:variable name="childOrder1" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[2]"/>
+				<xsl:variable name="childOrder2" select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION[3]"/>
+
+					<!-- PARENT OBX 1 -->
+					<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="$parentOrder/OBR"/>
+							<xsl:with-param name="orderNotes" select="$parentOrder/NTE"/>
+							<xsl:with-param name="results" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[1]"/>
+							<xsl:with-param name="specimen" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
+						</xsl:call-template>
+					<!-- PARENT OBX 2 -->
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="$parentOrder/OBR"/>
+							<xsl:with-param name="orderNotes" select="$parentOrder/NTE"/>
+							<xsl:with-param name="results" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[2]"/>
+							<xsl:with-param name="specimen" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
+							<xsl:with-param name="childOrder" select="$childOrder1/OBR"/>
+							<xsl:with-param name="childResults" select="$childOrder1/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+						</xsl:call-template>
+					<!-- PARENT OBX 3 -->
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="$parentOrder/OBR"/>
+							<xsl:with-param name="orderNotes" select="$parentOrder/NTE"/>
+							<xsl:with-param name="results" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION[3]"/>
+							<xsl:with-param name="specimen" select="$parentOrder/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN[1]/SPM"/>
+							<xsl:with-param name="childOrder" select="$childOrder2"/>
+							<xsl:with-param name="childResults" select="$childOrder2/ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+						</xsl:call-template>
+
+				</xsl:when>
+				<xsl:when test="util:isParentChild_Hepatitis_TestCase($messageID) = fn:true()">
+					<xsl:for-each select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION">
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="OBR"/>
+							<xsl:with-param name="orderNotes" select="NTE"/>
+							<xsl:with-param name="results" select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+							<xsl:with-param name="specimen" select="(ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN/SPM)[1]"/>
+						</xsl:call-template>
+					</xsl:for-each>
+				
+			</xsl:when>
+				<xsl:otherwise>
+					<xsl:for-each select="//ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION">
+						<xsl:call-template name="labResults-DV">
+							<xsl:with-param name="order" select="OBR"/>
+							<xsl:with-param name="orderNotes" select="NTE"/>
+							<xsl:with-param name="results" select="ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.OBSERVATION"/>
+							<xsl:with-param name="specimen" select="(ORU_R01.PATIENT_RESULT.ORDER_OBSERVATION.SPECIMEN/SPM)[1]"/>
+						</xsl:call-template>
+					</xsl:for-each>
+				</xsl:otherwise>
+			</xsl:choose>
 			<br/>
 			<!--Performing Organization Information – Display Verification-->
 			<xsl:call-template name="performingOrganizationNameAdd-DV">
