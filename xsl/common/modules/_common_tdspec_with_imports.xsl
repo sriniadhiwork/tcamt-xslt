@@ -79,7 +79,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:template name="main">
-		<!-- - - - programatically determine if it is a VXU or a QBP - -->
+		<xsl:value-of select="util:start(name(.), 'test-data-specs-main')"/>
 		<xsl:if test="$output = 'ng-tab-html'">
 			<xsl:variable name="full">
 				<xsl:call-template name="_main"/>
