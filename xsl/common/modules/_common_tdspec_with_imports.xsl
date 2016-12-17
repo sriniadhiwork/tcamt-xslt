@@ -4,10 +4,9 @@
 	xmlns:util="http://hl7.nist.gov/data-specs/util" xmlns="http://www.w3.org/1999/xhtml"
 	exclude-result-prefixes="xs" version="2.0">
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
-	<!--xsl:param name="output" select="'json'" /-->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
 	<!-- <xsl:param name="output" select="'plain-html'"/> -->
-	<xsl:param name="output" select="'ng-tab-html'"/>
+	<xsl:param name="output" select="'plain-html'"/>
 	<xsl:variable name="version" select="'2.10'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -79,7 +78,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:template name="main">
-		<xsl:value-of select="util:start(name(.), 'test-data-specs-main')"/>
+		<!--<xsl:value-of select="util:start(name(.), 'test-data-specs-main')"/>-->
 		<xsl:if test="$output = 'ng-tab-html'">
 			<xsl:variable name="full">
 				<xsl:call-template name="_main"/>
@@ -156,10 +155,10 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//DG1"/>
 			</xsl:call-template>
-			<xsl:call-template name="display-repeating-segment-in-accordion">
+<!--			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//OBX"/>
 			</xsl:call-template>
-			<xsl:call-template name="display-repeating-segment-in-accordion">
+-->			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//SPM"/>
 			</xsl:call-template>
 			<!-- - - - Call with mode - - -  
@@ -535,7 +534,7 @@
 			select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
 		<xsl:value-of
-			select="util:element('Provider Name', concat(util:format-with-space(.//ORC.12.3), .//ORC.12.2), $ind1)"/>
+			select="util:element('Provider Name', concat(util:format-with-space(//ORC.12.3), //ORC.12.2), $ind1)"/>
 
 		<xsl:value-of select="util:element('Provider NPI identifier', .//ORC.12.1, $ind1)"/>
 
