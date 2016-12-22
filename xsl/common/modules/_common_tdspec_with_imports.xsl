@@ -534,7 +534,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<!--		<xsl:value-of
+		<xsl:value-of
 			select="util:element('Provider Name', concat(util:format-with-space(.//ORC.12.3), .//ORC.12.2), $ind1)"/>
 
 		<xsl:value-of select="util:element('Provider NPI identifier', .//ORC.12.1, $ind1)"/>
@@ -561,7 +561,7 @@
 			select=".//ORC.23.3 = 'X.400' or .//ORC.23.3 = 'Internet'"/>
 		<xsl:value-of
 			select="util:element('Ordering Facility email address', util:IfThenElse($ofe, .//ORC.23.4, ''), $ind1)"/>
-			-->
+		
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<!-- General order information subtable -->
