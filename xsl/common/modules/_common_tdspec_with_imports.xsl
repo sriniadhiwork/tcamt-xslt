@@ -604,12 +604,10 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Timing/Quantity Information', 'Timing/Quantity Information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<!--
 		<xsl:value-of select="util:element('Start Date/time', util:format-time(..//TQ1.7.1), $ind1)"/>
 		<xsl:value-of select="util:element('End date/time', util:format-time(..//TQ1.8.1), $ind1)"/>
 		<xsl:value-of
-			select="util:chooseAmongThree('Priority', .//TQ1.9.9, .//TQ1.9.2, .//TQ1.1, $ind1)"/>
-		-->
+			select="util:chooseAmongThree('Priority', ..//TQ1.9.9, ..//TQ1.9.2, ..//TQ1.1, $ind1)"/>
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Order details subtable -->
