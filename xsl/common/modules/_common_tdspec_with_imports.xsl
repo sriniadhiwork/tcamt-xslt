@@ -140,6 +140,7 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ORC"/>
 			</xsl:call-template>
+			<!--
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//TQ1"/>
 			</xsl:call-template>
@@ -155,13 +156,14 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//DG1"/>
 			</xsl:call-template>
-			<!--			<xsl:call-template name="display-repeating-segment-in-accordion">
+			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//OBX"/>
 			</xsl:call-template>
--->
+
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//SPM"/>
 			</xsl:call-template>
+			-->
 			<!-- - - - Call with mode - - -  
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
