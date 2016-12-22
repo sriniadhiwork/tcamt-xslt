@@ -718,7 +718,6 @@
 				<xsl:value-of
 					select="util:title-no-tab('title', 'Observation Result', 'Observation Result', $ind2, false())"/>
 				<xsl:value-of select="util:elements($ind2)"/>
-				<!--
 				<xsl:choose>
 					<xsl:when test=".//OBX.3.3 = 'LN'">
 						<xsl:value-of
@@ -746,7 +745,7 @@
 				<xsl:choose>
 					<xsl:when test=".//OBX.2 = 'CWE'">
 						<xsl:value-of
-							select="util:chooseAmongThree('Observation Value', .//OBX.5.9, .//OBX.5.2, .//OBX.5.1, $ind1)"
+							select="util:chooseAmongThree('Observation Value', ..//OBX.5.9, ..//OBX.5.2, ..//OBX.5.1, $ind1)"
 						/>
 					</xsl:when>
 					<xsl:when test=".//OBX.2 = 'NM' or .//OBX.2 = 'DT'">
@@ -757,9 +756,8 @@
 					select="util:chooseAmongThree('Units', ..//OBX.6.9, ..//OBX.6.2, ..//OBX.6.3, $ind1)"/>
 				<xsl:value-of select="util:element('Observation Result status', ..//OBX.11, $ind1)"/>
 				<xsl:value-of
-					select="util:element('Date/Time of the Observation', util:format-date(.//OBX.14.1), $ind1)"/>
+					select="util:element('Date/Time of the Observation', util:format-date(..//OBX.14.1), $ind1)"/>
 				<xsl:value-of select="util:element('Observation Type', ..//OBX.29, $ind1)"/>
-				-->
 				<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 				
 			</xsl:for-each>
