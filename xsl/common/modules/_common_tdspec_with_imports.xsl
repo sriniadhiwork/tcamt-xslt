@@ -691,24 +691,26 @@
 
 
 		<!-- Diagnosis information subtable -->
+		<xsl:for-each select="..//DG1">
 		<xsl:value-of select="util:begin-sub-table($ind1)"/>
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Diagnosis information', 'Diagnosis information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		
+			
 		<xsl:value-of select="util:element('Priority', .//DG1.15, $ind1)"/>
-		<!-- 
+
 		<xsl:choose>
-			<xsl:when test="..//DG1.3.3 = 'I9'">
-				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', ..//DG1.3.1, $ind1)"/>
+			<xsl:when test=".//DG1.3.3 = 'I9'">
+				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"/>
 			</xsl:when>
-			<xsl:when test="..//DG1.3.3 = 'I10C'">
-				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', ..//DG1.3.1, $ind1)"/>
+			<xsl:when test=".//DG1.3.3 = 'I10C'">
+				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="util:element('Diagnosis type', ..//DG1.6, $ind1)"/>
-		 -->
+	
+		<xsl:value-of select="util:element('Diagnosis type', .//DG1.6, $ind1)"/>
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		</xsl:for-each>
 
 		<xsl:variable name="at-least-one-obx" select="count(..//OBX) > 0"/>
 		<xsl:if test="$at-least-one-obx">
@@ -759,7 +761,6 @@
 					select="util:element('Date/Time of the Observation', util:format-date(..//OBX.14.1), $ind1)"/>
 				<xsl:value-of select="util:element('Observation Type', ..//OBX.29, $ind1)"/>
 				<xsl:value-of select="util:end-table-fieldset($ind1)"/>
-				
 			</xsl:for-each>
 		</xsl:if>
 
