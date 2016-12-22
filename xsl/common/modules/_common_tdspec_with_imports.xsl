@@ -569,34 +569,29 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'General order information', 'General order information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<!--
 		<xsl:value-of
 			select="util:element('Provider Name', concat(util:format-with-space(.//ORC.12.3), .//ORC.12.2), $ind1)"/>
 
 		<xsl:value-of select="util:element('Placer Order Number', .//ORC.2.1, $ind1)"/>
-		<xsl:value-of select="util:element('Filler Order Number', .//ORC.3.1, $ind1)"/>
-		<xsl:value-of select="util:element('Placer Group Number', .//ORC.4.1, $ind1)"/>
+		<xsl:value-of select="util:element('Placer Order Number', .//ORC.3.1, $ind1)"/>
+		<xsl:value-of select="util:element('Filler Group Number', .//ORC.4.1, $ind1)"/>
 		<xsl:value-of select="util:element('Order Control', .//ORC.1, $ind1)"/>
 		<xsl:choose>
 			<xsl:when test="count(.//ORC.20.9) > 0">
 				<xsl:value-of
-					select="util:element('Advanced Beneficiary Notice Code', ORC.20.9, $ind1)"/>
+					select="util:element('Advanced Beneficiary Notice Code', .//ORC.20.9, $ind1)"/>
 			</xsl:when>
 			<xsl:when test="count(.//ORC.20.9) = 0 and count(.//ORC.20.2) > 0">
 				<xsl:value-of
-					select="util:element('Advanced Beneficiary Notice Code', ORC.20.2, $ind1)"/>
+					select="util:element('Advanced Beneficiary Notice Code', .//ORC.20.2, $ind1)"/>
 			</xsl:when>
 			<xsl:when
 				test="count(.//ORC.20.9) = 0 and count(.//ORC.20.2) = 0 and count(.//ORC.20.1) > 0">
 				<xsl:value-of
-					select="util:element('Advanced Beneficiary Notice Code', ORC.20.1, $ind1)"/>
+					select="util:element('Advanced Beneficiary Notice Code', .//ORC.20.1, $ind1)"/>
 			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Advanced Beneficiary Notice Code', '', $ind1)"/>
-			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:value-of select="util:element('Date/Time of Transaction', .//ORC.9.1, $ind1)"/>
-		-->
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Timing/Quantity Information subtable -->
