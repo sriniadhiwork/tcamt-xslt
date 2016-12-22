@@ -613,43 +613,43 @@
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Order details subtable -->
+		<!--Format time needs to be checked; alternative id too-->
 		<xsl:value-of select="util:begin-sub-table($ind1)"/>
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Order details', 'Order details', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<!--
+		
 		<xsl:choose>
-			<xsl:when test=".//OBR.4.3 = 'LN'">
+			<xsl:when test="..//OBR.4.3 = 'LN'">
 				<xsl:value-of
 					select="util:element('Universal Service Identifier (LOINC)', ..//OBR.4.1, $ind1)"
 				/>
 			</xsl:when>
-			<xsl:when test=".//OBR.4.6 = 'LN'">
+			<xsl:when test="..//OBR.4.6 = 'LN'">
 				<xsl:value-of
 					select="util:element('Universal Service Identifier (LOINC)', ..//OBR.4.4, $ind1)"
 				/>
 			</xsl:when>
 		</xsl:choose>
 		<xsl:choose>
-			<xsl:when test=".//OBR.4.3 = 'LN'">
+			<xsl:when test="..//OBR.4.3 = 'LN'">
 				<xsl:value-of
 					select="util:element('Alternative Universal Service Identifier', ..//OBR.4.1, $ind1)"
 				/>
 			</xsl:when>
-			<xsl:when test=".//OBR.4.6 = 'LN'">
+			<xsl:when test="..//OBR.4.6 = 'LN'">
 				<xsl:value-of
 					select="util:element('Alternative Universal Service Identifier', ..//OBR.4.4, $ind1)"
 				/>
 			</xsl:when>
 		</xsl:choose>
 		<xsl:value-of
-			select="util:element('Observation Date/Time', util:format-time(..//OBR.7.1), $ind1)"/>
+			select="util:element('Observation Date/Time', ..//OBR.7.1, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Observation end Date/Time', util:format-time(..//OBR.8.1), $ind1)"/>
-		<xsl:value-of select="util:element('Relevant Clinical Information', ..//OBR.13.2, $ind1)"/>
 		<xsl:value-of
 			select="util:chooseAmongThree('Relevant Clinical Information', ..//OBR.13.9, ..//OBR.13.2, ..//OBR.13.1, $ind1)"/>
-		-->
+		
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 
