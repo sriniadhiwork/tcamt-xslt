@@ -534,7 +534,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-<!--		<xsl:value-of
+		<!--		<xsl:value-of
 			select="util:element('Provider Name', concat(util:format-with-space(.//ORC.12.3), .//ORC.12.2), $ind1)"/>
 
 		<xsl:value-of select="util:element('Provider NPI identifier', .//ORC.12.1, $ind1)"/>
@@ -652,64 +652,71 @@
 		-->
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
-		<!-- Result copies subtable -->
-		<xsl:value-of select="util:begin-sub-table($ind1)"/>
-		<xsl:value-of
-			select="util:title-no-tab('title', 'Result copies', 'Result copies', $ind2, false())"/>
-		<xsl:value-of select="util:elements($ind2)"/>
-		
-		<xsl:value-of select="util:element('Comments', ..//NTE.3, $ind1)"/>
-		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<!-- Notes and comments subtable -->
 		<xsl:value-of select="util:begin-sub-table($ind1)"/>
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<!--
-		<xsl:value-of select="util:element('Instance ID', ..//PRT.1.1, $ind1)"/>
-		<xsl:value-of select="util:element('NPI Identifier', ..//PRT.5.1, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Name', concat(util:format-with-space(..//PRT.5.3), ..//PRT.5.2), $ind1)"/>
-		<xsl:value-of
-			select="util:format-address-multilines('Address', ..//PRT.14.1.1, ..//PRT.14.2, concat(util:format-with-space(..//PRT.14.3), util:format-with-space(..//PRT.14.4), util:format-with-space(..//PRT.14.5)), ..//PRT.14.6, $ind1)"/>
-
-		<xsl:variable name="pho" as="xs:boolean" select="..//PRT.15.3 = 'PH'"/>
-		<xsl:value-of
-			select="util:element('Phone Number', util:IfThenElse($pho, concat(util:format-with-space(..//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), ''), $ind1)"/>
-
-		<xsl:variable name="ead" as="xs:boolean"
-			select="..//PRT.15.3 = 'X.400' or ..//PRT.15.3 = 'Internet'"/>
-		<xsl:value-of
-			select="util:element('Ordering Facility email address', util:IfThenElse($ead, .//PRT.15.4, ''), $ind1)"/>
-
-		<xsl:value-of select="util:element('Action code', ..//PRT.2, $ind1)"/>
-		<xsl:value-of
-			select="util:chooseAmongThree('Participation', ..//PRT.4.9, ..//PRT.4.2, ..//PRT.4.1, $ind1)"/>
-		-->
+		<xsl:for-each select="..//NTE">
+			<xsl:value-of select="util:element('Comments', .//NTE.3, $ind1)"/>
+		</xsl:for-each>
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
+
+		<!-- Result copies subtable -->
+		<xsl:for-each select="..//PRT">
+			<xsl:value-of select="util:begin-sub-table($ind1)"/>
+			<xsl:value-of
+				select="util:title-no-tab('title', 'Result copies', 'Result copies', $ind2, false())"/>
+			<xsl:value-of select="util:elements($ind2)"/>
+
+			<xsl:value-of select="util:element('Instance ID', .//PRT.1.1, $ind1)"/>
+			<xsl:value-of select="util:element('NPI Identifier', .//PRT.5.1, $ind1)"/>
+			<xsl:value-of
+				select="util:element('Name', concat(util:format-with-space(.//PRT.5.3), .//PRT.5.2), $ind1)"/>
+			<xsl:value-of
+			select="util:format-address-multilines('Address', .//PRT.14.1.1, .//PRT.14.2, concat(util:format-with-space(.//PRT.14.3), util:format-with-space(.//PRT.14.4), util:format-with-space(.//PRT.14.5)), .//PRT.14.6, $ind1)"/> 
+			<xsl:for-each select=".//PRT.15">
+				<xsl:variable name="pho" as="xs:boolean" select="..//PRT.15.3 = 'PH'"/>
+				<xsl:value-of
+					select="util:element('Phone Number', util:IfThenElse($pho, concat(util:format-with-space(..//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), ''), $ind1)"/>
+			</xsl:for-each>
+			<xsl:variable name="ead" as="xs:boolean"
+				select=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'"/>
+			<xsl:value-of
+				select="util:element('Ordering Facility email address', util:IfThenElse($ead, .//PRT.15.4, ''), $ind1)"/>
+
+
+			<xsl:value-of select="util:element('Action code', .//PRT.2, $ind1)"/>
+			<xsl:value-of
+				select="util:chooseAmongThree('Participation', .//PRT.4.9, .//PRT.4.2, .//PRT.4.1, $ind1)"/>
+
+			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		</xsl:for-each>
 
 		<!-- Diagnosis information subtable -->
 		<xsl:for-each select="..//DG1">
-		<xsl:value-of select="util:begin-sub-table($ind1)"/>
-		<xsl:value-of
-			select="util:title-no-tab('title', 'Diagnosis information', 'Diagnosis information', $ind2, false())"/>
-		<xsl:value-of select="util:elements($ind2)"/>
-			
-		<xsl:value-of select="util:element('Priority', .//DG1.15, $ind1)"/>
+			<xsl:value-of select="util:begin-sub-table($ind1)"/>
+			<xsl:value-of
+				select="util:title-no-tab('title', 'Diagnosis information', 'Diagnosis information', $ind2, false())"/>
+			<xsl:value-of select="util:elements($ind2)"/>
 
-		<xsl:choose>
-			<xsl:when test=".//DG1.3.3 = 'I9'">
-				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"/>
-			</xsl:when>
-			<xsl:when test=".//DG1.3.3 = 'I10C'">
-				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"/>
-			</xsl:when>
-		</xsl:choose>
-	
-		<xsl:value-of select="util:element('Diagnosis type', .//DG1.6, $ind1)"/>
-		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+			<xsl:value-of select="util:element('Priority', .//DG1.15, $ind1)"/>
+
+			<xsl:choose>
+				<xsl:when test=".//DG1.3.3 = 'I9'">
+					<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"
+					/>
+				</xsl:when>
+				<xsl:when test=".//DG1.3.3 = 'I10C'">
+					<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"
+					/>
+				</xsl:when>
+			</xsl:choose>
+
+			<xsl:value-of select="util:element('Diagnosis type', .//DG1.6, $ind1)"/>
+			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 
 		<xsl:variable name="at-least-one-obx" select="count(..//OBX) > 0"/>
@@ -791,8 +798,7 @@
 			<xsl:value-of
 				select="util:element('Collection Start Date/Time', util:format-date(.//SPM.17.1.1), $ind1)"/>
 			<xsl:value-of
-				select="util:element('Collection End Date/Time', util:format-date(.//SPM.17.2.1), $ind1)"
-			/>
+				select="util:element('Collection End Date/Time', util:format-date(.//SPM.17.2.1), $ind1)"/>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 
@@ -864,7 +870,7 @@
 
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	
+
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  Includes - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
