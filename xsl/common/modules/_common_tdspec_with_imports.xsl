@@ -534,8 +534,8 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<xsl:value-of
-			select="util:element('Provider Name', concat(util:format-with-space(//ORC.12.3), //ORC.12.2), $ind1)"/>
+<!--		<xsl:value-of
+			select="util:element('Provider Name', concat(util:format-with-space(.//ORC.12.3), .//ORC.12.2), $ind1)"/>
 
 		<xsl:value-of select="util:element('Provider NPI identifier', .//ORC.12.1, $ind1)"/>
 
@@ -561,6 +561,7 @@
 			select=".//ORC.23.3 = 'X.400' or .//ORC.23.3 = 'Internet'"/>
 		<xsl:value-of
 			select="util:element('Ordering Facility email address', util:IfThenElse($ofe, .//ORC.23.4, ''), $ind1)"/>
+			-->
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<!-- General order information subtable -->
@@ -568,6 +569,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'General order information', 'General order information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
+		<!--
 		<xsl:value-of
 			select="util:element('Provider Name', concat(util:format-with-space(.//ORC.12.3), .//ORC.12.2), $ind1)"/>
 
@@ -594,6 +596,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:value-of select="util:element('Date/Time of Transaction', .//ORC.9.1, $ind1)"/>
+		-->
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Timing/Quantity Information subtable -->
@@ -601,10 +604,12 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Timing/Quantity Information', 'Timing/Quantity Information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
+		<!--
 		<xsl:value-of select="util:element('Start Date/time', util:format-time(..//TQ1.7.1), $ind1)"/>
 		<xsl:value-of select="util:element('End date/time', util:format-time(..//TQ1.8.1), $ind1)"/>
 		<xsl:value-of
 			select="util:chooseAmongThree('Priority', .//TQ1.9.9, .//TQ1.9.2, .//TQ1.1, $ind1)"/>
+		-->
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Order details subtable -->
@@ -612,7 +617,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Order details', 'Order details', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-
+		<!--
 		<xsl:choose>
 			<xsl:when test=".//OBR.4.3 = 'LN'">
 				<xsl:value-of
@@ -644,6 +649,7 @@
 		<xsl:value-of select="util:element('Relevant Clinical Information', ..//OBR.13.2, $ind1)"/>
 		<xsl:value-of
 			select="util:chooseAmongThree('Relevant Clinical Information', ..//OBR.13.9, ..//OBR.13.2, ..//OBR.13.1, $ind1)"/>
+		-->
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<!-- Result copies subtable -->
@@ -651,6 +657,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Result copies', 'Result copies', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
+		
 		<xsl:value-of select="util:element('Comments', ..//NTE.3, $ind1)"/>
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
@@ -659,6 +666,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
+		<!--
 		<xsl:value-of select="util:element('Instance ID', ..//PRT.1.1, $ind1)"/>
 		<xsl:value-of select="util:element('NPI Identifier', ..//PRT.5.1, $ind1)"/>
 		<xsl:value-of
@@ -678,6 +686,7 @@
 		<xsl:value-of select="util:element('Action code', ..//PRT.2, $ind1)"/>
 		<xsl:value-of
 			select="util:chooseAmongThree('Participation', ..//PRT.4.9, ..//PRT.4.2, ..//PRT.4.1, $ind1)"/>
+		-->
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 
@@ -686,81 +695,20 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Diagnosis information', 'Diagnosis information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		<xsl:value-of select="util:element('Priority', ..//DG1.15, $ind1)"/>
+		
+		<xsl:value-of select="util:element('Priority', .//DG1.15, $ind1)"/>
+		<!-- 
 		<xsl:choose>
-			<xsl:when test=".//DG1.3.3 = 'I9'">
+			<xsl:when test="..//DG1.3.3 = 'I9'">
 				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', ..//DG1.3.1, $ind1)"/>
 			</xsl:when>
-			<xsl:when test=".//DG1.3.3 = 'I10C'">
+			<xsl:when test="..//DG1.3.3 = 'I10C'">
 				<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', ..//DG1.3.1, $ind1)"/>
 			</xsl:when>
 		</xsl:choose>
 		<xsl:value-of select="util:element('Diagnosis type', ..//DG1.6, $ind1)"/>
+		 -->
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
-
-		<!-- <xsl:variable name="multiple-obx" select="count(..//OBX) > 1"/>
-				<xsl:for-each select="..//OBX">
-					<xsl:variable name="index">
-						<xsl:if test="$multiple-obx">
-							<xsl:value-of select="concat(' - ', position())"/>
-						</xsl:if>
-					</xsl:variable>
-					<xsl:value-of select="util:begin-sub-table($ind2)"/>
-					<xsl:value-of select="util:title-no-tab('title', concat('Results Performing Laboratory', $index), concat('Results Performing Laboratory',  $index), $ind2, false())"/>
-					<xsl:value-of select="util:elements($ind2)"/>
-					<xsl:value-of select="util:element('Laboratory Name', .//OBX.23.1, $ind1)"/>
-					<xsl:value-of select="util:element('Organization identifier', .//OBX.23.10, $ind1)"/>
-					<xsl:value-of select="util:element('Address', util:format-address(.//OBX.24.1.1, .//OBX.24.2, concat(.//OBX.24.3, ' ', .//OBX.24.4), .//OBX.24.5, .//OBX.24.6), $ind1)"/>
-					<xsl:value-of select="util:element('Director Name', concat(util:format-with-space(.//OBX.25.6), util:format-with-space(.//OBX.25.3), util:format-with-space(.//OBX.25.4), util:format-with-space(.//OBX.25.2.1), util:format-with-space(.//OBX.25.5)), $ind1)"/>
-					<xsl:value-of select="util:element('Director identifier', .//OBX.25.1, $ind1)"/>
-					<xsl:value-of select="util:end-table-fieldset($ind1)"/>
-				</xsl:for-each> -->
-
-		<!--		<xsl:template match="OBX">
-			<xsl:param name="vertical-orientation" as="xs:boolean"/>
-			<xsl:param name="counter"/>
-			<xsl:value-of
-				select="util:title('title', concat('Observation Results', $counter), 'Observation Results', $ind1, true(), $vertical-orientation, false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of
-				select="util:element('Observation LOINC Identifier', util:valueset(.//OBX.3.1, 'Observation Identifier Syndromic Surveillance'), $ind1)"/>
-			<xsl:variable name="observation-value">
-				<xsl:choose>
-					<xsl:when test=".//OBX.3.1 = 'SS002'">
-						<xsl:value-of
-							select="concat(.//OBX.5.1, .//OBX.5.3, util:valueset(.//OBX.5.4, 'PHVS_State_FIPS_5-2'), .//OBX.5.5, util:valueset(.//OBX.5.6, 'PHVS_Country_ISO_3166-1'), .//OBX.5.9)"
-						/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select=".//OBX.5"/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
-			<xsl:value-of select="util:element('Observation Value', $observation-value, $ind1)"/>
-			<xsl:variable name="units">
-				<xsl:choose>
-					<xsl:when test=".//OBX.3.1 = '21612-7'">
-						<xsl:value-of
-							select="util:value-or-valueset(.//OBX.6.2, .//OBX.6.1, 'PHVS_AgeUnit_SyndromicSurveillance')"
-						/>
-					</xsl:when>
-					<xsl:when test=".//OBX.3.1 = '8302-2'">
-						<xsl:value-of
-							select="util:value-or-valueset(.//OBX.6.2, .//OBX.6.1, 'PHVS_HeightUnit_UCUM')"
-						/>
-					</xsl:when>
-					<xsl:when test=".//OBX.3.1 = '3141-9'">
-						<xsl:value-of
-							select="util:value-or-valueset(.//OBX.6.2, .//OBX.6.1, 'PHVS_WeightUnit_UCUM')"
-						/>
-					</xsl:when>
-				</xsl:choose>
-			</xsl:variable>
-			<xsl:value-of select="util:element('Units', $units, $ind1)"/>
-			<xsl:value-of
-				select="util:last-element('Observation Results Status', util:valueset(.//OBX.11, 'HL70085'), $ind1, $vertical-orientation, false())"/>
-		</xsl:template>
--->
 
 		<xsl:variable name="at-least-one-obx" select="count(..//OBX) > 0"/>
 		<xsl:if test="$at-least-one-obx">
@@ -770,6 +718,7 @@
 				<xsl:value-of
 					select="util:title-no-tab('title', 'Observation Result', 'Observation Result', $ind2, false())"/>
 				<xsl:value-of select="util:elements($ind2)"/>
+				<!--
 				<xsl:choose>
 					<xsl:when test=".//OBX.3.3 = 'LN'">
 						<xsl:value-of
@@ -810,7 +759,9 @@
 				<xsl:value-of
 					select="util:element('Date/Time of the Observation', util:format-date(.//OBX.14.1), $ind1)"/>
 				<xsl:value-of select="util:element('Observation Type', ..//OBX.29, $ind1)"/>
+				-->
 				<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+				
 			</xsl:for-each>
 		</xsl:if>
 
@@ -843,8 +794,8 @@
 			<xsl:value-of
 				select="util:element('Collection End Date/Time', util:format-date(.//SPM.17.2.1), $ind1)"
 			/>
+			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
-		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
@@ -914,78 +865,7 @@
 
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - Vaccine Administration Information - - - - - - - - - - - -->
-	<!-- Note the OBX subtable. Also, that the grouping based on OBX.4 -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<xsl:template match="RXA">
-		<xsl:param name="vertical-orientation" as="xs:boolean"/>
-		<xsl:param name="counter"/>
-		<xsl:value-of
-			select="util:title('title', concat('Vaccine Administration Information', $counter), 'Vaccine Administration Information', $ind1, true(), $vertical-orientation, false())"/>
-		<xsl:value-of select="util:elements($ind1)"/>
-		<xsl:value-of select="util:element('Administered Vaccine', .//RXA.5.2, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Date/Time Start of Administration', util:format-date(.//RXA.3.1), $ind1)"/>
-		<xsl:value-of select="util:element('Administered Amount', .//RXA.6, $ind1)"/>
-		<xsl:value-of select="util:element('Administered Units', .//RXA.7.2, $ind1)"/>
-		<xsl:value-of select="util:element('Administration Notes', .//RXA.9.2, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Administering Provider', concat(util:format-with-space(.//RXA.10.3), .//RXA.10.2.1), $ind1)"/>
-		<xsl:value-of select="util:element('Substance Lot Number', .//RXA.15, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Substance Expiration Date', util:format-date(.//RXA.16.1), $ind1)"/>
-		<xsl:value-of select="util:element('Substance Manufacturer Name', .//RXA.17.2, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Substance/Treatment Refusal Reason', util:sub-refusal-reason(.//RXA.18.2), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Completion Status', util:completion-status(.//RXA.20), $ind1)"/>
-		<xsl:value-of select="util:element('Action Code', util:action-code(.//RXA.21), $ind1)"/>
-		<xsl:value-of select="util:element('Route', ..//RXR.1.2, $ind1)"/>
-		<xsl:value-of select="util:element('Administration Site', ..//RXR.2.2, $ind1)"/>
-		<xsl:value-of select="util:element('Entering Organization', ..//ORC.17.2, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Entered By', concat(util:format-with-space(..//ORC.10.3), ..//ORC.10.2.1), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Ordered By', concat(util:format-with-space(..//ORC.12.3), ..//ORC.12.2.1), $ind1)"/>
-		<xsl:choose>
-			<xsl:when test="count(..//OBX) > 0">
-				<xsl:value-of select="util:end-table($ind1)"/>
-				<xsl:value-of select="util:begin-sub-table($ind2)"/>
-				<xsl:variable name="recordname"
-					select="replace(.//RXA.9.2, '^(New immunization record)|(New record)$', 'Observations', 'i')"/>
-				<xsl:value-of
-					select="util:title-no-tab('title', $recordname, $recordname, $ind2, false())"/>
-				<xsl:value-of select="util:elements($ind2)"/>
-				<xsl:for-each-group select="..//OBX" group-by="OBX.4">
-					<xsl:for-each select="current-group()">
-						<xsl:apply-templates select="."/>
-					</xsl:for-each>
-					<!-- grey line after the group -->
-					<xsl:if test="position() != last()">
-						<xsl:value-of select="util:end-obx-group($ind2)"/>
-					</xsl:if>
-				</xsl:for-each-group>
-				<xsl:choose>
-					<xsl:when test="$generate-plain-html">
-						<xsl:value-of select="util:end-sub-table($ind2, $vertical-orientation)"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of
-							select="concat($nl, $indent, util:end-sub-table($ind2, $vertical-orientation), $ind2, '}', $nl, $ind2, '}', $nl, $ind1, ']', $nl)"
-						/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  Includes - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
