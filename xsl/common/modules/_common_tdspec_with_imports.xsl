@@ -369,9 +369,8 @@
 				</xsl:when>
 			</xsl:choose>
 		</xsl:for-each>
-
 		<xsl:value-of
-			select="util:element('Contact role', concat(util:format-with-space(.//NK1.7.9), util:format-with-space(.//NK1.7.2), .//NK1.7.1), $ind1)"/>
+			select="util:chooseAmongThree('Contact role', .//NK1.7.9, .//NK1.7.2, .//NK1.7.1, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Next of kin/Associated parties job code/Class', .//NK1.11.3, $ind1)"/>
 
