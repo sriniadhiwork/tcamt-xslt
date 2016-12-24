@@ -257,8 +257,10 @@
 			select="util:element('Date/Time of Birth', util:format-date(.//PID.7.1), $ind1)"/>
 		<xsl:value-of select="util:element('Death Date/Time', util:format-date(.//PID.29.1), $ind1)"/>
 
-		<xsl:value-of
+		<xsl:for-each select=".//PID">
+			<xsl:value-of
 			select="util:format-address-multilines('Patient Address', .//PID.11.1.1, .//PID.11.2, concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), .//PID.11.6, $ind1)"/>
+		</xsl:for-each>
 
 		<xsl:variable name="hpn" as="xs:boolean" select=".//PID.13.3 = 'PH'"/>
 		<xsl:value-of
@@ -278,7 +280,8 @@
 		<xsl:value-of
 			select="util:element('Business email address', util:IfThenElse($bema, .//PID.14.4, ''), $ind1)"/>
 
-		<xsl:choose>
+		<xsl:for-each select=".//PID.10">
+			<xsl:choose>
 			<xsl:when test="count(.//PID.10.9) > 0">
 				<xsl:value-of select="util:element('Race', .//PID.10.9, $ind1)"/>
 			</xsl:when>
@@ -293,6 +296,7 @@
 				<xsl:value-of select="util:element('Race', '', $ind1)"/>
 			</xsl:otherwise>
 		</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:choose>
 			<xsl:when test="count(.//PID.22.9) > 0">
@@ -348,8 +352,10 @@
 		<xsl:value-of
 			select="util:format-address-multilines('Contact person s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"/>
 
-		<xsl:value-of
+		<xsl:for-each select=".//NK1.4">
+			<xsl:value-of
 			select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)"/>
+		</xsl:for-each>
 
 		<xsl:variable name="pn" as="xs:boolean" select=".//NK1.5.3 = 'PH'"/>
 		<xsl:value-of
