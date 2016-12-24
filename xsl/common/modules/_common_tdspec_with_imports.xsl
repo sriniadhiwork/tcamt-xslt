@@ -357,14 +357,18 @@
 			select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)"/>
 		</xsl:for-each>
 
-		<xsl:variable name="pn" as="xs:boolean" select=".//NK1.5.3 = 'PH'"/>
-		<xsl:value-of
-			select="util:element('Phone number', util:IfThenElse($pn, concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), ''), $ind1)"/>
-
-		<xsl:variable name="ema" as="xs:boolean"
-			select=".//NK1.5.3 = 'X.400' or .//NK1.5.3 = 'Internet'"/>
-		<xsl:value-of
-			select="util:element('Email address', util:IfThenElse($ema, .//NK1.5.4, ''), $ind1)"/>
+		<xsl:for-each select=".//NK1.5">
+			<xsl:choose>
+				<xsl:when test=".//NK1.5.3 = 'PH'">
+					<xsl:value-of
+						select="util:element('Phone number', concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), $ind1)"/>
+				</xsl:when>
+				<xsl:when test=".//NK1.5.3 = 'X.400' or .//NK1.5.3 = 'Internet'">
+					<xsl:value-of
+						select="util:element('Email address', .//NK1.5.4, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:value-of
 			select="util:element('Contact role', concat(util:format-with-space(.//NK1.7.9), util:format-with-space(.//NK1.7.2), .//NK1.7.1), $ind1)"/>
