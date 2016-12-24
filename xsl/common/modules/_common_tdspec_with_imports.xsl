@@ -349,9 +349,11 @@
 		<xsl:value-of select="util:element('Organization identifier', NK1.13.10, $ind1)"/>
 		<xsl:value-of select="util:element('Contact person s name', NK1.30, $ind1)"/>
 
-		<xsl:value-of
+		<xsl:if test="count(.//NK1.32)">
+			<xsl:value-of
 			select="util:format-address-multilines('Contact person s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"/>
-
+		</xsl:if>
+		
 		<xsl:for-each select=".//NK1.4">
 			<xsl:value-of
 			select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)"/>
