@@ -409,9 +409,10 @@
 			select="util:title('title', concat('Visit Information', $counter), 'Visit Information', $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 
-		<xsl:value-of select="util:element('Patient Class', PV1.2, $ind1)"/>
-		<xsl:value-of select="util:element('Financial Class', PV1.20.1, $ind1)"/>
+		<xsl:value-of select="util:element('Patient Class', .//PV1.2, $ind1)"/>
+		<xsl:value-of select="util:element('Financial Class', .//PV1.20.1, $ind1)"/>
 
+		<xsl:for-each select=".//PV1.22">
 		<xsl:choose>
 			<xsl:when test="count(PV1.22.9) > 0">
 				<xsl:value-of select="util:element('Courtesy Code', PV1.22.9, $ind1)"/>
@@ -426,6 +427,7 @@
 				<xsl:value-of select="util:element('Courtesy Code', '', $ind1)"/>
 			</xsl:otherwise>
 		</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
