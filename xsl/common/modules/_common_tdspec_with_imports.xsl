@@ -273,15 +273,19 @@
 				</xsl:when>
 			</xsl:choose>
 		</xsl:for-each>
-
-		<xsl:variable name="bpn" as="xs:boolean" select=".//PID.14.3 = 'PH'"/>
-		<xsl:value-of
-			select="util:element('Business phone number', util:IfThenElse($bpn, concat(util:format-with-space(.//PID.14.6), util:format-with-space(.//PID.14.7), util:format-with-space(.//PID.14.8)), ''), $ind1)"/>
-
-		<xsl:variable name="bema" as="xs:boolean"
-			select=".//PID.14.3 = 'X.400' or .//PID.14.3 = 'Internet'"/>
-		<xsl:value-of
-			select="util:element('Business email address', util:IfThenElse($bema, .//PID.14.4, ''), $ind1)"/>
+		
+		<xsl:for-each select=".//PID.14">
+			<xsl:choose>
+				<xsl:when test=".//PID.14.3 = 'PH'">
+					<xsl:value-of
+						select="util:element('Business phone number', concat(util:format-with-space(.//PID.14.6), util:format-with-space(.//PID.14.7), util:format-with-space(.//PID.14.8)), $ind1)"/>
+				</xsl:when>
+				<xsl:when test=".//PID.14.3 = 'X.400' or .//PID.14.3 = 'Internet'">
+					<xsl:value-of
+						select="util:element('Business email address', .//PID.14.4, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.10">
 			<xsl:choose>
