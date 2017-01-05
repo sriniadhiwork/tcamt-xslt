@@ -262,14 +262,17 @@
 			select="util:format-address-multilines('Patient Address', .//PID.11.1.1, .//PID.11.2, concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), .//PID.11.6, $ind1)"/>
 		</xsl:for-each>
 
-		<xsl:variable name="hpn" as="xs:boolean" select=".//PID.13.3 = 'PH'"/>
-		<xsl:value-of
-			select="util:element('Home phone number', util:IfThenElse($hpn, concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), ''), $ind1)"/>
-
-		<xsl:variable name="ema" as="xs:boolean"
-			select=".//PID.13.3 = 'X.400' or .//PID.13.3 = 'Internet'"/>
-		<xsl:value-of
-			select="util:element('Email address', util:IfThenElse($ema, .//PID.13.4, ''), $ind1)"/>
+		<xsl:for-each select=".//PID.13">
+			<xsl:choose>
+				<xsl:when test=".//PID.13.3 = 'PH'">
+					<xsl:value-of
+						select="util:element('Home phone number', concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), $ind1)"/>
+				</xsl:when>
+				<xsl:when test=".//PID.13.3 = 'X.400' or .//PID.13.3 = 'Internet'">
+					<xsl:value-of select="util:element('Email address', .//PID.13.4, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:variable name="bpn" as="xs:boolean" select=".//PID.14.3 = 'PH'"/>
 		<xsl:value-of
