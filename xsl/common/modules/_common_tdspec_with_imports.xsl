@@ -529,16 +529,16 @@
 
 		<xsl:for-each select=".//GT1.11">
 			<xsl:choose>
-				<xsl:when test="count(.//GT1.11.9) > 0">
+				<xsl:when test="count(.//GT1.11.9) &gt; 0">
 					<xsl:value-of
-						select="util:element('Guarantor Relationship', .//GT1.11.2, $ind1)"/>
+						select="util:element('Guarantor Relationship', .//GT1.11.9, $ind1)"/>
 				</xsl:when>
-				<xsl:when test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) > 0">
+				<xsl:when test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) &gt; 0">
 					<xsl:value-of
 						select="util:element('Guarantor Relationship', .//GT1.11.2, $ind1)"/>
 				</xsl:when>
 				<xsl:when
-					test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) = 0 and count(.//GT1.11.1) > 0">
+					test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) = 0 and count(.//GT1.11.1) &gt; 0">
 					<xsl:value-of
 						select="util:element('Guarantor Relationship', .//GT1.11.1, $ind1)"/>
 				</xsl:when>
@@ -546,6 +546,9 @@
 		</xsl:for-each>
 
 		<xsl:value-of select="util:element('Guarantor Organization Name', .//GT1.21.1, $ind1)"/>
+		
+		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+		
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
