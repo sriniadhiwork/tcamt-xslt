@@ -674,12 +674,12 @@
 			</xsl:when>
 		</xsl:choose>
 		<xsl:choose>
-			<xsl:when test="..//OBR.4.3 = 'LN'">
+			<xsl:when test="not(..//OBR.4.3 = 'LN')">
 				<xsl:value-of
 					select="util:element('Alternative Universal Service Identifier', ..//OBR.4.1, $ind1)"
 				/>
 			</xsl:when>
-			<xsl:when test="..//OBR.4.6 = 'LN'">
+			<xsl:when test="not(..//OBR.4.6 = 'LN')">
 				<xsl:value-of
 					select="util:element('Alternative Universal Service Identifier', ..//OBR.4.4, $ind1)"
 				/>
