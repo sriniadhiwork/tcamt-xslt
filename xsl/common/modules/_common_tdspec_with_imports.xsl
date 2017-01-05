@@ -257,7 +257,7 @@
 			select="util:element('Date/Time of Birth', util:format-date(.//PID.7.1), $ind1)"/>
 		<xsl:value-of select="util:element('Death Date/Time', util:format-date(.//PID.29.1), $ind1)"/>
 
-		<xsl:for-each select=".//PID">
+		<xsl:for-each select=".//PID.11">
 			<xsl:value-of
 			select="util:format-address-multilines('Patient Address', .//PID.11.1.1, .//PID.11.2, concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), .//PID.11.6, $ind1)"/>
 		</xsl:for-each>
