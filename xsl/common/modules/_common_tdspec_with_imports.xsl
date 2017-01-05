@@ -593,27 +593,27 @@
 		<xsl:value-of select="util:element('Ordering Facility Name', .//ORC.21.1, $ind1)"/>
 
 		<xsl:choose>
-			<xsl:when test="count(.//ORC.21)">
+			<xsl:when test="count(.//ORC.22)">
 				<xsl:value-of
-					select="util:format-address-multilines('Ordering Facility Address', .//ORC.21.1, .//ORC.22.1.1, concat(util:format-with-space(.//ORC.22.3), util:format-with-space(.//ORC.22.4), util:format-with-space(.//ORC.22.5)), .//ORC.22.6, $ind1)"
+					select="util:format-address-multilines('Ordering Facility Address', .//ORC.22.1.1, .//ORC.22.2, concat(util:format-with-space(.//ORC.22.3), util:format-with-space(.//ORC.22.4), util:format-with-space(.//ORC.22.5)), .//ORC.22.6, $ind1)"
 				/>
 			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Ordering Facility Address', '', $ind1)"/>
-			</xsl:otherwise>
 		</xsl:choose>
 
-		<xsl:choose>
-			<xsl:when test="ORC.23.3 = 'PH'">
-				<xsl:value-of
-					select="util:element('Ordering Facility Phone number', concat(util:format-with-space(.//ORC.23.6), util:format-with-space(.//ORC.23.7), util:format-with-space(.//ORC.23.8)), $ind1)"
-				/>
-			</xsl:when>
-			<xsl:when test=".//ORC.23.3 = 'X.400' or .//ORC.23.3 = 'Internet'">
-				<xsl:value-of
-					select="util:element('Ordering Facility email address', .//ORC.23.4, $ind1)"/>
-			</xsl:when>
-		</xsl:choose>
+		<xsl:for-each select=".//ORC.23">
+			<xsl:choose>
+				<xsl:when test=".//ORC.23.3 = 'PH'">
+					<xsl:value-of
+						select="util:element('Ordering Facility Phone number', concat(util:format-with-space(.//ORC.23.6), util:format-with-space(.//ORC.23.7), util:format-with-space(.//ORC.23.8)), $ind1)"
+					/>
+				</xsl:when>
+				<xsl:when test=".//ORC.23.3 = 'X.400' or .//ORC.23.3 = 'Internet'">
+					<xsl:value-of
+						select="util:element('Ordering Facility email address', .//ORC.23.4, $ind1)"
+					/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<!-- General order information subtable -->
