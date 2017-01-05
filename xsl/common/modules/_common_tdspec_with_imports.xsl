@@ -421,7 +421,8 @@
 				<xsl:when test="count(.//PV1.22.9) = 0 and count(.//PV1.22.2) > 0">
 					<xsl:value-of select="util:element('Courtesy Code', .//PV1.22.2, $ind1)"/>
 				</xsl:when>
-				<xsl:when test="count(.//PV1.22.9) = 0 and count(.//PV1.22.2) = 0 and count(.//PV1.22.1) > 0">
+				<xsl:when
+					test="count(.//PV1.22.9) = 0 and count(.//PV1.22.2) = 0 and count(.//PV1.22.1) > 0">
 					<xsl:value-of select="util:element('Courtesy Code', .//PV1.22.1, $ind1)"/>
 				</xsl:when>
 			</xsl:choose>
@@ -529,16 +530,16 @@
 
 		<xsl:for-each select=".//GT1.11">
 			<xsl:choose>
-				<xsl:when test="count(.//GT1.11.9) &gt; 0">
+				<xsl:when test="count(.//GT1.11.9) > 0">
 					<xsl:value-of
 						select="util:element('Guarantor Relationship', .//GT1.11.9, $ind1)"/>
 				</xsl:when>
-				<xsl:when test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) &gt; 0">
+				<xsl:when test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) > 0">
 					<xsl:value-of
 						select="util:element('Guarantor Relationship', .//GT1.11.2, $ind1)"/>
 				</xsl:when>
 				<xsl:when
-					test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) = 0 and count(.//GT1.11.1) &gt; 0">
+					test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) = 0 and count(.//GT1.11.1) > 0">
 					<xsl:value-of
 						select="util:element('Guarantor Relationship', .//GT1.11.1, $ind1)"/>
 				</xsl:when>
@@ -546,9 +547,9 @@
 		</xsl:for-each>
 
 		<xsl:value-of select="util:element('Guarantor Organization Name', .//GT1.21.1, $ind1)"/>
-		
+
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-		
+
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -705,9 +706,19 @@
 
 		<!-- Result copies subtable -->
 		<xsl:for-each select="..//PRT">
+			<xsl:variable name="index">
+				<xsl:choose>
+					<xsl:when test="count(..//PRT) > 1">
+						<xsl:value-of select="concat(' - ', position())"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
 			<xsl:value-of select="util:begin-sub-table($ind1)"/>
 			<xsl:value-of
-				select="util:title-no-tab('title', 'Result copies', 'Result copies', $ind2, false())"/>
+				select="util:title-no-tab('title', concat('Result copies', $index), concat('Result copies', $index), $ind2, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
 
 			<xsl:value-of select="util:element('Instance ID', .//PRT.1.1, $ind1)"/>
@@ -737,9 +748,19 @@
 
 		<!-- Diagnosis information subtable -->
 		<xsl:for-each select="..//DG1">
+			<xsl:variable name="index">
+				<xsl:choose>
+					<xsl:when test="count(..//DG1) > 1">
+						<xsl:value-of select="concat(' - ', position())"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
 			<xsl:value-of select="util:begin-sub-table($ind1)"/>
 			<xsl:value-of
-				select="util:title-no-tab('title', 'Diagnosis information', 'Diagnosis information', $ind2, false())"/>
+				select="util:title-no-tab('title', concat('Diagnosis information', $index), concat('Diagnosis information', $index), $ind2, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
 
 			<xsl:value-of select="util:element('Priority', .//DG1.15, $ind1)"/>
@@ -759,57 +780,62 @@
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 
-		<xsl:variable name="at-least-one-obx" select="count(..//OBX) > 0"/>
-		<xsl:if test="$at-least-one-obx">
-			<xsl:for-each select="..//OBX">
-				<!-- Observation Result subtable -->
-				<xsl:value-of select="util:begin-sub-table($ind2)"/>
-				<xsl:value-of
-					select="util:title-no-tab('title', 'Observation Result', 'Observation Result', $ind2, false())"/>
-				<xsl:value-of select="util:elements($ind2)"/>
+		<xsl:for-each select="..//OBX">
+			<!-- Observation Result subtable -->
+			<xsl:variable name="index">
 				<xsl:choose>
-					<xsl:when test=".//OBX.3.3 = 'LN'">
-						<xsl:value-of
-							select="util:element('Observation LOINC Identifier', ..//OBX.3.1, $ind1)"
-						/>
+					<xsl:when test="count(..//OBX) > 1">
+						<xsl:value-of select="concat(' - ', position())"/>
 					</xsl:when>
-					<xsl:when test=".//OBX.3.6 = 'LN'">
-						<xsl:value-of
-							select="util:element('Observation LOINC Identifier', ..//OBX.3.4, $ind1)"
-						/>
-					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text/>
+					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test=".//OBX.3.3 = 'LN'">
-						<xsl:value-of
-							select="util:element('Observation Alternative Identifier', ..//OBX.3.1, $ind1)"
-						/>
-					</xsl:when>
-					<xsl:when test=".//OBX.3.6 = 'LN'">
-						<xsl:value-of
-							select="util:element('Observation Alternative Identifier', ..//OBX.3.4, $ind1)"
-						/>
-					</xsl:when>
-				</xsl:choose>
-				<xsl:choose>
-					<xsl:when test=".//OBX.2 = 'CWE'">
-						<xsl:value-of
-							select="util:chooseAmongThree('Observation Value', ..//OBX.5.9, ..//OBX.5.2, ..//OBX.5.1, $ind1)"
-						/>
-					</xsl:when>
-					<xsl:when test=".//OBX.2 = 'NM' or .//OBX.2 = 'DT'">
-						<xsl:value-of select="util:element('Observation Value', ..//OBX.5, $ind1)"/>
-					</xsl:when>
-				</xsl:choose>
-				<xsl:value-of
-					select="util:chooseAmongThree('Units', ..//OBX.6.9, ..//OBX.6.2, ..//OBX.6.3, $ind1)"/>
-				<xsl:value-of select="util:element('Observation Result status', ..//OBX.11, $ind1)"/>
-				<xsl:value-of
-					select="util:element('Date/Time of the Observation', util:format-date(..//OBX.14.1), $ind1)"/>
-				<xsl:value-of select="util:element('Observation Type', ..//OBX.29, $ind1)"/>
-				<xsl:value-of select="util:end-table-fieldset($ind1)"/>
-			</xsl:for-each>
-		</xsl:if>
+			</xsl:variable>
+			<xsl:value-of select="util:begin-sub-table($ind2)"/>
+			<xsl:value-of
+				select="util:title-no-tab('title', concat('Observation Result', $index), concat('Observation Result', $index), $ind2, false())"/>
+			<xsl:value-of select="util:elements($ind2)"/>
+			<xsl:choose>
+				<xsl:when test=".//OBX.3.3 = 'LN'">
+					<xsl:value-of
+						select="util:element('Observation LOINC Identifier', ..//OBX.3.1, $ind1)"/>
+				</xsl:when>
+				<xsl:when test=".//OBX.3.6 = 'LN'">
+					<xsl:value-of
+						select="util:element('Observation LOINC Identifier', ..//OBX.3.4, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+			<xsl:choose>
+				<xsl:when test=".//OBX.3.3 = 'LN'">
+					<xsl:value-of
+						select="util:element('Observation Alternative Identifier', ..//OBX.3.1, $ind1)"
+					/>
+				</xsl:when>
+				<xsl:when test=".//OBX.3.6 = 'LN'">
+					<xsl:value-of
+						select="util:element('Observation Alternative Identifier', ..//OBX.3.4, $ind1)"
+					/>
+				</xsl:when>
+			</xsl:choose>
+			<xsl:choose>
+				<xsl:when test=".//OBX.2 = 'CWE'">
+					<xsl:value-of
+						select="util:chooseAmongThree('Observation Value', ..//OBX.5.9, ..//OBX.5.2, ..//OBX.5.1, $ind1)"
+					/>
+				</xsl:when>
+				<xsl:when test=".//OBX.2 = 'NM' or .//OBX.2 = 'DT'">
+					<xsl:value-of select="util:element('Observation Value', ..//OBX.5, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+			<xsl:value-of
+				select="util:chooseAmongThree('Units', ..//OBX.6.9, ..//OBX.6.2, ..//OBX.6.3, $ind1)"/>
+			<xsl:value-of select="util:element('Observation Result status', ..//OBX.11, $ind1)"/>
+			<xsl:value-of
+				select="util:element('Date/Time of the Observation', util:format-date(..//OBX.14.1), $ind1)"/>
+			<xsl:value-of select="util:element('Observation Type', ..//OBX.29, $ind1)"/>
+			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		</xsl:for-each>
 
 		<xsl:variable name="multiple-specimens" select="count(..//SPM) > 1"/>
 		<xsl:for-each select="..//SPM">
