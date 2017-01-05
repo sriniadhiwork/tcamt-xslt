@@ -259,26 +259,29 @@
 
 		<xsl:for-each select=".//PID.11">
 			<xsl:value-of
-			select="util:format-address-multilines('Patient Address', .//PID.11.1.1, .//PID.11.2, concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), .//PID.11.6, $ind1)"/>
+				select="util:format-address-multilines('Patient Address', .//PID.11.1.1, .//PID.11.2, concat(util:format-with-space(.//PID.11.3), util:format-with-space(.//PID.11.4), util:format-with-space(.//PID.11.5)), .//PID.11.6, $ind1)"
+			/>
 		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.13">
 			<xsl:choose>
 				<xsl:when test=".//PID.13.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Home phone number', concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), $ind1)"/>
+						select="util:element('Home phone number', concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), $ind1)"
+					/>
 				</xsl:when>
 				<xsl:when test=".//PID.13.3 = 'X.400' or .//PID.13.3 = 'Internet'">
 					<xsl:value-of select="util:element('Email address', .//PID.13.4, $ind1)"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:for-each>
-		
+
 		<xsl:for-each select=".//PID.14">
 			<xsl:choose>
 				<xsl:when test=".//PID.14.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Business phone number', concat(util:format-with-space(.//PID.14.6), util:format-with-space(.//PID.14.7), util:format-with-space(.//PID.14.8)), $ind1)"/>
+						select="util:element('Business phone number', concat(util:format-with-space(.//PID.14.6), util:format-with-space(.//PID.14.7), util:format-with-space(.//PID.14.8)), $ind1)"
+					/>
 				</xsl:when>
 				<xsl:when test=".//PID.14.3 = 'X.400' or .//PID.14.3 = 'Internet'">
 					<xsl:value-of
@@ -289,37 +292,36 @@
 
 		<xsl:for-each select=".//PID.10">
 			<xsl:choose>
-			<xsl:when test="count(.//PID.10.9) > 0">
-				<xsl:value-of select="util:element('Race', .//PID.10.9, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(.//PID.10.9) = 0 and count(.//PID.10.2) > 0">
-				<xsl:value-of select="util:element('Race', .//PID.10.2, $ind1)"/>
-			</xsl:when>
-			<xsl:when
-				test="count(.//PID.10.9) = 0 and count(.//PID.10.2) = 0 and count(.//PID.10.1) > 0">
-				<xsl:value-of select="util:element('Race', .//PID.10.1, $ind1)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Race', '', $ind1)"/>
-			</xsl:otherwise>
-		</xsl:choose>
+				<xsl:when test="count(.//PID.10.9) > 0">
+					<xsl:value-of select="util:element('Race', .//PID.10.9, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//PID.10.9) = 0 and count(.//PID.10.2) > 0">
+					<xsl:value-of select="util:element('Race', .//PID.10.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when
+					test="count(.//PID.10.9) = 0 and count(.//PID.10.2) = 0 and count(.//PID.10.1) > 0">
+					<xsl:value-of select="util:element('Race', .//PID.10.1, $ind1)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="util:element('Race', '', $ind1)"/>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:for-each>
 
-		<xsl:choose>
-			<xsl:when test="count(.//PID.22.9) > 0">
-				<xsl:value-of select="util:element('Ethnic group', .//PID.22.9, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(.//PID.22.9) = 0 and count(.//PID.22.2) > 0">
-				<xsl:value-of select="util:element('Ethnic group', .//PID.22.2, $ind1)"/>
-			</xsl:when>
-			<xsl:when
-				test="count(.//PID.10.9) = 0 and count(.//PID.22.2) = 0 and count(.//PID.22.1) > 0">
-				<xsl:value-of select="util:element('Ethnic group', .//PID.22.1, $ind1)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Ethnic group', '', $ind1)"/>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:for-each select=".//PID.22">
+			<xsl:choose>
+				<xsl:when test="count(.//PID.22.9) > 0">
+					<xsl:value-of select="util:element('Ethnic group', .//PID.22.9, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//PID.22.9) = 0 and count(.//PID.22.2) > 0">
+					<xsl:value-of select="util:element('Ethnic group', .//PID.22.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when
+					test="count(.//PID.10.9) = 0 and count(.//PID.22.2) = 0 and count(.//PID.22.1) > 0">
+					<xsl:value-of select="util:element('Ethnic group', .//PID.22.1, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
 
@@ -352,7 +354,8 @@
 
 		<xsl:if test="count(.//NK1.2)">
 			<xsl:value-of
-			select="util:element('Name', concat(util:format-with-space(.//NK1.2.2), util:format-with-space(.//NK1.2.3), util:format-with-space(.//NK1.2.1.1), .//NK1.2.4), $ind1)"/>
+				select="util:element('Name', concat(util:format-with-space(.//NK1.2.2), util:format-with-space(.//NK1.2.3), util:format-with-space(.//NK1.2.1.1), .//NK1.2.4), $ind1)"
+			/>
 		</xsl:if>
 		<xsl:value-of select="util:element('Organization name', NK1.13.1, $ind1)"/>
 		<xsl:value-of select="util:element('Organization identifier', NK1.13.10, $ind1)"/>
@@ -360,23 +363,25 @@
 
 		<xsl:if test="count(.//NK1.32)">
 			<xsl:value-of
-			select="util:format-address-multilines('Contact person s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"/>
+				select="util:format-address-multilines('Contact person s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"
+			/>
 		</xsl:if>
-		
+
 		<xsl:for-each select=".//NK1.4">
 			<xsl:value-of
-			select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)"/>
+				select="util:format-address-multilines('Address', .//NK1.4.1.1, .//NK1.4.2, concat(util:format-with-space(.//NK1.4.3), util:format-with-space(.//NK1.4.4), util:format-with-space(.//NK1.4.5)), .//NK1.4.6, $ind1)"
+			/>
 		</xsl:for-each>
 
 		<xsl:for-each select=".//NK1.5">
 			<xsl:choose>
 				<xsl:when test=".//NK1.5.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Phone number', concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), $ind1)"/>
+						select="util:element('Phone number', concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), $ind1)"
+					/>
 				</xsl:when>
 				<xsl:when test=".//NK1.5.3 = 'X.400' or .//NK1.5.3 = 'Internet'">
-					<xsl:value-of
-						select="util:element('Email address', .//NK1.5.4, $ind1)"/>
+					<xsl:value-of select="util:element('Email address', .//NK1.5.4, $ind1)"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:for-each>
@@ -575,24 +580,25 @@
 		<xsl:choose>
 			<xsl:when test="count(.//ORC.21)">
 				<xsl:value-of
-					select="util:format-address-multilines('Ordering Facility Address', .//ORC.21.1, .//ORC.22.1.1, concat(util:format-with-space(.//ORC.22.3), util:format-with-space(.//ORC.22.4), util:format-with-space(.//ORC.22.5)), .//ORC.22.6, $ind1)"/>				
+					select="util:format-address-multilines('Ordering Facility Address', .//ORC.21.1, .//ORC.22.1.1, concat(util:format-with-space(.//ORC.22.3), util:format-with-space(.//ORC.22.4), util:format-with-space(.//ORC.22.5)), .//ORC.22.6, $ind1)"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of
-					select="util:element('Ordering Facility Address', '', $ind1)"/>				
+				<xsl:value-of select="util:element('Ordering Facility Address', '', $ind1)"/>
 			</xsl:otherwise>
 		</xsl:choose>
-		
+
 		<xsl:choose>
 			<xsl:when test="ORC.23.3 = 'PH'">
 				<xsl:value-of
-					select="util:element('Ordering Facility Phone number', concat(util:format-with-space(.//ORC.23.6), util:format-with-space(.//ORC.23.7), util:format-with-space(.//ORC.23.8)), $ind1)"/>				
+					select="util:element('Ordering Facility Phone number', concat(util:format-with-space(.//ORC.23.6), util:format-with-space(.//ORC.23.7), util:format-with-space(.//ORC.23.8)), $ind1)"
+				/>
 			</xsl:when>
 			<xsl:when test=".//ORC.23.3 = 'X.400' or .//ORC.23.3 = 'Internet'">
 				<xsl:value-of
 					select="util:element('Ordering Facility email address', .//ORC.23.4, $ind1)"/>
 			</xsl:when>
-		</xsl:choose>		
+		</xsl:choose>
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 		<!-- General order information subtable -->
@@ -642,7 +648,7 @@
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Order details', 'Order details', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="..//OBR.4.3 = 'LN'">
 				<xsl:value-of
@@ -667,13 +673,12 @@
 				/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of
-			select="util:element('Observation Date/Time', ..//OBR.7.1, $ind1)"/>
+		<xsl:value-of select="util:element('Observation Date/Time', ..//OBR.7.1, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Observation end Date/Time', util:format-time(..//OBR.8.1), $ind1)"/>
 		<xsl:value-of
 			select="util:chooseAmongThree('Relevant Clinical Information', ..//OBR.13.9, ..//OBR.13.2, ..//OBR.13.1, $ind1)"/>
-		
+
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 
@@ -700,11 +705,12 @@
 			<xsl:value-of
 				select="util:element('Name', concat(util:format-with-space(.//PRT.5.3), .//PRT.5.2), $ind1)"/>
 			<xsl:value-of
-			select="util:format-address-multilines('Address', .//PRT.14.1.1, .//PRT.14.2, concat(util:format-with-space(.//PRT.14.3), util:format-with-space(.//PRT.14.4), util:format-with-space(.//PRT.14.5)), .//PRT.14.6, $ind1)"/> 
+				select="util:format-address-multilines('Address', .//PRT.14.1.1, .//PRT.14.2, concat(util:format-with-space(.//PRT.14.3), util:format-with-space(.//PRT.14.4), util:format-with-space(.//PRT.14.5)), .//PRT.14.6, $ind1)"/>
 			<xsl:for-each select=".//PRT.15">
 				<xsl:variable name="pho" as="xs:boolean" select="..//PRT.15.3 = 'PH'"/>
 				<xsl:value-of
-					select="util:element('Phone Number', util:IfThenElse($pho, concat(util:format-with-space(..//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), ''), $ind1)"/>
+					select="util:element('Phone Number', util:IfThenElse($pho, concat(util:format-with-space(..//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), ''), $ind1)"
+				/>
 			</xsl:for-each>
 			<xsl:variable name="ead" as="xs:boolean"
 				select=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'"/>
