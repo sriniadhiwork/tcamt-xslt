@@ -728,18 +728,20 @@
 				select="util:element('Name', concat(util:format-with-space(.//PRT.5.3), .//PRT.5.2), $ind1)"/>
 			<xsl:value-of
 				select="util:format-address-multilines('Address', .//PRT.14.1.1, .//PRT.14.2, concat(util:format-with-space(.//PRT.14.3), util:format-with-space(.//PRT.14.4), util:format-with-space(.//PRT.14.5)), .//PRT.14.6, $ind1)"/>
+			
 			<xsl:for-each select=".//PRT.15">
-				<xsl:variable name="pho" as="xs:boolean" select="..//PRT.15.3 = 'PH'"/>
-				<xsl:value-of
-					select="util:element('Phone Number', util:IfThenElse($pho, concat(util:format-with-space(..//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), ''), $ind1)"
-				/>
+				<xsl:choose>
+					<xsl:when test=".//PRT.15.3 = 'PH'">
+						<xsl:value-of
+							select="util:element('Phone Number', concat(util:format-with-space(.//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), $ind1)"/>
+					</xsl:when>
+					<xsl:when test=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'">
+						<xsl:value-of
+							select="util:element('Ordering Facility email address', .//PRT.15.4, $ind1)"/>
+					</xsl:when>
+				</xsl:choose>
 			</xsl:for-each>
-			<xsl:variable name="ead" as="xs:boolean"
-				select=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'"/>
-			<xsl:value-of
-				select="util:element('Ordering Facility email address', util:IfThenElse($ead, .//PRT.15.4, ''), $ind1)"/>
-
-
+			
 			<xsl:value-of select="util:element('Action code', .//PRT.2, $ind1)"/>
 			<xsl:value-of
 				select="util:chooseAmongThree('Participation', .//PRT.4.9, .//PRT.4.2, .//PRT.4.1, $ind1)"/>
