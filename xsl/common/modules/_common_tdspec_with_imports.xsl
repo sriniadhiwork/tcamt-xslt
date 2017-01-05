@@ -361,7 +361,8 @@
 		</xsl:if>
 		<xsl:value-of select="util:element('Organization name', .//NK1.13.1, $ind1)"/>
 		<xsl:value-of select="util:element('Organization identifier', .//NK1.13.10, $ind1)"/>
-		<xsl:value-of select="util:element('Contact person''s name', concat(util:format-with-space(.//NK1.30.2), util:format-with-space(.//NK1.30.3), util:format-with-space(.//NK1.30.1.1), util:format-with-space(.//NK1.30.4)), $ind1)"/>
+		<xsl:value-of
+			select="util:element('Contact person''s name', concat(util:format-with-space(.//NK1.30.2), util:format-with-space(.//NK1.30.3), util:format-with-space(.//NK1.30.1.1), util:format-with-space(.//NK1.30.4)), $ind1)"/>
 
 		<xsl:if test="count(.//NK1.32)">
 			<xsl:value-of
@@ -413,20 +414,20 @@
 		<xsl:value-of select="util:element('Financial Class', .//PV1.20.1, $ind1)"/>
 
 		<xsl:for-each select=".//PV1.22">
-		<xsl:choose>
-			<xsl:when test="count(PV1.22.9) > 0">
-				<xsl:value-of select="util:element('Courtesy Code', PV1.22.9, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) > 0">
-				<xsl:value-of select="util:element('Courtesy Code', PV1.22.2, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) = 0 and count(PV1.22.1) > 0">
-				<xsl:value-of select="util:element('Courtesy Code', PV1.22.1, $ind1)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Courtesy Code', '', $ind1)"/>
-			</xsl:otherwise>
-		</xsl:choose>
+			<xsl:choose>
+				<xsl:when test="count(PV1.22.9) > 0">
+					<xsl:value-of select="util:element('Courtesy Code', PV1.22.9, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) > 0">
+					<xsl:value-of select="util:element('Courtesy Code', PV1.22.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) = 0 and count(PV1.22.1) > 0">
+					<xsl:value-of select="util:element('Courtesy Code', PV1.22.1, $ind1)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="util:element('Courtesy Code', '', $ind1)"/>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:for-each>
 
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
@@ -448,16 +449,17 @@
 
 		<xsl:for-each select=".//IN1.2">
 			<xsl:choose>
-			<xsl:when test="count(.//IN1.2.9) > 0">
-				<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.9, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.2.2) > 0">
-				<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.2, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.2.2) = 0 and count(.//IN1.2.1) > 0">
-				<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.1, $ind1)"/>
-			</xsl:when>
-		</xsl:choose>
+				<xsl:when test="count(.//IN1.2.9) > 0">
+					<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.9, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.2.2) > 0">
+					<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when
+					test="count(.//IN1.2.9) = 0 and count(.//IN1.2.2) = 0 and count(.//IN1.2.1) > 0">
+					<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.1, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
 		</xsl:for-each>
 
 		<xsl:value-of select="util:element('Insurance Company ID', .//IN1.3.1, $ind1)"/>
@@ -468,7 +470,8 @@
 
 		<xsl:value-of select="util:element('Group Number', .//IN1.8, $ind1)"/>
 		<xsl:value-of select="util:element('Insured s Group Employer Name', .//IN1.11.1, $ind1)"/>
-		<xsl:value-of select="util:element('Insured s Group Employer Identifier', .//IN1.11.10, $ind1)"/>
+		<xsl:value-of
+			select="util:element('Insured s Group Employer Identifier', .//IN1.11.10, $ind1)"/>
 		<xsl:value-of select="util:element('Plan Expiration Date', .//IN1.13, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Name Of Insured', concat(util:format-with-space(.//IN1.16.2), util:format-with-space(.//IN1.16.3), util:format-with-space(.//IN1.16.1.1), util:format-with-space(.//IN1.16.4)), $ind1)"/>
@@ -480,11 +483,14 @@
 			</xsl:when>
 			<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.17.2) > 0">
 				<xsl:value-of
-					select="util:element('Insured''s Relationship To Patient', .//IN1.17.2, $ind1)"/>
+					select="util:element('Insured''s Relationship To Patient', .//IN1.17.2, $ind1)"
+				/>
 			</xsl:when>
-			<xsl:when test="count(.//IN1.17.9) = 0 and count(.//IN1.17.2) = 0 and count(.//IN1.17.1) > 0">
+			<xsl:when
+				test="count(.//IN1.17.9) = 0 and count(.//IN1.17.2) = 0 and count(.//IN1.17.1) > 0">
 				<xsl:value-of
-					select="util:element('Insured''s Relationship To Patient', .//IN1.17.1, $ind1)"/>
+					select="util:element('Insured''s Relationship To Patient', .//IN1.17.1, $ind1)"
+				/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="util:element('Insured''s Relationship To Patient', '', $ind1)"
@@ -524,23 +530,23 @@
 		<xsl:value-of
 			select="util:format-address-multilines('Guarantor Address', .//GT1.5.1.1, .//GT1.5.2, concat(util:format-with-space(.//GT1.5.3), util:format-with-space(.//GT1.5.4), util:format-with-space(.//GT1.5.5)), GT1.5.6, $ind1)"/>
 
-
-		<xsl:choose>
-			<xsl:when test="count(.//GT1.11.9) > 0">
-				<xsl:value-of select="util:element('Guarantor Relationship', GT1.11.2, $ind1)"/>
-			</xsl:when>
-			<xsl:when test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) > 0">
-				<xsl:value-of select="util:element('Guarantor Relationship', GT1.11.2, $ind1)"/>
-			</xsl:when>
-			<xsl:when
-				test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) = 0 and count(.//GT1.11.1) > 0">
-				<xsl:value-of select="util:element('Guarantor Relationship', GT1.11.1, $ind1)"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Guarantor Relationship', '', $ind1)"/>
-			</xsl:otherwise>
-		</xsl:choose>
-
+		<xsl:for-each select=".//GT1.11">
+			<xsl:choose>
+				<xsl:when test="count(.//GT1.11.9) > 0">
+					<xsl:value-of
+						select="util:element('Guarantor Relationship', .//GT1.11.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) > 0">
+					<xsl:value-of
+						select="util:element('Guarantor Relationship', .//GT1.11.2, $ind1)"/>
+				</xsl:when>
+				<xsl:when
+					test="count(.//GT1.11.9) = 0 and count(.//GT1.11.2) = 0 and count(.//GT1.11.1) > 0">
+					<xsl:value-of
+						select="util:element('Guarantor Relationship', .//GT1.11.1, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:value-of select="util:element('Guarantor Organization Name', .//GT1.21.1, $ind1)"/>
 	</xsl:template>
