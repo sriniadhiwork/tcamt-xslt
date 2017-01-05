@@ -446,60 +446,60 @@
 			select="util:title('title', concat('Insurance Information', $counter), 'Insurance Information', $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 
-		<xsl:choose>
-			<xsl:when test="count(IN1.2.9) > 0">
-				<xsl:value-of select="util:element('Insurance Plan ID', IN1.2.9, $ind1)"/>
+		<xsl:for-each select=".//IN1.2">
+			<xsl:choose>
+			<xsl:when test="count(.//IN1.2.9) > 0">
+				<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.9, $ind1)"/>
 			</xsl:when>
-			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.2.2) > 0">
-				<xsl:value-of select="util:element('Insurance Plan ID', IN1.2.2, $ind1)"/>
+			<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.2.2) > 0">
+				<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.2, $ind1)"/>
 			</xsl:when>
-			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.2.2) = 0 and count(IN1.2.1) > 0">
-				<xsl:value-of select="util:element('Insurance Plan ID', IN1.2.1, $ind1)"/>
+			<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.2.2) = 0 and count(.//IN1.2.1) > 0">
+				<xsl:value-of select="util:element('Insurance Plan ID', .//IN1.2.1, $ind1)"/>
 			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="util:element('Insurance Plan ID', '', $ind1)"/>
-			</xsl:otherwise>
 		</xsl:choose>
+		</xsl:for-each>
 
-		<xsl:value-of select="util:element('Insurance Company ID', IN1.3.1, $ind1)"/>
-		<xsl:value-of select="util:element('Insurance Company Name', IN1.4.1, $ind1)"/>
+		<xsl:value-of select="util:element('Insurance Company ID', .//IN1.3.1, $ind1)"/>
+		<xsl:value-of select="util:element('Insurance Company Name', .//IN1.4.1, $ind1)"/>
 
 		<xsl:value-of
 			select="util:format-address-multilines('Insurance Company Address', .//IN1.5.1.1, .//IN1.5.2, concat(util:format-with-space(.//IN1.5.3), util:format-with-space(.//IN1.5.4), util:format-with-space(.//IN1.5.5)), .//IN1.5.6, $ind1)"/>
 
-		<xsl:value-of select="util:element('Group Number', IN1.8, $ind1)"/>
-		<xsl:value-of select="util:element('Insured s Group Employer Name', IN1.11, $ind1)"/>
-		<xsl:value-of select="util:element('Plan Expiration Date', IN1.13, $ind1)"/>
+		<xsl:value-of select="util:element('Group Number', .//IN1.8, $ind1)"/>
+		<xsl:value-of select="util:element('Insured s Group Employer Name', .//IN1.11.1, $ind1)"/>
+		<xsl:value-of select="util:element('Insured s Group Employer Identifier', .//IN1.11.10, $ind1)"/>
+		<xsl:value-of select="util:element('Plan Expiration Date', .//IN1.13, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Name Of Insured', concat(util:format-with-space(.//IN1.16.2), util:format-with-space(.//IN1.16.3), util:format-with-space(.//IN1.16.1.1), util:format-with-space(.//IN1.16.4)), $ind1)"/>
 
 		<xsl:choose>
-			<xsl:when test="count(IN1.17.9) > 0">
+			<xsl:when test="count(.//IN1.17.9) > 0">
 				<xsl:value-of
-					select="util:element('Insured s Relationship To Patient', IN1.17.9, $ind1)"/>
+					select="util:element('Insured s Relationship To Patient', .//IN1.17.9, $ind1)"/>
 			</xsl:when>
-			<xsl:when test="count(IN1.2.9) = 0 and count(IN1.17.2) > 0">
+			<xsl:when test="count(.//IN1.2.9) = 0 and count(.//IN1.17.2) > 0">
 				<xsl:value-of
-					select="util:element('Insured s Relationship To Patient', IN1.17.2, $ind1)"/>
+					select="util:element('Insured''s Relationship To Patient', .//IN1.17.2, $ind1)"/>
 			</xsl:when>
-			<xsl:when test="count(IN1.17.9) = 0 and count(IN1.17.2) = 0 and count(IN1.17.1) > 0">
+			<xsl:when test="count(.//IN1.17.9) = 0 and count(.//IN1.17.2) = 0 and count(.//IN1.17.1) > 0">
 				<xsl:value-of
-					select="util:element('Insured s Relationship To Patient', IN1.17.1, $ind1)"/>
+					select="util:element('Insured''s Relationship To Patient', .//IN1.17.1, $ind1)"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="util:element('Insured s Relationship To Patient', '', $ind1)"
+				<xsl:value-of select="util:element('Insured''s Relationship To Patient', '', $ind1)"
 				/>
 			</xsl:otherwise>
 		</xsl:choose>
 
 		<xsl:value-of
-			select="util:element('Insured s Date Of Birth', util:format-date(.//IN1.18.1), $ind1)"/>
+			select="util:element('Insured''s Date Of Birth', util:format-date(.//IN1.18.1), $ind1)"/>
 
 		<xsl:value-of
 			select="util:format-address-multilines('Insured Address', .//IN1.19.1.1, .//IN1.19.2, concat(util:format-with-space(.//IN1.19.3), util:format-with-space(.//IN1.19.4), util:format-with-space(.//IN1.19.5)), .//IN1.19.6, $ind1)"/>
 
-		<xsl:value-of select="util:element('Type Of Agreement Code', IN1.31, $ind1)"/>
-		<xsl:value-of select="util:element('Policy Number', IN1.36, $ind1)"/>
+		<xsl:value-of select="util:element('Type Of Agreement Code', .//IN1.31, $ind1)"/>
+		<xsl:value-of select="util:element('Policy Number', .//IN1.36, $ind1)"/>
 
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
