@@ -415,18 +415,15 @@
 
 		<xsl:for-each select=".//PV1.22">
 			<xsl:choose>
-				<xsl:when test="count(PV1.22.9) > 0">
-					<xsl:value-of select="util:element('Courtesy Code', PV1.22.9, $ind1)"/>
+				<xsl:when test="count(.//PV1.22.9) > 0">
+					<xsl:value-of select="util:element('Courtesy Code', .//PV1.22.9, $ind1)"/>
 				</xsl:when>
-				<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) > 0">
-					<xsl:value-of select="util:element('Courtesy Code', PV1.22.2, $ind1)"/>
+				<xsl:when test="count(.//PV1.22.9) = 0 and count(.//PV1.22.2) > 0">
+					<xsl:value-of select="util:element('Courtesy Code', .//PV1.22.2, $ind1)"/>
 				</xsl:when>
-				<xsl:when test="count(PV1.22.9) = 0 and count(PV1.22.2) = 0 and count(PV1.22.1) > 0">
-					<xsl:value-of select="util:element('Courtesy Code', PV1.22.1, $ind1)"/>
+				<xsl:when test="count(.//PV1.22.9) = 0 and count(.//PV1.22.2) = 0 and count(.//PV1.22.1) > 0">
+					<xsl:value-of select="util:element('Courtesy Code', .//PV1.22.1, $ind1)"/>
 				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="util:element('Courtesy Code', '', $ind1)"/>
-				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:for-each>
 
