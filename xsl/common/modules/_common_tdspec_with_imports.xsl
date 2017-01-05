@@ -577,14 +577,18 @@
 
 		<xsl:value-of select="util:element('Provider NPI identifier', .//ORC.12.1, $ind1)"/>
 
-		<xsl:variable name="bpn" as="xs:boolean" select=".//ORC.14.3 = 'PH'"/>
-		<xsl:value-of
-			select="util:element('Call Back Phone number', util:IfThenElse($bpn, concat(util:format-with-space(.//ORC.14.6), util:format-with-space(.//ORC.14.7), util:format-with-space(.//ORC.14.8)), ''), $ind1)"/>
-
-		<xsl:variable name="ema" as="xs:boolean"
-			select=".//ORC.14.3 = 'X.400' or .//ORC.14.3 = 'Internet'"/>
-		<xsl:value-of
-			select="util:element('Email address', util:IfThenElse($ema, .//ORC.14.4, ''), $ind1)"/>
+		<xsl:for-each select=".//ORC.14">
+			<xsl:choose>
+				<xsl:when test=".//ORC.14.3 = 'PH'">
+					<xsl:value-of
+						select="util:element('Call Back Phone number', concat(util:format-with-space(.//ORC.14.6), util:format-with-space(.//ORC.14.7), util:format-with-space(.//ORC.14.8)), $ind1)"
+					/>
+				</xsl:when>
+				<xsl:when test=".//ORC.14.3 = 'X.400' or .//ORC.14.3 = 'Internet'">
+					<xsl:value-of select="util:element('Email address', .//ORC.14.4, $ind1)"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each>
 
 		<xsl:value-of select="util:element('Ordering Facility Name', .//ORC.21.1, $ind1)"/>
 
