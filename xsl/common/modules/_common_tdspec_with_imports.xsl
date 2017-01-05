@@ -359,13 +359,13 @@
 				select="util:element('Name', concat(util:format-with-space(.//NK1.2.2), util:format-with-space(.//NK1.2.3), util:format-with-space(.//NK1.2.1.1), .//NK1.2.4), $ind1)"
 			/>
 		</xsl:if>
-		<xsl:value-of select="util:element('Organization name', NK1.13.1, $ind1)"/>
-		<xsl:value-of select="util:element('Organization identifier', NK1.13.10, $ind1)"/>
-		<xsl:value-of select="util:element('Contact person s name', NK1.30, $ind1)"/>
+		<xsl:value-of select="util:element('Organization name', .//NK1.13.1, $ind1)"/>
+		<xsl:value-of select="util:element('Organization identifier', .//NK1.13.10, $ind1)"/>
+		<xsl:value-of select="util:element('Contact person''s name', concat(util:format-with-space(.//NK1.30.2), util:format-with-space(.//NK1.30.3), util:format-with-space(.//NK1.30.1.1), util:format-with-space(.//NK1.30.4)), $ind1)"/>
 
 		<xsl:if test="count(.//NK1.32)">
 			<xsl:value-of
-				select="util:format-address-multilines('Contact person s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"
+				select="util:format-address-multilines('Contact person''s address', .//NK1.32.1.1, .//NK1.32.2, concat(util:format-with-space(.//NK1.32.3), util:format-with-space(.//NK1.32.4), util:format-with-space(.//NK1.32.5)), .//NK1.32.6, $ind1)"
 			/>
 		</xsl:if>
 
