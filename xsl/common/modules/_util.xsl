@@ -1042,9 +1042,6 @@
 			<xsl:when test="$seg = 'PID' or $seg = 'QPD'">
 				<xsl:value-of select="'Patient Information'"/>
 			</xsl:when>
-			<xsl:when test="$seg = 'PD1'">
-				<xsl:value-of select="'Immunization Registry Information'"/>
-			</xsl:when>
 			<xsl:when test="$seg = 'PV1'">
 				<xsl:value-of select="'Patient Visit Information'"/>
 			</xsl:when>
@@ -1056,6 +1053,12 @@
 			</xsl:when>
 			<xsl:when test="$seg = 'RXA'">
 				<xsl:value-of select="'Vaccine Administration Information'"/>
+			</xsl:when>
+			<xsl:when test="$seg = 'ACK'">
+				<xsl:value-of select="'Acknowledgment'"/>
+			</xsl:when>
+			<xsl:when test="$seg = 'ERR'">
+				<xsl:value-of select="'Error'"/>
 			</xsl:when>
 			<!-- [Caro] add LRI Order Observation -->
 			<!-- TODO : make sure it does not impact IZ or SS -->

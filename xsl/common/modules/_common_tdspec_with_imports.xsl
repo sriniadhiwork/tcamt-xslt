@@ -47,8 +47,9 @@
 		select="$output = 'plain-html' or $output = 'ng-tab-html'"/>
 	<!--  Use this section for supportd profiles -->
 	<xsl:variable name="ACK" select="'ACK'"/>
-	<xsl:variable name="RSP" select="'RSP'"/>
 	<xsl:variable name="LOI" select="'LOI'"/>
+	<xsl:variable name="OML" select="'OML'"/>
+	<xsl:variable name="ORL" select="'ORL'"/>
 
 	<xsl:variable name="br">
 		<xsl:value-of select="util:tag('br/', '')"/>
@@ -96,19 +97,19 @@
 				<xsl:when test="starts-with(name(.), 'ACK')">
 					<xsl:value-of select="$ACK"/>
 				</xsl:when>
-				<xsl:when test="starts-with(name(.), 'ORU')">
-					<xsl:value-of select="$LOI"/>
-				</xsl:when>
 				<xsl:when test="starts-with(name(.), 'OML')">
-					<xsl:value-of select="$LOI"/>
+					<xsl:value-of select="$OML"/>
+				</xsl:when>
+				<xsl:when test="starts-with(name(.), 'ORL')">
+					<xsl:value-of select="$ORL"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 
-		<!-- - - - - - Acknolwedgement profiles: showing a template saying that it is supplied by the system- - - - - - - - - - - -->
+		<!-- - - - - - Acknolwedgement profiles - - - - - - - - - - - -->
 		<xsl:if test="$message-type = $ACK">
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//ACK"/>
+				<xsl:with-param name="segments" select="//MSA"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ERR"/>
@@ -117,11 +118,10 @@
 
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - LOI display - - - - - - - - - - - - -->
+		<!-- - - - - - OML display - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<xsl:if test="$message-type = $LOI">
-			<!-- - - - - - LOI - - - - - - - - - - - -->
+		<xsl:if test="$message-type = $OML">
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
 			</xsl:call-template>
@@ -140,30 +140,27 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ORC"/>
 			</xsl:call-template>
-			<!--
+		</xsl:if>
+
+		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-- - - - - - ORL display - - - - - - - - - - - - -->
+		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<xsl:if test="$message-type = $ORL">
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//TQ1"/>
+				<xsl:with-param name="segments" select="//ACK"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//OBR"/>
+				<xsl:with-param name="segments" select="//ERR"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//NTE"/>
+				<xsl:with-param name="segments" select="//PID"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//PRT"/>
-			</xsl:call-template>
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//DG1"/>
-			</xsl:call-template>
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//OBX"/>
+				<xsl:with-param name="segments" select="//ORC"/>
 			</xsl:call-template>
 
-			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//SPM"/>
-			</xsl:call-template>
-			-->
 			<!-- - - - Call with mode - - -  
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
@@ -728,20 +725,22 @@
 				select="util:element('Name', concat(util:format-with-space(.//PRT.5.3), .//PRT.5.2), $ind1)"/>
 			<xsl:value-of
 				select="util:format-address-multilines('Address', .//PRT.14.1.1, .//PRT.14.2, concat(util:format-with-space(.//PRT.14.3), util:format-with-space(.//PRT.14.4), util:format-with-space(.//PRT.14.5)), .//PRT.14.6, $ind1)"/>
-			
+
 			<xsl:for-each select=".//PRT.15">
 				<xsl:choose>
 					<xsl:when test=".//PRT.15.3 = 'PH'">
 						<xsl:value-of
-							select="util:element('Phone Number', concat(util:format-with-space(.//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), $ind1)"/>
+							select="util:element('Phone Number', concat(util:format-with-space(.//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), $ind1)"
+						/>
 					</xsl:when>
 					<xsl:when test=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'">
 						<xsl:value-of
-							select="util:element('Ordering Facility email address', .//PRT.15.4, $ind1)"/>
+							select="util:element('Ordering Facility email address', .//PRT.15.4, $ind1)"
+						/>
 					</xsl:when>
 				</xsl:choose>
 			</xsl:for-each>
-			
+
 			<xsl:value-of select="util:element('Action code', .//PRT.2, $ind1)"/>
 			<xsl:value-of
 				select="util:chooseAmongThree('Participation', .//PRT.4.9, .//PRT.4.2, .//PRT.4.1, $ind1)"/>
@@ -831,7 +830,9 @@
 					<xsl:value-of select="util:element('Observation Value', .//OBX.5, $ind1)"/>
 				</xsl:when>
 				<xsl:when test=".//OBX.2 = 'DT'">
-					<xsl:value-of select="util:element('Observation Value', util:format-date(.//OBX.5), $ind1)"/>
+					<xsl:value-of
+						select="util:element('Observation Value', util:format-date(.//OBX.5), $ind1)"
+					/>
 				</xsl:when>
 			</xsl:choose>
 			<xsl:value-of
@@ -897,7 +898,7 @@
 		<xsl:value-of select="util:elements($ind1)"/>
 		<xsl:value-of
 			select="util:element('Patient Name', concat(util:format-with-space(.//QPD.4.2), util:format-with-space(.//QPD.4.3), .//QPD.4.1.1), $ind1)"/>
-		<xsl:value-of select="util:element('Mother s Maiden Name', .//QPD.5.1.1, $ind1)"/>
+		<xsl:value-of select="util:element('Mother''s Maiden Name', .//QPD.5.1.1, $ind1)"/>
 		<xsl:value-of
 			select="util:element('ID Number', concat(util:format-with-space(.//QPD.3.1[1]), .//QPD.3.1[2]), $ind1)"/>
 		<xsl:value-of
@@ -941,20 +942,20 @@
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	
+
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - Acknoledgment information - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<xsl:template match="ACK">
+	<xsl:template match="MSA">
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:value-of
 			select="util:title('title', 'Acknowledgment', 'Acknowledgment', $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
-		
+
 		<xsl:value-of select="util:element('Acknowledgment code', .//MSA.1, $ind1)"/>
-		
+
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
 
@@ -967,27 +968,27 @@
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
 		<xsl:value-of
-			select="util:title('title', concat('Error details', $counter), 'Error details', $ind1, false(), $vertical-orientation, false())"/>
+			select="util:title('title', concat('Error details', $counter), concat('Error details', $counter), $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
-		
-		<xsl:value-of select="util:single-element('Error Location', $ind1)" />
-		<xsl:value-of select="util:element('Segment ID ', .//ERR.2.1, $ind1)"/>
-		<xsl:value-of select="util:element('Segment Sequence', .//ERR.2.2, $ind1)"/>
-		<xsl:value-of select="util:element('Field Position', .//ERR.2.3, $ind1)"/>
-		<xsl:value-of select="util:element('Field Repetition ', .//ERR.2.4, $ind1)"/>
-		<xsl:value-of select="util:element('Component number', .//ERR.2.5, $ind1)"/>
-		<xsl:value-of select="util:element('Sub-Component number', .//ERR.2.6, $ind1)"/>
-		
+
+		<xsl:value-of select="util:single-element('Error Location', $ind1)"/>
+		<xsl:value-of select="util:element('Segment ID ', .//ERR.2.1, $ind2)"/>
+		<xsl:value-of select="util:element('Segment Sequence', .//ERR.2.2, $ind2)"/>
+		<xsl:value-of select="util:element('Field Position', .//ERR.2.3, $ind2)"/>
+		<xsl:value-of select="util:element('Field Repetition ', .//ERR.2.4, $ind2)"/>
+		<xsl:value-of select="util:element('Component number', .//ERR.2.5, $ind2)"/>
+		<xsl:value-of select="util:element('Sub-Component number', .//ERR.2.6, $ind2)"/>
+
 		<xsl:value-of
 			select="util:chooseAmongThree('HL7 Error Code', .//ERR.3.9, .//ERR.3.2, .//ERR.3.1, $ind1)"/>
-		
+
 		<xsl:value-of select="util:element('Severity', .//ERR.4, $ind1)"/>
-		
+
 		<xsl:value-of
 			select="util:chooseAmongThree('Application Error Code', .//ERR.5.9, .//ERR.5.2, .//ERR.5.1, $ind1)"/>
 		<xsl:value-of select="util:element('Diagnostic information', .//ERR.7, $ind1)"/>
 		<xsl:value-of select="util:element('User message', .//ERR.8, $ind1)"/>
-				
+
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -1006,6 +1007,6 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!--  to nullify the effects of the unmatched segments due to apply-templates -->
-	<xsl:template match="*" mode="Syndromic"> </xsl:template>
-	<xsl:template match="*" mode="LRI"> </xsl:template>
+	<!--<xsl:template match="*" mode="Syndromic"> </xsl:template>
+	<xsl:template match="*" mode="LRI"> </xsl:template>-->
 </xsl:stylesheet>
