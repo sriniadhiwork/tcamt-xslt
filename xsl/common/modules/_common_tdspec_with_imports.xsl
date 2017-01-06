@@ -331,7 +331,7 @@
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
 		<xsl:value-of
-			select="util:title('title', concat('Next of kin information', $counter), 'Next of kin information', $ind1, true(), $vertical-orientation, false())"/>
+			select="util:title('title', concat('Next of kin information', $counter), concat('Next of kin information', $counter), $ind1, true(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 		<xsl:for-each select=".//NK1.3">
 			<xsl:choose>
