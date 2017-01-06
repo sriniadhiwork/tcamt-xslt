@@ -251,8 +251,8 @@
 			select="util:element('Mother s Maiden Name', concat(util:format-with-space(.//PID.6.2), util:format-with-space(.//PID.6.3), util:format-with-space(.//PID.6.1.1), .//PID.6.4), $ind1)"/>
 		<xsl:value-of select="util:element('Administrative Sex', util:admin-sex(.//PID.8), $ind1)"/>
 		<xsl:value-of
-			select="util:element('Date/Time of Birth', util:format-date(.//PID.7.1), $ind1)"/>
-		<xsl:value-of select="util:element('Death Date/Time', util:format-date(.//PID.29.1), $ind1)"/>
+			select="util:element('Date/Time of Birth', util:format-time(.//PID.7.1), $ind1)"/>
+		<xsl:value-of select="util:element('Death Date/Time', util:format-time(.//PID.29.1), $ind1)"/>
 
 		<xsl:for-each select=".//PID.11">
 			<xsl:value-of
@@ -494,7 +494,7 @@
 		</xsl:choose>
 
 		<xsl:value-of
-			select="util:element('Insured''s Date Of Birth', util:format-date(.//IN1.18.1), $ind1)"/>
+			select="util:element('Insured''s Date Of Birth', util:format-time(.//IN1.18.1), $ind1)"/>
 
 		<xsl:value-of
 			select="util:format-address-multilines('Insured Address', .//IN1.19.1.1, .//IN1.19.2, concat(util:format-with-space(.//IN1.19.3), util:format-with-space(.//IN1.19.4), util:format-with-space(.//IN1.19.5)), .//IN1.19.6, $ind1)"/>
@@ -831,7 +831,7 @@
 				</xsl:when>
 				<xsl:when test=".//OBX.2 = 'DT'">
 					<xsl:value-of
-						select="util:element('Observation Value', util:format-date(.//OBX.5), $ind1)"
+						select="util:element('Observation Value', util:format-time(.//OBX.5), $ind1)"
 					/>
 				</xsl:when>
 			</xsl:choose>
@@ -839,7 +839,7 @@
 				select="util:chooseAmongThree('Units', .//OBX.6.9, .//OBX.6.2, .//OBX.6.1, $ind1)"/>
 			<xsl:value-of select="util:element('Observation Result status', .//OBX.11, $ind1)"/>
 			<xsl:value-of
-				select="util:element('Date/Time of the Observation', util:format-date(.//OBX.14.1), $ind1)"/>
+				select="util:element('Date/Time of the Observation', util:format-time(.//OBX.14.1), $ind1)"/>
 			<xsl:value-of select="util:element('Observation Type', .//OBX.29, $ind1)"/>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
@@ -869,9 +869,9 @@
 			<xsl:value-of
 				select="util:chooseAmongThree('Source site modifier', .//SPM.9.9, .//SPM.9.2, .//SPM.9.1, $ind1)"/>
 			<xsl:value-of
-				select="util:element('Collection Start Date/Time', util:format-date(.//SPM.17.1.1), $ind1)"/>
+				select="util:element('Collection Start Date/Time', util:format-time(.//SPM.17.1.1), $ind1)"/>
 			<xsl:value-of
-				select="util:element('Collection End Date/Time', util:format-date(.//SPM.17.2.1), $ind1)"/>
+				select="util:element('Collection End Date/Time', util:format-time(.//SPM.17.2.1), $ind1)"/>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 
@@ -902,7 +902,7 @@
 		<xsl:value-of
 			select="util:element('ID Number', concat(util:format-with-space(.//QPD.3.1[1]), .//QPD.3.1[2]), $ind1)"/>
 		<xsl:value-of
-			select="util:element('Date/Time of Birth', util:format-date(.//QPD.6.1), $ind1)"/>
+			select="util:element('Date/Time of Birth', util:format-time(.//QPD.6.1), $ind1)"/>
 		<xsl:value-of select="util:element('Sex', util:admin-sex(.//QPD.7), $ind1)"/>
 		<xsl:value-of
 			select="util:element('Patient Address', util:format-address(.//QPD.8.1.1, .//QPD.8.3, .//QPD.8.4, .//QPD.8.5, .//QPD.8.6), $ind1)"/>
@@ -930,14 +930,14 @@
 		<xsl:value-of
 			select="util:element('Immunization Registry Status', util:imm-reg-status(.//PD1.16), $ind1)"/>
 		<xsl:value-of
-			select="util:element('Immunization Registry Status Effective Date', util:format-date(.//PD1.17), $ind1)"/>
+			select="util:element('Immunization Registry Status Effective Date', util:format-time(.//PD1.17), $ind1)"/>
 		<xsl:value-of select="util:element('Publicity Code', .//PD1.11.2, $ind1)"/>
 		<xsl:value-of
-			select="util:element('Publicity Code Effective Date', util:format-date(.//PD1.18), $ind1)"/>
+			select="util:element('Publicity Code Effective Date', util:format-time(.//PD1.18), $ind1)"/>
 		<xsl:value-of
 			select="util:element('Protection Indicator', util:protection-indicator(.//PD1.12), $ind1)"/>
 		<xsl:value-of
-			select="util:last-element('Protection Indicator Effective Date', util:format-date(.//PD1.13), $ind1, $vertical-orientation, false())"
+			select="util:last-element('Protection Indicator Effective Date', util:format-time(.//PD1.13), $ind1, $vertical-orientation, false())"
 		/>
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
