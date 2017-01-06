@@ -773,7 +773,7 @@
 					/>
 				</xsl:when>
 				<xsl:when test=".//DG1.3.3 = 'I10C'">
-					<xsl:value-of select="util:element('Diagnosis ICD-9CM Code', .//DG1.3.1, $ind1)"
+					<xsl:value-of select="util:element('Diagnosis ICD-10CM Code', .//DG1.3.1, $ind1)"
 					/>
 				</xsl:when>
 			</xsl:choose>
