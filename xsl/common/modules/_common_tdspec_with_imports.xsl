@@ -106,13 +106,13 @@
 		</xsl:variable>
 
 		<!-- - - - - - Acknolwedgement profiles: showing a template saying that it is supplied by the system- - - - - - - - - - - -->
-		<xsl:if test="$message-type = $ACK or $message-type = $RSP">
-			<xsl:value-of
-				select="util:title('title', 'Patient Information', 'Patient Information', $ind1, false(), false(), false())"/>
-			<xsl:value-of select="util:elements($ind1)"/>
-			<xsl:value-of
-				select="util:single-element('This information will be automatically supplied by the System', $ind1)"/>
-			<xsl:value-of select="util:end-elements($ind1, false(), false())"/>
+		<xsl:if test="$message-type = $ACK">
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//ACK"/>
+			</xsl:call-template>
+			<xsl:call-template name="display-repeating-segment-in-accordion">
+				<xsl:with-param name="segments" select="//ERR"/>
+			</xsl:call-template>
 		</xsl:if>
 
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
