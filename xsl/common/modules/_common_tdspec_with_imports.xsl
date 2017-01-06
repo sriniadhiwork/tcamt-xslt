@@ -944,7 +944,7 @@
 	
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - ACK information - - - - - - - - - - - -->
+	<!-- - - - - - Acknoledgment information - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:template match="ACK">
@@ -957,6 +957,42 @@
 		
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
+
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - Error details information - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<xsl:template match="ERR">
+		<xsl:param name="vertical-orientation" as="xs:boolean"/>
+		<xsl:param name="counter"/>
+		<xsl:value-of
+			select="util:title('title', concat('Error details', $counter), 'Error details', $ind1, false(), $vertical-orientation, false())"/>
+		<xsl:value-of select="util:elements($ind1)"/>
+		
+		<xsl:value-of select="util:single-element('Error Location', $ind1)" />
+		<xsl:value-of select="util:element('Segment ID ', .//ERR.2.1, $ind1)"/>
+		<xsl:value-of select="util:element('Segment Sequence', .//ERR.2.2, $ind1)"/>
+		<xsl:value-of select="util:element('Field Position', .//ERR.2.3, $ind1)"/>
+		<xsl:value-of select="util:element('Field Repetition ', .//ERR.2.4, $ind1)"/>
+		<xsl:value-of select="util:element('Component number', .//ERR.2.5, $ind1)"/>
+		<xsl:value-of select="util:element('Sub-Component number', .//ERR.2.6, $ind1)"/>
+		
+		<xsl:value-of
+			select="util:chooseAmongThree('HL7 Error Code', .//ERR.3.9, .//ERR.3.2, .//ERR.3.1, $ind1)"/>
+		
+		<xsl:value-of select="util:element('Severity', .//ERR.4, $ind1)"/>
+		
+		<xsl:value-of
+			select="util:chooseAmongThree('Application Error Code', .//ERR.5.9, .//ERR.5.2, .//ERR.5.1, $ind1)"/>
+		<xsl:value-of select="util:element('Diagnostic information', .//ERR.7, $ind1)"/>
+		<xsl:value-of select="util:element('User message', .//ERR.8, $ind1)"/>
+				
+		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+	</xsl:template>
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+
 
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
