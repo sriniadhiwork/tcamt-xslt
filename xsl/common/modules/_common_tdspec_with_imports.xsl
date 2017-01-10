@@ -619,8 +619,8 @@
 			select="util:title-no-tab('title', 'General order information', 'General order information', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
 		<xsl:value-of select="util:element('Placer Order Number', .//ORC.2.1, $ind1)"/>
-		<xsl:value-of select="util:element('Placer Order Number', .//ORC.3.1, $ind1)"/>
-		<xsl:value-of select="util:element('Filler Group Number', .//ORC.4.1, $ind1)"/>
+		<xsl:value-of select="util:element('Filler Order Number', .//ORC.3.1, $ind1)"/>
+		<xsl:value-of select="util:element('Placer Group Number', .//ORC.4.1, $ind1)"/>
 		<xsl:value-of select="util:element('Order Control', .//ORC.1, $ind1)"/>
 		<xsl:choose>
 			<xsl:when test="count(.//ORC.20.9) > 0">
