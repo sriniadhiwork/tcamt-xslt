@@ -5,8 +5,8 @@
 	exclude-result-prefixes="xs" version="2.0">
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
-	<!-- <xsl:param name="output" select="'plain-html'"/> -->
-	<xsl:param name="output" select="'plain-html'"/>
+	 <!--<xsl:param name="output" select="'plain-html'"/> -->
+	<xsl:param name="output" select="'ng-tab-html'"/>
 	<xsl:variable name="version" select="'2.10'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -79,7 +79,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:template name="main">
-		<!--<xsl:value-of select="util:start(name(.), 'test-data-specs-main')"/>-->
+		<xsl:value-of select="util:start(name(.), 'test-data-specs-main')"/>
 		<xsl:if test="$output = 'ng-tab-html'">
 			<xsl:variable name="full">
 				<xsl:call-template name="_main"/>
@@ -111,9 +111,9 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//MSA"/>
 			</xsl:call-template>
-			<!--<xsl:call-template name="display-repeating-segment-in-accordion">
+			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ERR"/>
-			</xsl:call-template>-->
+			</xsl:call-template>
 		</xsl:if>
 
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -953,9 +953,7 @@
 			select="util:title('title', 'Acknowledgment', 'Acknowledgment', $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 
-		<xsl:value-of select="util:element('Acknowledgment code', .//MSA.1, $ind1)"/>
-
-		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+		<xsl:value-of select="util:last-element('Acknowledgment code',.//MSA.1, $ind1, $vertical-orientation, false())"/>
 	</xsl:template>
 
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -986,9 +984,7 @@
 		<xsl:value-of
 			select="util:chooseAmongThree('Application Error Code', .//ERR.5.9, .//ERR.5.2, .//ERR.5.1, $ind1)"/>
 		<xsl:value-of select="util:element('Diagnostic information', .//ERR.7, $ind1)"/>
-		<xsl:value-of select="util:element('User message', .//ERR.8, $ind1)"/>
-
-		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+		<xsl:value-of select="util:last-element('User message',.//ERR.8, $ind1, $vertical-orientation, false())"/>
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
