@@ -111,9 +111,9 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//MSA"/>
 			</xsl:call-template>
-			<xsl:call-template name="display-repeating-segment-in-accordion">
+			<!--<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ERR"/>
-			</xsl:call-template>
+			</xsl:call-template>-->
 		</xsl:if>
 
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -523,7 +523,7 @@
 		<xsl:value-of
 			select="util:element('Guarantor Name', concat(util:format-with-space(.//GT1.3.2), util:format-with-space(.//GT1.3.3), util:format-with-space(.//GT1.3.1.1), .//GT1.3.4), $ind1)"/>
 		<xsl:value-of
-			select="util:format-address-multilines('Guarantor Address', .//GT1.5.1.1, .//GT1.5.2, concat(util:format-with-space(.//GT1.5.3), util:format-with-space(.//GT1.5.4), util:format-with-space(.//GT1.5.5)), GT1.5.6, $ind1)"/>
+			select="util:format-address-multilines('Guarantor Address', .//GT1.5.1.1, .//GT1.5.2, concat(util:format-with-space(.//GT1.5.3), util:format-with-space(.//GT1.5.4), util:format-with-space(.//GT1.5.5)), .//GT1.5.6, $ind1)"/>
 
 		<xsl:for-each select=".//GT1.11">
 			<xsl:choose>
