@@ -653,7 +653,7 @@
 
 		<!-- Order details subtable -->
 		<!--Format time needs to be checked; alternative id too-->
-		<xsl:value-of select="util:begin-sub-table($ind1)"/>
+		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Order details', 'Order details', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
@@ -691,10 +691,10 @@
 
 
 		<!-- Notes and comments subtable -->
-		<xsl:value-of select="util:begin-sub-table($ind1)"/>
+		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
-			select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind2, false())"/>
-		<xsl:value-of select="util:elements($ind2)"/>
+			select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind1, false())"/>
+		<xsl:value-of select="util:elements($ind1)"/>
 		<xsl:for-each select="..//NTE">
 			<xsl:value-of select="util:element('Comments', .//NTE.3, $ind1)"/>
 		</xsl:for-each>
@@ -713,7 +713,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
-			<xsl:value-of select="util:begin-sub-table($ind1)"/>
+			<xsl:value-of select="util:begin-sub-table($ind2)"/>
 			<xsl:value-of
 				select="util:title-no-tab('title', concat('Result copies', $index), concat('Result copies', $index), $ind2, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
@@ -759,7 +759,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:variable>
-			<xsl:value-of select="util:begin-sub-table($ind1)"/>
+			<xsl:value-of select="util:begin-sub-table($ind2)"/>
 			<xsl:value-of
 				select="util:title-no-tab('title', concat('Diagnosis information', $index), concat('Diagnosis information', $index), $ind2, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
