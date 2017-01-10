@@ -248,7 +248,7 @@
 		<xsl:value-of
 			select="util:element('Patient Name', concat(util:format-with-space(.//PID.5.2), util:format-with-space(.//PID.5.3), util:format-with-space(.//PID.5.1.1), .//PID.5.4), $ind1)"/>
 		<xsl:value-of
-			select="util:element('Mother s Maiden Name', concat(util:format-with-space(.//PID.6.2), util:format-with-space(.//PID.6.3), util:format-with-space(.//PID.6.1.1), .//PID.6.4), $ind1)"/>
+			select="util:element('Mother''s Maiden Name', concat(util:format-with-space(.//PID.6.2), util:format-with-space(.//PID.6.3), util:format-with-space(.//PID.6.1.1), .//PID.6.4), $ind1)"/>
 		<xsl:value-of select="util:element('Administrative Sex', util:admin-sex(.//PID.8), $ind1)"/>
 		<xsl:value-of
 			select="util:element('Date/Time of Birth', util:format-time(.//PID.7.1), $ind1)"/>
@@ -734,7 +734,7 @@
 					</xsl:when>
 					<xsl:when test=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'">
 						<xsl:value-of
-							select="util:element('Ordering Facility email address', .//PRT.15.4, $ind1)"
+							select="util:element('Email address', .//PRT.15.4, $ind1)"
 						/>
 					</xsl:when>
 				</xsl:choose>
