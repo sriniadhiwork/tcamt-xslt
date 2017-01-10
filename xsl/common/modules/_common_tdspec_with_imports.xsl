@@ -310,21 +310,7 @@
 			select="util:title('title', concat('Next of kin information', $counter), concat('Next of kin information', $counter), $ind1, true(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 		<xsl:for-each select=".//NK1.3">
-			<xsl:choose>
-				<xsl:when test="count(.//NK1.3.9) > 0">
-					<xsl:value-of select="util:element('Relationship', .//NK1.3.9, $ind1)"/>
-				</xsl:when>
-				<xsl:when test="count(.//NK1.3.9) = 0 and count(.//NK1.3.2) > 0">
-					<xsl:value-of select="util:element('Relationship', NK1.3.2, $ind1)"/>
-				</xsl:when>
-				<xsl:when
-					test="count(.//NK1.3.9) = 0 and count(.//NK1.3.2) = 0 and count(.//NK1.3.1) > 0">
-					<xsl:value-of select="util:element('Relationship', NK1.3.1, $ind1)"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="util:element('Relationship', '', $ind1)"/>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:value-of select="util:chooseAmongThree('Relationship', .//NK1.3.9, .//NK1.3.2, .//NK1.3.1, $ind1)" />
 		</xsl:for-each>
 
 		<xsl:if test="count(.//NK1.2)">
