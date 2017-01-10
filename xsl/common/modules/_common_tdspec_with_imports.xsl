@@ -682,7 +682,7 @@
 				/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="util:element('Observation Date/Time', ..//OBR.7.1, $ind1)"/>
+		<xsl:value-of select="util:element('Observation Date/Time', util:format-time(..//OBR.7.1), $ind1)"/>
 		<xsl:value-of
 			select="util:element('Observation end Date/Time', util:format-time(..//OBR.8.1), $ind1)"/>
 		<xsl:value-of
