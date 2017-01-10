@@ -687,15 +687,14 @@
 			select="util:element('Observation end Date/Time', util:format-time(..//OBR.8.1), $ind1)"/>
 		<xsl:value-of
 			select="util:chooseAmongThree('Relevant Clinical Information', ..//OBR.13.9, ..//OBR.13.2, ..//OBR.13.1, $ind1)"/>
-<!--
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 
 
-		<!-\- Notes and comments subtable -\->
+		<!-- Notes and comments subtable -->
 		<xsl:value-of select="util:begin-sub-table($ind1)"/>
 		<xsl:value-of
 			select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind2, false())"/>
-		<xsl:value-of select="util:elements($ind2)"/>-->
+		<xsl:value-of select="util:elements($ind2)"/>
 		<xsl:for-each select="..//NTE">
 			<xsl:value-of select="util:element('Comments', .//NTE.3, $ind1)"/>
 		</xsl:for-each>
