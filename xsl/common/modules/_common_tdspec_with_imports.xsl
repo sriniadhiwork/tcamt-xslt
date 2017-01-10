@@ -148,12 +148,12 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<xsl:if test="$message-type = $ORL">
-			<xsl:call-template name="display-repeating-segment-in-accordion">
+			<!--<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//MSA"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ERR"/>
-			</xsl:call-template>
+			</xsl:call-template>-->
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
 			</xsl:call-template>
@@ -288,21 +288,7 @@
 		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.10">
-			<xsl:choose>
-				<xsl:when test="count(.//PID.10.9) > 0">
-					<xsl:value-of select="util:element('Race', .//PID.10.9, $ind1)"/>
-				</xsl:when>
-				<xsl:when test="count(.//PID.10.9) = 0 and count(.//PID.10.2) > 0">
-					<xsl:value-of select="util:element('Race', .//PID.10.2, $ind1)"/>
-				</xsl:when>
-				<xsl:when
-					test="count(.//PID.10.9) = 0 and count(.//PID.10.2) = 0 and count(.//PID.10.1) > 0">
-					<xsl:value-of select="util:element('Race', .//PID.10.1, $ind1)"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="util:element('Race', '', $ind1)"/>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:value-of select="util:chooseAmongThree('Race', .//PID.10.9, .//PID.10.2, .//PID.10.1, $ind1)" />
 		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.22">
