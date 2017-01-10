@@ -210,7 +210,8 @@
 					</xsl:choose>
 				</xsl:variable>
 				<xsl:variable name="mins" select="concat(':',substring($time,11,2))"/>
-				<xsl:variable name="time-format" select="format-time(xs:time(concat($cHrs,$mins,':00')),'[H]:[m]')"/>
+				<xsl:variable name="secs" select="concat(':',substring($time,13,2))"/>
+				<xsl:variable name="time-format" select="format-time(xs:time(concat($cHrs,$mins,$secs)),'[H]:[m]:[s]')"/>
 				<xsl:variable name="AM-PM">
 					<xsl:choose>
 						<xsl:when test="number($hrs) &gt; 12">
