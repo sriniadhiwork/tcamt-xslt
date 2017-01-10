@@ -5,8 +5,8 @@
 	exclude-result-prefixes="xs" version="2.0">
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
-	 <!--<xsl:param name="output" select="'plain-html'"/> -->
-	<xsl:param name="output" select="'ng-tab-html'"/>
+	 <xsl:param name="output" select="'plain-html'"/> 
+	<!--<xsl:param name="output" select="'ng-tab-html'"/>-->
 	<xsl:variable name="version" select="'2.10'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -637,7 +637,7 @@
 					select="util:element('Advanced Beneficiary Notice Code', .//ORC.20.1, $ind1)"/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="util:element('Date/Time of Transaction', .//ORC.9.1, $ind1)"/>
+		<xsl:value-of select="util:element('Date/Time of Transaction', util:format-time(.//ORC.9.1), $ind1)"/>
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Timing/Quantity Information subtable -->
