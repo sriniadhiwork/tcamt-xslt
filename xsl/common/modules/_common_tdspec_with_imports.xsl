@@ -149,7 +149,7 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<xsl:if test="$message-type = $ORL">
 			<xsl:call-template name="display-repeating-segment-in-accordion">
-				<xsl:with-param name="segments" select="//ACK"/>
+				<xsl:with-param name="segments" select="//MSA"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ERR"/>
@@ -389,8 +389,8 @@
 			select="util:chooseAmongThree('Contact role', .//NK1.7.9, .//NK1.7.2, .//NK1.7.1, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Next of kin/Associated parties job code/Class', .//NK1.11.3, $ind1)"/>
-
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
+		
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
