@@ -795,7 +795,7 @@
 			</xsl:variable>
 			<xsl:value-of select="util:begin-sub-table($ind2)"/>
 			<xsl:value-of
-				select="util:title-no-tab('title', concat('Observation Result', $index), concat('Observation Result', $index), $ind2, false())"/>
+				select="util:title-no-tab('title', concat('Observation Result - ', .//OBX.1), concat('Observation Result - ', .//OBX.1), $ind2, false())"/>
 			<xsl:value-of select="util:elements($ind2)"/>
 			<xsl:choose>
 				<xsl:when test=".//OBX.3.3 = 'LN'">
