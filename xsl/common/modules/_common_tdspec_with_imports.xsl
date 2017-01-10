@@ -5,8 +5,8 @@
 	exclude-result-prefixes="xs" version="2.0">
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
-	 <xsl:param name="output" select="'plain-html'"/> 
-	<!--<xsl:param name="output" select="'ng-tab-html'"/>-->
+	 <!--<xsl:param name="output" select="'plain-html'"/> -->
+	<xsl:param name="output" select="'ng-tab-html'"/>
 	<xsl:variable name="version" select="'2.10'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -157,9 +157,9 @@
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
 			</xsl:call-template>
-			<xsl:call-template name="display-repeating-segment-in-accordion">
+<!--			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ORC"/>
-			</xsl:call-template>
+			</xsl:call-template>-->
 
 			<!-- - - - Call with mode - - -  
 			<xsl:call-template name="display-repeating-segment-in-accordion">
@@ -306,19 +306,9 @@
 		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.22">
-			<xsl:choose>
-				<xsl:when test="count(.//PID.22.9) > 0">
-					<xsl:value-of select="util:element('Ethnic group', .//PID.22.9, $ind1)"/>
-				</xsl:when>
-				<xsl:when test="count(.//PID.22.9) = 0 and count(.//PID.22.2) > 0">
-					<xsl:value-of select="util:element('Ethnic group', .//PID.22.2, $ind1)"/>
-				</xsl:when>
-				<xsl:when
-					test="count(.//PID.10.9) = 0 and count(.//PID.22.2) = 0 and count(.//PID.22.1) > 0">
-					<xsl:value-of select="util:element('Ethnic group', .//PID.22.1, $ind1)"/>
-				</xsl:when>
-			</xsl:choose>
+			<xsl:value-of select="util:chooseAmongThree('Ethnic group', .//PID.22.9, .//PID.22.2, .//PID.22.1, $ind1)" />
 		</xsl:for-each>
+
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
 	</xsl:template>
 
