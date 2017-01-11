@@ -61,8 +61,7 @@
                     </xsl:if>
 
                     <xsl:apply-templates>
-                        <xsl:with-param name="output">plain-html</xsl:with-param>
-                        <!--<xsl:with-param name="output">ng-tab-html</xsl:with-param>-->
+                        <xsl:with-param name="output"><xsl:value-of select="$output"/></xsl:with-param>
                     </xsl:apply-templates>
 
                 </xsl:element>
