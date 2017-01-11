@@ -610,15 +610,19 @@
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Timing/Quantity Information subtable -->
-		<xsl:value-of select="util:begin-sub-table($ind2)"/>
-		<xsl:value-of
-			select="util:title-no-tab('title', 'Timing/Quantity Information', 'Timing/Quantity Information', $ind2, false())"/>
-		<xsl:value-of select="util:elements($ind2)"/>
-		<xsl:value-of select="util:element('Start Date/time', util:format-time(..//TQ1.7.1), $ind1)"/>
-		<xsl:value-of select="util:element('End date/time', util:format-time(..//TQ1.8.1), $ind1)"/>
-		<xsl:value-of
-			select="util:chooseAmongThree('Priority', ..//TQ1.9.9, ..//TQ1.9.2, ..//TQ1.9.1, $ind1)"/>
-		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
+		<xsl:if test="not(count(../TQ1) = 0)">
+			<xsl:value-of select="util:begin-sub-table($ind2)"/>
+			<xsl:value-of
+				select="util:title-no-tab('title', 'Timing/Quantity Information', 'Timing/Quantity Information', $ind2, false())"/>
+			<xsl:value-of select="util:elements($ind2)"/>
+			<xsl:value-of
+				select="util:element('Start Date/time', util:format-time(..//TQ1.7.1), $ind1)"/>
+			<xsl:value-of
+				select="util:element('End date/time', util:format-time(..//TQ1.8.1), $ind1)"/>
+			<xsl:value-of
+				select="util:chooseAmongThree('Priority', ..//TQ1.9.9, ..//TQ1.9.2, ..//TQ1.9.1, $ind1)"/>
+			<xsl:value-of select="util:end-table-fieldset($ind2)"/>
+		</xsl:if>
 
 		<!-- Order details subtable -->
 		<!--Format time needs to be checked; alternative id too-->
