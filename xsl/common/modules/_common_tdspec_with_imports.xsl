@@ -5,7 +5,7 @@
 	exclude-result-prefixes="xs" version="2.0">
 	<!-- param: output   values: json | jquery-tab-html | ng-tab-html    default: plain-html -->
 	<!--xsl:param name="output" select="'jquery-tab-html'" -->
-	 <!--<xsl:param name="output" select="'plain-html'"/> -->
+	<!--<xsl:param name="output" select="'plain-html'"/>-->
 	<xsl:param name="output" select="'ng-tab-html'"/>
 	<xsl:variable name="version" select="'2.10'"/>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -148,18 +148,18 @@
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 		<xsl:if test="$message-type = $ORL">
-			<!--<xsl:call-template name="display-repeating-segment-in-accordion">
+			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//MSA"/>
 			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ERR"/>
-			</xsl:call-template>-->
+			</xsl:call-template>
 			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//PID"/>
 			</xsl:call-template>
-<!--			<xsl:call-template name="display-repeating-segment-in-accordion">
+			<xsl:call-template name="display-repeating-segment-in-accordion">
 				<xsl:with-param name="segments" select="//ORC"/>
-			</xsl:call-template>-->
+			</xsl:call-template>
 
 			<!-- - - - Call with mode - - -  
 			<xsl:call-template name="display-repeating-segment-in-accordion">
@@ -288,11 +288,15 @@
 		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.10">
-			<xsl:value-of select="util:chooseAmongThree('Race', .//PID.10.9, .//PID.10.2, .//PID.10.1, $ind1)" />
+			<xsl:value-of
+				select="util:chooseAmongThree('Race', .//PID.10.9, .//PID.10.2, .//PID.10.1, $ind1)"
+			/>
 		</xsl:for-each>
 
 		<xsl:for-each select=".//PID.22">
-			<xsl:value-of select="util:chooseAmongThree('Ethnic group', .//PID.22.9, .//PID.22.2, .//PID.22.1, $ind1)" />
+			<xsl:value-of
+				select="util:chooseAmongThree('Ethnic group', .//PID.22.9, .//PID.22.2, .//PID.22.1, $ind1)"
+			/>
 		</xsl:for-each>
 
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
@@ -310,7 +314,9 @@
 			select="util:title('title', concat('Next of kin information', $counter), concat('Next of kin information', $counter), $ind1, true(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 		<xsl:for-each select=".//NK1.3">
-			<xsl:value-of select="util:chooseAmongThree('Relationship', .//NK1.3.9, .//NK1.3.2, .//NK1.3.1, $ind1)" />
+			<xsl:value-of
+				select="util:chooseAmongThree('Relationship', .//NK1.3.9, .//NK1.3.2, .//NK1.3.1, $ind1)"
+			/>
 		</xsl:for-each>
 
 		<xsl:if test="count(.//NK1.2)">
@@ -352,7 +358,7 @@
 		<xsl:value-of
 			select="util:element('Next of kin/Associated parties job code/Class', .//NK1.11.3, $ind1)"/>
 		<xsl:value-of select="util:end-elements($ind1, $vertical-orientation, false())"/>
-		
+
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -366,7 +372,7 @@
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
 		<xsl:value-of
-			select="util:title('title', concat('Visit Information', $counter), 'Visit Information', $ind1, false(), $vertical-orientation, false())"/>
+			select="util:title('title', concat('Visit Information', $counter), concat('Visit Information', $counter), $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 
 		<xsl:value-of select="util:element('Patient Class', .//PV1.2, $ind1)"/>
@@ -599,7 +605,8 @@
 					select="util:element('Advanced Beneficiary Notice Code', .//ORC.20.1, $ind1)"/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="util:element('Date/Time of Transaction', util:format-time(.//ORC.9.1), $ind1)"/>
+		<xsl:value-of
+			select="util:element('Date/Time of Transaction', util:format-time(.//ORC.9.1), $ind1)"/>
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Timing/Quantity Information subtable -->
@@ -644,7 +651,8 @@
 				/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:value-of select="util:element('Observation Date/Time', util:format-time(..//OBR.7.1), $ind1)"/>
+		<xsl:value-of
+			select="util:element('Observation Date/Time', util:format-time(..//OBR.7.1), $ind1)"/>
 		<xsl:value-of
 			select="util:element('Observation end Date/Time', util:format-time(..//OBR.8.1), $ind1)"/>
 		<xsl:value-of
@@ -653,14 +661,16 @@
 
 
 		<!-- Notes and comments subtable -->
-		<xsl:value-of select="util:begin-sub-table($ind2)"/>
-		<xsl:value-of
-			select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind1, false())"/>
-		<xsl:value-of select="util:elements($ind1)"/>
-		<xsl:for-each select="..//NTE">
-			<xsl:value-of select="util:element('Comments', .//NTE.3, $ind1)"/>
-		</xsl:for-each>
-		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		<xsl:if test="not(count(..//NTE) = 0)">
+			<xsl:value-of select="util:begin-sub-table($ind2)"/>
+			<xsl:value-of
+				select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind1, false())"/>
+			<xsl:value-of select="util:elements($ind1)"/>
+			<xsl:for-each select="..//NTE">
+				<xsl:value-of select="util:element('Comments', .//NTE.3, $ind1)"/>
+			</xsl:for-each>
+			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		</xsl:if>
 
 
 		<!-- Result copies subtable -->
@@ -695,9 +705,7 @@
 						/>
 					</xsl:when>
 					<xsl:when test=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'">
-						<xsl:value-of
-							select="util:element('Email address', .//PRT.15.4, $ind1)"
-						/>
+						<xsl:value-of select="util:element('Email address', .//PRT.15.4, $ind1)"/>
 					</xsl:when>
 				</xsl:choose>
 			</xsl:for-each>
@@ -734,8 +742,8 @@
 					/>
 				</xsl:when>
 				<xsl:when test=".//DG1.3.3 = 'I10C'">
-					<xsl:value-of select="util:element('Diagnosis ICD-10CM Code', .//DG1.3.1, $ind1)"
-					/>
+					<xsl:value-of
+						select="util:element('Diagnosis ICD-10CM Code', .//DG1.3.1, $ind1)"/>
 				</xsl:when>
 			</xsl:choose>
 
@@ -836,7 +844,7 @@
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 
-		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
+		<!--<xsl:value-of select="util:end-table-fieldset($ind1)"/>-->
 
 		<xsl:value-of select="util:end-tab($ind1, $vertical-orientation)"/>
 	</xsl:template>
@@ -915,7 +923,9 @@
 			select="util:title('title', 'Acknowledgment', 'Acknowledgment', $ind1, false(), $vertical-orientation, false())"/>
 		<xsl:value-of select="util:elements($ind1)"/>
 
-		<xsl:value-of select="util:last-element('Acknowledgment code',.//MSA.1, $ind1, $vertical-orientation, false())"/>
+		<xsl:value-of
+			select="util:last-element('Acknowledgment code', .//MSA.1, $ind1, $vertical-orientation, false())"
+		/>
 	</xsl:template>
 
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
@@ -946,7 +956,9 @@
 		<xsl:value-of
 			select="util:chooseAmongThree('Application Error Code', .//ERR.5.9, .//ERR.5.2, .//ERR.5.1, $ind1)"/>
 		<xsl:value-of select="util:element('Diagnostic information', .//ERR.7, $ind1)"/>
-		<xsl:value-of select="util:last-element('User message',.//ERR.8, $ind1, $vertical-orientation, false())"/>
+		<xsl:value-of
+			select="util:last-element('User message', .//ERR.8, $ind1, $vertical-orientation, false())"
+		/>
 	</xsl:template>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
