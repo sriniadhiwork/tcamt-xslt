@@ -91,6 +91,7 @@
 		<xsl:call-template name="_main"/>
 		<xsl:value-of select="util:end($ind1)"/>
 	</xsl:template>
+	
 	<xsl:template name="_main">
 		<xsl:variable name="message-type">
 			<xsl:choose>
@@ -610,7 +611,7 @@
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 
 		<!-- Timing/Quantity Information subtable -->
-		<xsl:if test="not(count(../TQ1) = 0)">
+		<xsl:if test="not(count(..//TQ1) = 0)">
 			<xsl:value-of select="util:begin-sub-table($ind2)"/>
 			<xsl:value-of
 				select="util:title-no-tab('title', 'Timing/Quantity Information', 'Timing/Quantity Information', $ind2, false())"/>
@@ -945,8 +946,8 @@
 		<xsl:value-of select="util:elements($ind1)"/>
 
 		<xsl:value-of select="util:single-element('Error Location', $ind1)"/>
-		<xsl:value-of select="util:element('Segment ID ', .//ERR.2.1, $ind2)"/>
-		<xsl:value-of select="util:element('Segment Sequence', .//ERR.2.2, $ind2)"/>
+		<xsl:value-of select="util:element(concat($ind2, 'Segment ID'), .//ERR.2.1, $ind2)"/>
+		<xsl:value-of select="util:element(concat($ind2, 'Segment Sequence'), .//ERR.2.2, $ind2)"/>
 		<xsl:value-of select="util:element('Field Position', .//ERR.2.3, $ind2)"/>
 		<xsl:value-of select="util:element('Field Repetition ', .//ERR.2.4, $ind2)"/>
 		<xsl:value-of select="util:element('Component number', .//ERR.2.5, $ind2)"/>
