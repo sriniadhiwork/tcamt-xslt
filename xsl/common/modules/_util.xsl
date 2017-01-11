@@ -193,6 +193,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:function name="util:format-time">
 		<xsl:param name="time"/>
+		
 		<xsl:choose>
 			<xsl:when test="string-length(normalize-space($time)) &lt; 9">
 				<xsl:value-of select="util:format-date($time)"/>
@@ -220,10 +221,6 @@
 						</xsl:when>
 					</xsl:choose>
 				</xsl:variable>
-				<xsl:variable name="mins" select="concat(':', substring($time, 11, 2))"/>
-				<xsl:variable name="secs" select="concat(':', substring($time, 13, 2))"/>
-				<xsl:variable name="time-format"
-					select="format-time(xs:time(concat($cHrs, $mins, $secs)), '[H]:[m]:[s]')"/>
 				<xsl:variable name="AM-PM">
 					<xsl:choose>
 						<xsl:when test="number($hrs) > 12 or number($hrs) = 12">
@@ -234,7 +231,23 @@
 						</xsl:when>
 					</xsl:choose>
 				</xsl:variable>
-				<xsl:value-of select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+				<xsl:variable name="mins" select="concat(':', substring($time, 11, 2))"/>
+				
+				<xsl:if test="string-length(normalize-space($time)) &gt; 13">
+					<xsl:variable name="secs" select="concat(':', substring($time, 13, 2))"/>
+					<xsl:variable name="time-format"
+						select="concat($cHrs, $mins, $secs)"/>
+					<!--<xsl:variable name="time-format"
+						select="format-time(xs:time(concat($cHrs, $mins, $secs)), '[H]:[m]:[s]')"/>-->
+					<xsl:value-of select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+				</xsl:if>
+				<xsl:if test="string-length(normalize-space($time)) &lt; 13">
+					<xsl:variable name="time-format"
+						select="concat($cHrs, $mins)"/>
+					<xsl:value-of select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+				</xsl:if>
+				
+				
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
