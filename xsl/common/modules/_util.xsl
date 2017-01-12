@@ -90,11 +90,53 @@
 		<xsl:param name="cityStateZip"/>
 		<xsl:param name="country"/>
 		<xsl:param name="ind"/>
-		<xsl:value-of select="util:element($elementName, $street1, $ind)"/>
-		<xsl:value-of select="util:element(' ', $street2, $ind)"/>
+		<xsl:value-of select="util:element($elementName, concat($street1, '&lt;br&gt;', $street2, '&lt;br&gt;', $cityStateZip ,'&lt;br&gt;', $country), $ind)"/>
+		<!--<xsl:value-of select="util:element(' ', $street2, $ind)"/>
 		<xsl:value-of select="util:element(' ', $cityStateZip, $ind)"/>
-		<xsl:value-of select="util:element(' ', $country, $ind)"/>
+		<xsl:value-of select="util:element(' ', $country, $ind)"/>-->
 
+
+		<!--Note: $street1 is always displayed-->
+		<!--Note2: count($variable[text()]) is 1 if there are data, 0 otherwise-->
+		<!--		<xsl:if test="not(count($street1[text()]) + count($street2[text()]) + number(not(count($cityStateZip) = 0)) + count($country[text()]) = 0)">
+			<xsl:variable name="rowspan" select="1 + count($street2[text()]) + number(not(count($cityStateZip) = 0)) + count($country[text()])"/> 
+			
+			<xsl:element name="tr">
+				<xsl:element name="td">
+					<xsl:attribute name="rowspan">
+						<xsl:value-of select="$rowspan"/>
+					</xsl:attribute>
+					<xsl:value-of select="$elementName"/>
+				</xsl:element>
+				<xsl:element name="td">
+					<xsl:if test="normalize-space($street1) = ''">
+						<xsl:attribute name="noData"></xsl:attribute>
+					</xsl:if>
+					<xsl:value-of select="$street1"/>
+				</xsl:element>
+			</xsl:element>
+			<xsl:if test="not(normalize-space($street2) = '')">
+				<xsl:element name="tr">
+					<xsl:element name="td">
+						<xsl:value-of select="$street2"/>
+					</xsl:element>
+				</xsl:element>
+			</xsl:if>
+			<xsl:if test="not(count($cityStateZip) = 0)">
+				<xsl:element name="tr">
+					<xsl:element name="td">
+						<xsl:value-of select="$cityStateZip"/>
+					</xsl:element>
+				</xsl:element>
+			</xsl:if>
+			<xsl:if test="not(normalize-space($country) = '')">
+				<xsl:element name="tr">
+					<xsl:element name="td">
+						<xsl:value-of select="$country"/>
+					</xsl:element>
+				</xsl:element>
+			</xsl:if>
+		</xsl:if>-->
 	</xsl:function>
 
 
@@ -176,7 +218,7 @@
 				</xsl:if>
 			</xsl:variable>
 			<xsl:choose>
-				<xsl:when test="not(normalize-space(substring($elementData, 5, 2))='')">
+				<xsl:when test="not(normalize-space(substring($elementData, 5, 2)) = '')">
 					<xsl:value-of select="concat($month, $day, $year, $time)"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -193,7 +235,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:function name="util:format-time">
 		<xsl:param name="time"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="string-length(normalize-space($time)) &lt; 9">
 				<xsl:value-of select="util:format-date($time)"/>
@@ -232,22 +274,22 @@
 					</xsl:choose>
 				</xsl:variable>
 				<xsl:variable name="mins" select="concat(':', substring($time, 11, 2))"/>
-				
-				<xsl:if test="string-length(normalize-space($time)) &gt; 13">
+
+				<xsl:if test="string-length(normalize-space($time)) > 13">
 					<xsl:variable name="secs" select="concat(':', substring($time, 13, 2))"/>
-					<xsl:variable name="time-format"
-						select="concat($cHrs, $mins, $secs)"/>
+					<xsl:variable name="time-format" select="concat($cHrs, $mins, $secs)"/>
 					<!--<xsl:variable name="time-format"
 						select="format-time(xs:time(concat($cHrs, $mins, $secs)), '[H]:[m]:[s]')"/>-->
-					<xsl:value-of select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+					<xsl:value-of
+						select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
 				</xsl:if>
 				<xsl:if test="string-length(normalize-space($time)) &lt; 13">
-					<xsl:variable name="time-format"
-						select="concat($cHrs, $mins)"/>
-					<xsl:value-of select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+					<xsl:variable name="time-format" select="concat($cHrs, $mins)"/>
+					<xsl:value-of
+						select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
 				</xsl:if>
-				
-				
+
+
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
@@ -287,7 +329,7 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- begin-sub-table: end previous table with </table></fieldset> so as to prepare for the obx table; in case of json, add an element 
-				{"element" : "obx", "data" : -->
+		{"element" : "obx", "data" : -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:function name="util:begin-sub-table">
@@ -1338,7 +1380,7 @@
 		TM	OBX-5
 		CWE	OBX-5.9 or OBX-5.2 or OBX-5.5 
 		ED	OBX-5.5
-		-->
+	-->
 	<xsl:function name="util:obx-result">
 		<xsl:param name="obx"/>
 		<xsl:choose>
