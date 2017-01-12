@@ -635,24 +635,24 @@
 		<xsl:choose>
 			<xsl:when test="..//OBR.4.3 = 'LN'">
 				<xsl:value-of
-					select="util:element('Universal Service Identifier (LOINC)', ..//OBR.4.1, $ind1)"
+					select="util:element('Service Identifier (LOINC code)', ..//OBR.4.1, $ind1)"
 				/>
 			</xsl:when>
 			<xsl:when test="..//OBR.4.6 = 'LN'">
 				<xsl:value-of
-					select="util:element('Universal Service Identifier (LOINC)', ..//OBR.4.4, $ind1)"
+					select="util:element('Service Identifier (LOINC code)', ..//OBR.4.4, $ind1)"
 				/>
 			</xsl:when>
 		</xsl:choose>
 		<xsl:choose>
 			<xsl:when test="not(..//OBR.4.3 = 'LN')">
 				<xsl:value-of
-					select="util:element('Alternative Universal Service Identifier', ..//OBR.4.1, $ind1)"
+					select="util:element('Service Identifier (local code)', ..//OBR.4.1, $ind1)"
 				/>
 			</xsl:when>
 			<xsl:when test="not(..//OBR.4.6 = 'LN')">
 				<xsl:value-of
-					select="util:element('Alternative Universal Service Identifier', ..//OBR.4.4, $ind1)"
+					select="util:element('Service Identifier (local code)', ..//OBR.4.4, $ind1)"
 				/>
 			</xsl:when>
 		</xsl:choose>
@@ -775,22 +775,22 @@
 			<xsl:choose>
 				<xsl:when test=".//OBX.3.3 = 'LN'">
 					<xsl:value-of
-						select="util:element('Observation LOINC Identifier', .//OBX.3.1, $ind1)"/>
+						select="util:element('Observation Identifier (LOINC code)', .//OBX.3.1, $ind1)"/>
 				</xsl:when>
 				<xsl:when test=".//OBX.3.6 = 'LN'">
 					<xsl:value-of
-						select="util:element('Observation LOINC Identifier', .//OBX.3.4, $ind1)"/>
+						select="util:element('Observation Identifier (LOINC code)', .//OBX.3.4, $ind1)"/>
 				</xsl:when>
 			</xsl:choose>
 			<xsl:choose>
 				<xsl:when test="not(.//OBX.3.3 = 'LN')">
 					<xsl:value-of
-						select="util:element('Observation Alternative Identifier', .//OBX.3.1, $ind1)"
+						select="util:element('Observation Identifier (local code)', .//OBX.3.1, $ind1)"
 					/>
 				</xsl:when>
 				<xsl:when test="not(.//OBX.3.6 = 'LN')">
 					<xsl:value-of
-						select="util:element('Observation Alternative Identifier', .//OBX.3.4, $ind1)"
+						select="util:element('Observation Identifier (local code)', .//OBX.3.4, $ind1)"
 					/>
 				</xsl:when>
 			</xsl:choose>
