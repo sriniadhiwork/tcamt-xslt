@@ -90,11 +90,13 @@
 		<xsl:param name="cityStateZip"/>
 		<xsl:param name="country"/>
 		<xsl:param name="ind"/>
-		<xsl:value-of select="util:element($elementName, concat($street1, '&lt;br&gt;', $street2, '&lt;br&gt;', $cityStateZip ,'&lt;br&gt;', $country), $ind)"/>
-		<!--<xsl:value-of select="util:element(' ', $street2, $ind)"/>
-		<xsl:value-of select="util:element(' ', $cityStateZip, $ind)"/>
-		<xsl:value-of select="util:element(' ', $country, $ind)"/>-->
-
+		<xsl:choose>
+			<xsl:when test="number(count($street1[text()]) + count($street2[text()]) + number(not(count($cityStateZip) = 0)) + count($country[text()])) > 0">
+				<xsl:value-of select="util:element($elementName, concat($street1, '&lt;br&gt;', $street2, '&lt;br&gt;', $cityStateZip ,'&lt;br&gt;', $country), $ind)"/>
+			</xsl:when>
+			<xsl:otherwise>
+			</xsl:otherwise>
+		</xsl:choose>
 
 		<!--Note: $street1 is always displayed-->
 		<!--Note2: count($variable[text()]) is 1 if there are data, 0 otherwise-->
