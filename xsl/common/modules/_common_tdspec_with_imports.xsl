@@ -856,67 +856,6 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 
-
-
-
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - Patient information for QPD - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<xsl:template match="QPD">
-		<xsl:param name="vertical-orientation" as="xs:boolean"/>
-		<xsl:param name="counter"/>
-		<xsl:value-of
-			select="util:title('title', concat('Patient Information', $counter), 'Patient Information', $ind1, false(), $vertical-orientation, false())"/>
-		<xsl:value-of select="util:elements($ind1)"/>
-		<xsl:value-of
-			select="util:element('Patient Name', concat(util:format-with-space(.//QPD.4.2), util:format-with-space(.//QPD.4.3), .//QPD.4.1.1), $ind1)"/>
-		<xsl:value-of select="util:element('Mother''s Maiden Name', .//QPD.5.1.1, $ind1)"/>
-		<xsl:value-of
-			select="util:element('ID Number', concat(util:format-with-space(.//QPD.3.1[1]), .//QPD.3.1[2]), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Date/Time of Birth', util:format-time(.//QPD.6.1), $ind1)"/>
-		<xsl:value-of select="util:element('Sex', util:admin-sex(.//QPD.7), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Patient Address', util:format-address(.//QPD.8.1.1, .//QPD.8.3, .//QPD.8.4, .//QPD.8.5, .//QPD.8.6), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Patient Phone', util:format-tel(.//QPD.9.6, .//QPD.9.7), $ind1)"/>
-		<xsl:value-of select="util:element('Birth Indicator', util:yes-no(.//QPD.10), $ind1)"/>
-		<xsl:value-of
-			select="util:last-element('Birth Order', .//QPD.11, $ind1, $vertical-orientation, false())"
-		/>
-	</xsl:template>
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<xsl:template match="PD1">
-		<xsl:param name="vertical-orientation" as="xs:boolean"/>
-		<xsl:param name="counter"/>
-		<xsl:value-of
-			select="util:title('title', concat('Immunization Registry Information', $counter), 'Immunization Registry Information', $ind1, true(), $vertical-orientation, false())"/>
-		<xsl:value-of select="util:elements($ind1)"/>
-		<xsl:value-of
-			select="util:element('Immunization Registry Status', util:imm-reg-status(.//PD1.16), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Immunization Registry Status Effective Date', util:format-time(.//PD1.17), $ind1)"/>
-		<xsl:value-of select="util:element('Publicity Code', .//PD1.11.2, $ind1)"/>
-		<xsl:value-of
-			select="util:element('Publicity Code Effective Date', util:format-time(.//PD1.18), $ind1)"/>
-		<xsl:value-of
-			select="util:element('Protection Indicator', util:protection-indicator(.//PD1.12), $ind1)"/>
-		<xsl:value-of
-			select="util:last-element('Protection Indicator Effective Date', util:format-time(.//PD1.13), $ind1, $vertical-orientation, false())"
-		/>
-	</xsl:template>
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - Acknoledgment information - - - - - - - - - - - -->
