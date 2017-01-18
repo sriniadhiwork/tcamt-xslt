@@ -265,7 +265,7 @@
 			<xsl:choose>
 				<xsl:when test=".//PID.13.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Home phone number', concat(util:format-with-space(.//PID.13.6), util:format-with-space(.//PID.13.7), util:format-with-space(.//PID.13.8)), $ind1)"
+						select="util:element('Home phone number', util:format-tel2(.//PID.13.6, .//PID.13.7, .//PID.13.8), $ind1)"
 					/>
 				</xsl:when>
 				<xsl:when test=".//PID.13.3 = 'X.400' or .//PID.13.3 = 'Internet'">
@@ -278,7 +278,7 @@
 			<xsl:choose>
 				<xsl:when test=".//PID.14.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Business phone number', concat(util:format-with-space(.//PID.14.6), util:format-with-space(.//PID.14.7), util:format-with-space(.//PID.14.8)), $ind1)"
+						select="util:element('Business phone number', util:format-tel2(.//PID.14.6, .//PID.14.7, .//PID.14.8), $ind1)"
 					/>
 				</xsl:when>
 				<xsl:when test=".//PID.14.3 = 'X.400' or .//PID.14.3 = 'Internet'">
@@ -346,7 +346,7 @@
 			<xsl:choose>
 				<xsl:when test=".//NK1.5.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Phone number', concat(util:format-with-space(.//NK1.5.6), util:format-with-space(.//NK1.5.7), util:format-with-space(.//NK1.5.8)), $ind1)"
+						select="util:element('Phone number', util:format-tel2(.//NK1.5.6, .//NK1.5.7, .//NK1.5.8), $ind1)"
 					/>
 				</xsl:when>
 				<xsl:when test=".//NK1.5.3 = 'X.400' or .//NK1.5.3 = 'Internet'">
@@ -570,7 +570,7 @@
 			<xsl:choose>
 				<xsl:when test=".//ORC.23.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Ordering Facility Phone number', concat(util:format-with-space(.//ORC.23.6), util:format-with-space(.//ORC.23.7), util:format-with-space(.//ORC.23.8)), $ind1)"
+						select="util:element('Ordering Facility Phone number', util:format-tel2(.//ORC.23.6, .//ORC.23.7, .//ORC.23.8), $ind1)"
 					/>
 				</xsl:when>
 				<xsl:when test=".//ORC.23.3 = 'X.400' or .//ORC.23.3 = 'Internet'">
@@ -706,7 +706,7 @@
 				<xsl:choose>
 					<xsl:when test=".//PRT.15.3 = 'PH'">
 						<xsl:value-of
-							select="util:element('Phone Number', concat(util:format-with-space(.//PRT.15.6), util:format-with-space(.//PRT.15.7), util:format-with-space(.//PRT.15.8)), $ind1)"
+							select="util:element('Phone Number', util:format-tel2(.//PRT.15.6, .//PRT.15.7, .//PRT.15.8), $ind1)"
 						/>
 					</xsl:when>
 					<xsl:when test=".//PRT.15.3 = 'X.400' or .//PRT.15.3 = 'Internet'">
