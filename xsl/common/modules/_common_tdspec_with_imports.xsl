@@ -547,7 +547,7 @@
 			<xsl:choose>
 				<xsl:when test=".//ORC.14.3 = 'PH'">
 					<xsl:value-of
-						select="util:element('Call Back Phone number', concat(util:format-with-space(.//ORC.14.6), util:format-with-space(.//ORC.14.7), util:format-with-space(.//ORC.14.8)), $ind1)"
+						select="util:element('Call Back Phone number', util:format-tel2(.//ORC.14.6, .//ORC.14.7, .//ORC.14.8), $ind1)"
 					/>
 				</xsl:when>
 				<xsl:when test=".//ORC.14.3 = 'X.400' or .//ORC.14.3 = 'Internet'">

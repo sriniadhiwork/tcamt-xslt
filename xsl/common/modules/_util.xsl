@@ -66,9 +66,21 @@
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<xsl:function name="util:format-tel2">
 		<xsl:param name="areaCode"/>
-		<xsl:param name="localCode"/>
-		<xsl:param name="lineNumber"/>
-		<xsl:value-of select="concat('(', $areaCode, ')', $localCode, ' - ', $lineNumber)" />
+		<xsl:param name="phoneNumber"/>
+		<xsl:param name="extension"/>
+		<xsl:if test="$areaCode != '' and $phoneNumber != ''">
+			<xsl:variable name="paddedNumber" select="concat($phoneNumber, '                ')" />
+			<xsl:variable name="localCode" select="substring($paddedNumber, 1, 3)"/>
+			<xsl:variable name="lineNumber" select="substring($paddedNumber, 4, 4)"/>
+			<xsl:choose>
+				<xsl:when test="normalize-space($extension) != ''">
+					<xsl:value-of select="concat('(', $areaCode, ')', $localCode, ' - ', $lineNumber, ' ext ', $extension)" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat('(', $areaCode, ')', $localCode, ' - ', $lineNumber)" />			
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:function>
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
