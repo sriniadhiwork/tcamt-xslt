@@ -276,22 +276,52 @@
 					</xsl:choose>
 				</xsl:variable>
 				<xsl:variable name="mins" select="concat(':', substring($time, 11, 2))"/>
-
-				<xsl:if test="string-length(normalize-space($time)) > 13">
-					<xsl:variable name="secs" select="concat(':', substring($time, 13, 2))"/>
-					<xsl:variable name="time-format" select="concat($cHrs, $mins, $secs)"/>
-					<!--<xsl:variable name="time-format"
-						select="format-time(xs:time(concat($cHrs, $mins, $secs)), '[H]:[m]:[s]')"/>-->
-					<xsl:value-of
-						select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
-				</xsl:if>
-				<xsl:if test="string-length(normalize-space($time)) &lt; 13">
-					<xsl:variable name="time-format" select="concat($cHrs, $mins)"/>
-					<xsl:value-of
-						select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
-				</xsl:if>
-
-
+				
+				
+				<xsl:choose>
+					<xsl:when test="contains($time, '+')">
+						<xsl:variable name="dateNoOffset" select="normalize-space(substring-before($time, '+'))"/>
+						<xsl:if test="string-length($dateNoOffset) > 13">
+							<xsl:variable name="secs" select="concat(':', substring($dateNoOffset, 13, 2))"/>
+							<xsl:variable name="time-format" select="concat($cHrs, $mins, $secs)"/>
+							<xsl:value-of
+								select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM, ' +', normalize-space(substring-after($time, '+')))"/>
+						</xsl:if>
+						<xsl:if test="string-length(normalize-space($dateNoOffset)) &lt; 13">
+							<xsl:variable name="time-format" select="concat($cHrs, $mins)"/>
+							<xsl:value-of
+								select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM, ' +', normalize-space(substring-after($time, '+')))"/>
+						</xsl:if>						
+					</xsl:when>
+					<xsl:when test="contains($time, '-')">
+						<xsl:variable name="dateNoOffset" select="normalize-space(substring-before($time, '-'))"/>
+						<xsl:if test="string-length($dateNoOffset) > 13">
+							<xsl:variable name="secs" select="concat(':', substring($dateNoOffset, 13, 2))"/>
+							<xsl:variable name="time-format" select="concat($cHrs, $mins, $secs)"/>
+							<xsl:value-of
+								select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM, ' -', normalize-space(substring-after($time, '-')))"/>
+						</xsl:if>
+						<xsl:if test="string-length(normalize-space($dateNoOffset)) &lt; 13">
+							<xsl:variable name="time-format" select="concat($cHrs, $mins)"/>
+							<xsl:value-of
+								select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM, ' -', normalize-space(substring-after($time, '-')))"/>
+						</xsl:if>						
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:if test="string-length(normalize-space($time)) > 13">
+							<xsl:variable name="secs" select="concat(':', substring($time, 13, 2))"/>
+							<xsl:variable name="time-format" select="concat($cHrs, $mins, $secs)"/>
+							<xsl:value-of
+								select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+						</xsl:if>
+						<xsl:if test="string-length(normalize-space($time)) &lt; 13">
+							<xsl:variable name="time-format" select="concat($cHrs, $mins)"/>
+							<xsl:value-of
+								select="concat($month, $day, $year, ' ', $time-format, ' ', $AM-PM)"/>
+						</xsl:if>									
+					</xsl:otherwise>
+				</xsl:choose>
+				
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
