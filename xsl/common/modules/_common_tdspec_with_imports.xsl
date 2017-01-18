@@ -672,7 +672,8 @@
 				select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind1, false())"/>
 			<xsl:value-of select="util:elements($ind1)"/>
 			<xsl:for-each select="..//NTE">
-				<xsl:value-of select="util:element('Comments', .//NTE.3, $ind1)"/>
+				<xsl:variable name="comment" select="replace(./NTE.3, '\\br\\', '&lt; br &#47; &gt;')"/>
+				<xsl:value-of select="util:element('Comments', $comment, $ind1)"/>
 			</xsl:for-each>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:if>
