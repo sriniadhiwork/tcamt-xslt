@@ -672,7 +672,7 @@
 				select="util:title-no-tab('title', 'Notes &amp; comments', 'Notes &amp; comments', $ind1, false())"/>
 			<xsl:value-of select="util:elements($ind1)"/>
 			<xsl:for-each select="..//NTE">
-				<xsl:variable name="comment" select="replace(./NTE.3, '\\br\\', '&lt; br &#47; &gt;')"/>
+				<xsl:variable name="comment" select="replace(./NTE.3, '\\br\\', '&lt; br &#47;&gt;')"/>
 				<xsl:value-of select="util:element('Comments', $comment, $ind1)"/>
 			</xsl:for-each>
 			<xsl:value-of select="util:end-table-fieldset($ind1)"/>
@@ -700,9 +700,10 @@
 			<xsl:value-of select="util:element('NPI Identifier', .//PRT.5.1, $ind1)"/>
 			<xsl:value-of
 				select="util:element('Name', concat(util:format-with-space(.//PRT.5.3), .//PRT.5.2), $ind1)"/>
-			<xsl:value-of
-				select="util:format-address-multilines('Address', .//PRT.14.1.1, .//PRT.14.2, concat(util:format-with-space(.//PRT.14.3), util:format-with-space(.//PRT.14.4), util:format-with-space(.//PRT.14.5)), .//PRT.14.6, $ind1)"/>
-
+			<xsl:for-each select=".//PRT.14">
+				<xsl:value-of
+					select="util:format-address-multilines('Address', ./PRT.14.1/PRT.14.1.1, ./PRT.14.2, concat(util:format-with-space(./PRT.14.3), util:format-with-space(./PRT.14.4), util:format-with-space(./PRT.14.5)), ./PRT.14.6, $ind1)"/>
+			</xsl:for-each>
 			<xsl:for-each select=".//PRT.15">
 				<xsl:choose>
 					<xsl:when test=".//PRT.15.3 = 'PH'">
