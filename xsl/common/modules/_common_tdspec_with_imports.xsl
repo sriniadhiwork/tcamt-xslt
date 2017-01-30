@@ -632,7 +632,7 @@
 			select="util:title-no-tab('title', 'Order details', 'Order details', $ind2, false())"/>
 		<xsl:value-of select="util:elements($ind2)"/>
 		<xsl:value-of
-			select="util:element('Universal Service Identifier', util:format-time(..//OBR.4.2), $ind1)"/>
+			select="util:element('Universal Service Identifier', ..//OBR.4.2, $ind1)"/>
 		<xsl:value-of
 			select="util:element('Observation Date/Time', util:format-time(..//OBR.7.1), $ind1)"/>
 		<xsl:value-of
