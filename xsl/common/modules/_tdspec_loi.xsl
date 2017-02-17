@@ -617,15 +617,16 @@
 			</xsl:call-template>
 		
 		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - 	Order  - - - - - - - - - - - -->
+
+<!--	<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - 	Order  - - - - - - - - - - - -\->
 		<xsl:template match="ORC">
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
 		<xsl:value-of
 		select="util:title('title', concat('Order', $counter), 'Order', $ind1, true(), $vertical-orientation, false())"/>
 		
-		<!-- Ordering Provider subtable -->
+		<!-\- Ordering Provider subtable -\->
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
 		select="util:title-no-tab('title', 'Ordering Provider', 'Ordering Provider', $ind2, false())"/>
@@ -674,7 +675,7 @@
 		</xsl:for-each>
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		
-		<!-- General order information subtable -->
+		<!-\- General order information subtable -\->
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
 		select="util:title-no-tab('title', 'General order information', 'General order information', $ind2, false())"/>
@@ -702,7 +703,7 @@
 		select="util:element('Date/Time of Transaction', util:format-time(.//ORC.9.1), $ind1)"/>
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 		
-		<!-- Timing/Quantity Information subtable -->
+		<!-\- Timing/Quantity Information subtable -\->
 		<xsl:if test="not(count(..//TQ1) = 0)">
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
@@ -717,8 +718,8 @@
 		<xsl:value-of select="util:end-table-fieldset($ind2)"/>
 		</xsl:if>
 		
-		<!-- Order details subtable -->
-		<!--Format time needs to be checked; alternative id too-->
+		<!-\- Order details subtable -\->
+		<!-\-Format time needs to be checked; alternative id too-\->
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
 		select="util:title-no-tab('title', 'Order details', 'Order details', $ind2, false())"/>
@@ -757,7 +758,7 @@
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		
 		
-		<!-- Notes and comments subtable -->
+		<!-\- Notes and comments subtable -\->
 		<xsl:if test="not(count(..//NTE) = 0)">
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
@@ -770,7 +771,7 @@
 		</xsl:if>
 		
 		
-		<!-- Result copies subtable -->
+		<!-\- Result copies subtable -\->
 		<xsl:for-each select="..//PRT">
 		<xsl:variable name="index">
 		<xsl:choose>
@@ -814,7 +815,7 @@
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 		
-		<!-- Diagnosis information subtable -->
+		<!-\- Diagnosis information subtable -\->
 		<xsl:for-each select="..//DG1">
 		<xsl:variable name="index">
 		<xsl:choose>
@@ -849,7 +850,7 @@
 		</xsl:for-each>
 		
 		<xsl:for-each select="..//OBX">
-		<!-- Observation Result subtable -->
+		<!-\- Observation Result subtable -\->
 		<xsl:variable name="index">
 		<xsl:choose>
 		<xsl:when test="count(..//OBX) > 1">
@@ -917,7 +918,7 @@
 		<xsl:value-of select="concat(' - ', position())"/>
 		</xsl:if>
 		</xsl:variable>
-		<!-- Specimen Information -->
+		<!-\- Specimen Information -\->
 		<xsl:value-of select="util:begin-sub-table($ind2)"/>
 		<xsl:value-of
 		select="util:title-no-tab('title', concat('Specimen Details', $index), concat('Specimen Details', $index), $ind2, false())"/>
@@ -941,21 +942,21 @@
 		<xsl:value-of select="util:end-table-fieldset($ind1)"/>
 		</xsl:for-each>
 		
-		<!--<xsl:value-of select="util:end-table-fieldset($ind1)"/>-->
+		<!-\-<xsl:value-of select="util:end-table-fieldset($ind1)"/>-\->
 		
 		<xsl:value-of select="util:end-tab($ind1, $vertical-orientation)"/>
 		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
 		
 		
 		
 		
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Patient information for QPD - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - Patient information for QPD - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
 		<xsl:template match="QPD">
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
@@ -979,14 +980,14 @@
 		select="util:element('Birth Order', .//QPD.11, $ind1)"
 		/>
 		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
 		
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - Immunization Registry information - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - Immunization Registry information - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
 		<xsl:template match="PD1">
 		<xsl:param name="vertical-orientation" as="xs:boolean"/>
 		<xsl:param name="counter"/>
@@ -1006,11 +1007,11 @@
 		select="util:element('Protection Indicator Effective Date', util:format-time(.//PD1.13), $ind1)"
 		/>
 		</xsl:template>
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
+		<!-\- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -\->
 		
 		@@@@@@@@@@@@@@@@
-	
+	-->
 	
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
 	<!-- - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - -->
